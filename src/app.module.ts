@@ -12,6 +12,7 @@ import { CustomerBranchModule } from './modules/customer-branch/customer-branch.
 import { CategoryModule } from './modules/category/category.module';
 import { BrandModule } from './modules/brand/brand.module';
 import { CurrencyModule } from './modules/currency/currency.module';
+import { ConceptModule } from './modules/concept/concept.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { CurrencyModule } from './modules/currency/currency.module';
     UserModule,
     BrandModule,
     CurrencyModule,
+    ConceptModule,
   ],
 })
 export class AppModule {}
