@@ -7,6 +7,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { CityModule } from './modules/city/city.module';
 import { DistrictModule } from './modules/district/district.module';
+import { CustomerModule } from './modules/customer/customer.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { DistrictModule } from './modules/district/district.module';
     AuthModule,
     CityModule,
     DistrictModule,
+    CustomerModule,
   ],
 })
 export class AppModule {}
