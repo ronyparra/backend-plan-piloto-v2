@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { CityModule } from './modules/city/city.module';
 import { DistrictModule } from './modules/district/district.module';
 import { CustomerModule } from './modules/customer/customer.module';
+import { CustomerBranchModule } from './modules/customer-branch/customer-branch.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CustomerModule } from './modules/customer/customer.module';
     CityModule,
     DistrictModule,
     CustomerModule,
+    CustomerBranchModule,
   ],
 })
 export class AppModule {}

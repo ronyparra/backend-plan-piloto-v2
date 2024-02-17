@@ -16,8 +16,6 @@ export class AuthService {
     password: string,
   ): Promise<{ access_token: string }> {
     const user: User = await this.userService.findByEmail(email);
-    console.log('user', user);
-    console.log('password', password);
     if (user && (await bcrypt.compare(password, user.password))) {
       delete user.password;
       const payload = { sub: user.id, user: user };
