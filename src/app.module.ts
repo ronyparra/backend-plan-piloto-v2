@@ -11,6 +11,7 @@ import { CustomerModule } from './modules/customer/customer.module';
 import { CustomerBranchModule } from './modules/customer-branch/customer-branch.module';
 import { CategoryModule } from './modules/category/category.module';
 import { BrandModule } from './modules/brand/brand.module';
+import { CurrencyModule } from './modules/currency/currency.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { BrandModule } from './modules/brand/brand.module';
     DistrictModule,
     UserModule,
     BrandModule,
+    CurrencyModule,
   ],
 })
 export class AppModule {}
