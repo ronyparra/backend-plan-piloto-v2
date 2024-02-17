@@ -1,24 +1,12 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
-
-import { Customer } from '../../customer/entities/customer.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class CustomerBranch {
+export class Category {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ length: 100 })
   name: string;
-
-  @ManyToOne(() => Customer, (customer) => customer.id)
-  @JoinColumn({ name: 'customerId' })
-  customer: Customer;
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

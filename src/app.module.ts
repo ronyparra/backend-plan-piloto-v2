@@ -9,6 +9,7 @@ import { CityModule } from './modules/city/city.module';
 import { DistrictModule } from './modules/district/district.module';
 import { CustomerModule } from './modules/customer/customer.module';
 import { CustomerBranchModule } from './modules/customer-branch/customer-branch.module';
+import { CategoryModule } from './modules/category/category.module';
 
 @Module({
   imports: [
@@ -26,12 +27,13 @@ import { CustomerBranchModule } from './modules/customer-branch/customer-branch.
       autoLoadEntities: true,
     }),
     // Modules
-    UserModule,
     AuthModule,
     CityModule,
-    DistrictModule,
     CustomerModule,
     CustomerBranchModule,
+    CategoryModule,
+    DistrictModule,
+    UserModule,
   ],
 })
 export class AppModule {}
