@@ -27,6 +27,9 @@ export class User {
   @Column({ length: 100 })
   lastname: string;
 
+  @Column({ type: 'boolean', default: true })
+  active: boolean;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
 

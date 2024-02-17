@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import configuration from './config/configuration';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,11 +10,10 @@ async function bootstrap() {
     .setTitle('Plan Piloto V2')
     .setDescription('API para el plan piloto de la versión 2')
     .setVersion('1.0')
-    .addTag('plan-piloto')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(configuration().port);
 }
 bootstrap();

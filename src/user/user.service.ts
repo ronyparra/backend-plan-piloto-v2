@@ -26,7 +26,14 @@ export class UserService {
   findOne(id: number) {
     return this.userRepository.findOne({
       select: ['id', 'username', 'email', 'name', 'lastname'],
-      where: { id },
+      where: { id, active: true },
+    });
+  }
+
+  findByEmail(email: string) {
+    return this.userRepository.findOne({
+      select: ['id', 'username', 'email', 'name', 'lastname', 'password'],
+      where: { email, active: true },
     });
   }
 
@@ -36,6 +43,6 @@ export class UserService {
   }
 
   remove(id: number) {
-    return this.userRepository.delete(id);
+    return this.userRepository.update(id, { active: false });
   }
 }
