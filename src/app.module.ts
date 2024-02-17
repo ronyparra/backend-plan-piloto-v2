@@ -6,6 +6,7 @@ import configuration from './config/configuration';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { CityModule } from './modules/city/city.module';
+import { DistrictModule } from './modules/district/district.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CityModule } from './modules/city/city.module';
     UserModule,
     AuthModule,
     CityModule,
+    DistrictModule,
   ],
 })
 export class AppModule {}
