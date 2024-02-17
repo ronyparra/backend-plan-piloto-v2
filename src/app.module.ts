@@ -13,6 +13,7 @@ import { CategoryModule } from './modules/category/category.module';
 import { BrandModule } from './modules/brand/brand.module';
 import { CurrencyModule } from './modules/currency/currency.module';
 import { ConceptModule } from './modules/concept/concept.module';
+import { PaymentStatusModule } from './modules/payment-status/payment-status.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { ConceptModule } from './modules/concept/concept.module';
     BrandModule,
     CurrencyModule,
     ConceptModule,
+    PaymentStatusModule,
   ],
 })
 export class AppModule {}
