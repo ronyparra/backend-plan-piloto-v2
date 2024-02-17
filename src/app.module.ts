@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+// Modules
+import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { CityModule } from './modules/city/city.module';
 
 @Module({
   imports: [
@@ -22,10 +22,10 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       autoLoadEntities: true,
     }),
+    // Modules
     UserModule,
     AuthModule,
+    CityModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
