@@ -1,10 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
 
 import { Customer } from '../../customer/entities/customer.entity';
 
@@ -13,12 +7,12 @@ export class CustomerBranch {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @PrimaryGeneratedColumn()
+  @OneToOne(() => Customer, (customer) => customer.id, { cascade: true })
+  customerId: Customer;
+
   @Column({ length: 100 })
   name: string;
-
-  @ManyToOne(() => Customer, (customer) => customer.id)
-  @JoinColumn({ name: 'customerId' })
-  customer: Customer;
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

@@ -1,5 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 
+import { CustomerBranch } from 'src/modules/customer-branch/entities/customer-branch.entity';
 @Entity()
 export class Customer {
   @PrimaryGeneratedColumn()
@@ -13,6 +20,12 @@ export class Customer {
 
   @Column({ type: 'boolean', default: true })
   active: boolean;
+
+  @ManyToOne(() => CustomerBranch, (customerBranch) => customerBranch.id, {
+    nullable: false,
+  })
+  @JoinColumn({ name: 'id' })
+  customerBranch: CustomerBranch[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

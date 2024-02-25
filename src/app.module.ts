@@ -14,6 +14,7 @@ import { BrandModule } from './modules/brand/brand.module';
 import { CurrencyModule } from './modules/currency/currency.module';
 import { ConceptModule } from './modules/concept/concept.module';
 import { PaymentStatusModule } from './modules/payment-status/payment-status.module';
+import { ActivityModule } from './modules/activity/activity.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { PaymentStatusModule } from './modules/payment-status/payment-status.mod
     CurrencyModule,
     ConceptModule,
     PaymentStatusModule,
+    // ActivityModule,
   ],
 })
 export class AppModule {}

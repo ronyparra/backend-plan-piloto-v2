@@ -20,7 +20,7 @@ export class CustomerBranchService {
       select: {
         id: true,
         name: true,
-        customer: {
+        customerId: {
           id: true,
           name: true,
           rut: true,
