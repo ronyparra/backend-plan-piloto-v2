@@ -20,13 +20,25 @@ export class Concept {
   @Column()
   pricing: number;
 
-  @ManyToOne(() => Category, (category) => category.id, { nullable: false })
+  @ManyToOne(() => Category, (category) => category.id, {
+    onUpdate: 'CASCADE',
+    nullable: false,
+  })
   @JoinColumn({ name: 'categoryId' })
   category: Category;
 
-  @ManyToOne(() => Currency, (currency) => currency.id, { nullable: false })
+  @Column({ name: 'categoryId' })
+  categoryId: number;
+
+  @ManyToOne(() => Currency, (currency) => currency.id, {
+    onUpdate: 'CASCADE',
+    nullable: false,
+  })
   @JoinColumn({ name: 'currencyId' })
   currency: Currency;
+
+  @Column({ name: 'currencyId' })
+  currencyId: number;
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

@@ -20,10 +20,12 @@ export class ConceptService {
       select: {
         id: true,
         name: true,
+        categoryId: true,
         category: {
           id: true,
           name: true,
         },
+        currencyId: true,
         currency: {
           id: true,
           name: true,
@@ -42,10 +44,12 @@ export class ConceptService {
       select: {
         id: true,
         name: true,
+        categoryId: true,
         category: {
           id: true,
           name: true,
         },
+        currencyId: true,
         currency: {
           id: true,
           name: true,

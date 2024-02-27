@@ -5,10 +5,10 @@ export class CreateConceptDto {
   name: string;
 
   @ApiProperty({ example: 1 })
-  category: { id: number };
+  categoryId: number;
 
   @ApiProperty({ example: 1 })
-  currency: { id: number };
+  currencyId: number;
 
   @ApiProperty({ example: 100 })
   pricing: number;

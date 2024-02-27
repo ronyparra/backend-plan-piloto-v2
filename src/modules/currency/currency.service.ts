@@ -17,7 +17,7 @@ export class CurrencyService {
 
   findAll() {
     return this.currencyRepository.find({
-      select: ['id', 'name'],
+      select: ['id', 'name', 'symbol'],
       where: {
         active: true,
       },
@@ -26,7 +26,7 @@ export class CurrencyService {
 
   findOne(id: number) {
     return this.currencyRepository.findOne({
-      select: ['id', 'name'],
+      select: ['id', 'name', 'symbol'],
       where: { id, active: true },
     });
   }
