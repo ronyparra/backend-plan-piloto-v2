@@ -11,7 +11,11 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       load: [configuration],
     }),
-    JwtModule.register({ secret: configuration().jwt.secret }),
+    JwtModule.register({
+      global: true,
+      secret: configuration().jwt.secret,
+      signOptions: { expiresIn: '3d' },
+    }),
     UserModule,
   ],
   controllers: [AuthController],
