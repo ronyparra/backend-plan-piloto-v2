@@ -6,7 +6,5 @@ export class UpdateDistrictDto extends PartialType(CreateDistrictDto) {
   @ApiProperty()
   name: string;
   @ApiProperty()
-  city: {
-    id: number;
-  };
+  cityId: number;
 }

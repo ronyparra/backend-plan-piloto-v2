@@ -20,6 +20,7 @@ export class DistrictService {
       select: {
         id: true,
         name: true,
+        cityId: true,
         city: {
           id: true,
           name: true,
@@ -36,6 +37,7 @@ export class DistrictService {
       select: {
         id: true,
         name: true,
+        cityId: true,
         city: {
           id: true,
           name: true,

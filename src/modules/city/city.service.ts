@@ -16,11 +16,14 @@ export class CityService {
   }
 
   findAll() {
-    return this.cityRepository.find();
+    return this.cityRepository.find({
+      select: ['id', 'name'],
+    });
   }
 
   findOne(id: number) {
     return this.cityRepository.findOne({
+      select: ['id', 'name'],
       where: { id },
     });
   }

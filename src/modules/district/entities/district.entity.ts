@@ -15,9 +15,15 @@ export class District {
   @Column({ length: 100 })
   name: string;
 
-  @ManyToOne(() => City, (city) => city.id)
+  @ManyToOne(() => City, (city) => city.id, {
+    onUpdate: 'CASCADE',
+    nullable: false,
+  })
   @JoinColumn({ name: 'cityId' })
   city: City;
+
+  @Column({ name: 'cityId' })
+  cityId: number;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
