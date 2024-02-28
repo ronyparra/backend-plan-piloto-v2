@@ -25,6 +25,9 @@ export class District {
   @Column({ name: 'cityId' })
   cityId: number;
 
+  @Column({ type: 'boolean', default: true })
+  active: boolean;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
 

@@ -6,12 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { PaymentStatusService } from './payment-status.service';
 import { CreatePaymentStatusDto } from './dto/create-payment-status.dto';
 import { UpdatePaymentStatusDto } from './dto/update-payment-status.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('payment-status')
 @ApiTags('payment-status')
 export class PaymentStatusController {

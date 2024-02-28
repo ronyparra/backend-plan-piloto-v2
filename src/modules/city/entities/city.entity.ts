@@ -7,6 +7,9 @@ export class City {
   @Column({ length: 100 })
   name: string;
 
+  @Column({ type: 'boolean', default: true })
+  active: boolean;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
 

@@ -14,6 +14,7 @@ async function bootstrap() {
     .setTitle('Backend')
     .setDescription('API para el plan piloto V2')
     .setVersion('2.0')
+    .addBearerAuth()
     .build();
   const customOptions: SwaggerCustomOptions = {};
   const document = SwaggerModule.createDocument(app, config);

@@ -6,12 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { CustomerBranchService } from './customer-branch.service';
 import { CreateCustomerBranchDto } from './dto/create-customer-branch.dto';
 import { UpdateCustomerBranchDto } from './dto/update-customer-branch.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('customer-branch')
 @ApiTags('customer-branch')
 export class CustomerBranchController {
