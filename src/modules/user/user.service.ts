@@ -20,6 +20,7 @@ export class UserService {
   findAll() {
     return this.userRepository.find({
       select: ['id', 'username', 'email', 'name', 'lastname'],
+      where: { active: true },
     });
   }
 
@@ -38,7 +39,9 @@ export class UserService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    const userInstance: User = this.userRepository.create(updateUserDto);
+    const userInstance = updateUserDto.password
+      ? this.userRepository.create(updateUserDto)
+      : updateUserDto;
     return this.userRepository.update(id, userInstance);
   }
 
