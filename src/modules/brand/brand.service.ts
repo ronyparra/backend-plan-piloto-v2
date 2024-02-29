@@ -36,6 +36,6 @@ export class BrandService {
   }
 
   remove(id: number) {
-    return this.brandRepository.update(id, { active: false });
+    return this.brandRepository.delete(id);
   }
 }

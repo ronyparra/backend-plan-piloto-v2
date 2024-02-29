@@ -36,6 +36,6 @@ export class CurrencyService {
   }
 
   remove(id: number) {
-    return this.currencyRepository.update(id, { active: false });
+    return this.currencyRepository.delete(id);
   }
 }

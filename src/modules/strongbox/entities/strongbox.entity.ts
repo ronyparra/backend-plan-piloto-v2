@@ -5,25 +5,28 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { City } from 'src/modules/city/entities/city.entity';
+import { Currency } from 'src/modules/currency/entities/currency.entity';
 
 @Entity()
-export class District {
+export class Strongbox {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ length: 100 })
   name: string;
 
-  @ManyToOne(() => City, (city) => city.id, {
+  @Column({ type: 'float', default: 0 })
+  amount: number;
+
+  @ManyToOne(() => Currency, (currency) => currency.id, {
     onUpdate: 'CASCADE',
     nullable: false,
   })
-  @JoinColumn({ name: 'cityId' })
-  city: City;
+  @JoinColumn({ name: 'currencyId' })
+  currency: Currency;
 
-  @Column({ name: 'cityId' })
-  cityId: number;
+  @Column({ name: 'currencyId' })
+  currencyId: number;
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

@@ -66,6 +66,6 @@ export class ConceptService {
   }
 
   remove(id: number) {
-    return this.conceptRepository.update(id, { active: false });
+    return this.conceptRepository.delete(id);
   }
 }

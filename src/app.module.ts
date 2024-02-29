@@ -14,7 +14,16 @@ import { BrandModule } from './modules/brand/brand.module';
 import { CurrencyModule } from './modules/currency/currency.module';
 import { ConceptModule } from './modules/concept/concept.module';
 import { PaymentStatusModule } from './modules/payment-status/payment-status.module';
-import { ActivityModule } from './modules/activity/activity.module';
+// import { ActivityModule } from './modules/activity/activity.module';
+import { InvoiceTypeModule } from './modules/invoice-type/invoice-type.module';
+import { IvaModule } from './modules/iva/iva.module';
+import { DocumentTypeModule } from './modules/document-type/document-type.module';
+import { EstablishmentModule } from './modules/establishment/establishment.module';
+import { ExpeditionPointModule } from './modules/expedition-point/expedition-point.module';
+import { StrongboxModule } from './modules/strongbox/strongbox.module';
+import { StampingModule } from './modules/stamping/stamping.module';
+import { ServiceTypeModule } from './modules/service-type/service-type.module';
+import { SupplierModule } from './modules/supplier/supplier.module';
 
 @Module({
   imports: [
@@ -43,6 +52,15 @@ import { ActivityModule } from './modules/activity/activity.module';
     CurrencyModule,
     ConceptModule,
     PaymentStatusModule,
+    InvoiceTypeModule,
+    IvaModule,
+    DocumentTypeModule,
+    EstablishmentModule,
+    ExpeditionPointModule,
+    StrongboxModule,
+    StampingModule,
+    ServiceTypeModule,
+    SupplierModule,
     // ActivityModule,
   ],
 })

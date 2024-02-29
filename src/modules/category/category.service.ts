@@ -36,6 +36,6 @@ export class CategoryService {
   }
 
   remove(id: number) {
-    return this.categoryRepository.update(id, { active: false });
+    return this.categoryRepository.delete(id);
   }
 }

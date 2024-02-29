@@ -18,13 +18,14 @@ export class CityService {
   findAll() {
     return this.cityRepository.find({
       select: ['id', 'name'],
+      where: { active: true },
     });
   }
 
   findOne(id: number) {
     return this.cityRepository.findOne({
       select: ['id', 'name'],
-      where: { id },
+      where: { id, active: true },
     });
   }
 
