@@ -7,4 +7,7 @@ export class UpdateEstablishmentDto extends PartialType(
 ) {
   @ApiProperty({ example: 'Central' })
   name: string;
+
+  @ApiProperty({ example: '001' })
+  number: string;
 }

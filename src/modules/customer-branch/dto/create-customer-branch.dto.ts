@@ -4,6 +4,9 @@ export class CreateCustomerBranchDto {
   @ApiProperty({ example: 'Sucursal 1' })
   name: string;
 
+  @ApiProperty({ example: 'Av. 1' })
+  address: string;
+
   @ApiProperty({ example: 1 })
   customerId: number;
 

@@ -4,6 +4,9 @@ export class CreateSupplierDto {
   @ApiProperty({ example: 'Proveedor 1' })
   name: string;
 
+  @ApiProperty({ example: 'Proveedor 1' })
+  socialReason: string;
+
   @ApiProperty({ example: '123456789' })
   document: string;
 

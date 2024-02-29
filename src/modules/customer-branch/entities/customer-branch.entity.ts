@@ -49,6 +49,9 @@ export class CustomerBranch {
   @Column({ length: 100 })
   name: string;
 
+  @Column({ length: 100 })
+  address: string;
+
   @Column({ type: 'boolean', default: true })
   active: boolean;
 

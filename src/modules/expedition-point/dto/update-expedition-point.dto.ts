@@ -7,4 +7,7 @@ export class UpdateExpeditionPointDto extends PartialType(
 ) {
   @ApiProperty({ example: 'Norte' })
   name: string;
+
+  @ApiProperty({ example: '002' })
+  number: string;
 }

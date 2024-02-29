@@ -20,6 +20,9 @@ export class Customer {
   name: string;
 
   @Column({ length: 100 })
+  social_reason: string;
+
+  @Column({ length: 100 })
   document: string;
 
   @Column({ length: 100 })

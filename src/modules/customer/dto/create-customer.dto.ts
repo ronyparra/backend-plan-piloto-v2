@@ -4,6 +4,9 @@ export class CreateCustomerDto {
   @ApiProperty({ example: 'Empresa 1' })
   name: string;
 
+  @ApiProperty({ example: 'Empresa 1' })
+  social_reason: string;
+
   @ApiProperty({ example: '123456789' })
   document: string;
 

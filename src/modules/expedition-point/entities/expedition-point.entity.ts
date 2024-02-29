@@ -7,6 +7,9 @@ export class ExpeditionPoint {
   @Column({ length: 100 })
   name: string;
 
+  @Column({ length: 3 })
+  number: string;
+
   @Column({ type: 'boolean', default: true })
   active: boolean;
 
