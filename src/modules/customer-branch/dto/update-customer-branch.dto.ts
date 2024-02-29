@@ -7,8 +7,13 @@ export class UpdateCustomerBranchDto extends PartialType(
 ) {
   @ApiProperty({ example: 'Sucursal 1' })
   name: string;
+
   @ApiProperty({ example: 1 })
-  customer: {
-    id: number;
-  };
+  customerId: number;
+
+  @ApiProperty({ example: 1 })
+  cityId: number;
+
+  @ApiProperty({ example: 1 })
+  districtId: number;
 }

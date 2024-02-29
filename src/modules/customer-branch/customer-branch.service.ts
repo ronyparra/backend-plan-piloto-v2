@@ -20,19 +20,50 @@ export class CustomerBranchService {
       select: {
         id: true,
         name: true,
-        customerId: {
+        customer: {
           id: true,
           name: true,
-          rut: true,
         },
+        city: {
+          id: true,
+          name: true,
+        },
+        district: {
+          id: true,
+          name: true,
+        },
+        customerId: true,
+        cityId: true,
+        districtId: true,
       },
-      relations: ['customer'],
+      relations: ['customer', 'city', 'district'],
+      where: { active: true },
     });
   }
 
   findOne(id: number) {
     return this.customerBranchRepository.findOne({
-      where: { id },
+      select: {
+        id: true,
+        name: true,
+        customer: {
+          id: true,
+          name: true,
+        },
+        city: {
+          id: true,
+          name: true,
+        },
+        district: {
+          id: true,
+          name: true,
+        },
+        customerId: true,
+        cityId: true,
+        districtId: true,
+      },
+      relations: ['customer', 'city', 'district'],
+      where: { id, active: true },
     });
   }
 
