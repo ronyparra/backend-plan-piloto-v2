@@ -24,6 +24,7 @@ import { StrongboxModule } from './modules/strongbox/strongbox.module';
 import { StampingModule } from './modules/stamping/stamping.module';
 import { ServiceTypeModule } from './modules/service-type/service-type.module';
 import { SupplierModule } from './modules/supplier/supplier.module';
+import { PurchaseModule } from './modules/purchase/purchase.module';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { SupplierModule } from './modules/supplier/supplier.module';
     ServiceTypeModule,
     SupplierModule,
     UserModule,
+    PurchaseModule,
   ],
 })
 export class AppModule {}

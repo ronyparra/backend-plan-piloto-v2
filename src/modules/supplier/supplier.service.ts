@@ -20,6 +20,7 @@ export class SupplierService {
       select: {
         id: true,
         name: true,
+        social_reason: true,
         document: true,
         phone: true,
         email: true,
@@ -47,6 +48,7 @@ export class SupplierService {
       select: {
         id: true,
         name: true,
+        social_reason: true,
         document: true,
         phone: true,
         email: true,
