@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
-export class Iva {
+export class TaxType {
   @PrimaryGeneratedColumn()
   id: number;
 

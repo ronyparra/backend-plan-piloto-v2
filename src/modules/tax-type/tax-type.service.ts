@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { CreateIvaDto } from './dto/create-iva.dto';
-import { UpdateIvaDto } from './dto/update-iva.dto';
-import { Iva } from './entities/iva.entity';
+import { CreateTaxTypeDto } from './dto/create-tax-type.dto';
+import { UpdateTaxTypeDto } from './dto/update-tax-type.dto';
+import { TaxType } from './entities/tax-type.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class IvaService {
+export class TaxTypeService {
   constructor(
-    @InjectRepository(Iva)
-    private ivaRepository: Repository<Iva>,
+    @InjectRepository(TaxType)
+    private ivaRepository: Repository<TaxType>,
   ) {}
-  create(createIvaDto: CreateIvaDto) {
-    return this.ivaRepository.save(createIvaDto);
+  create(createTaxTypeDto: CreateTaxTypeDto) {
+    return this.ivaRepository.save(createTaxTypeDto);
   }
 
   findAll() {
@@ -31,8 +31,8 @@ export class IvaService {
     });
   }
 
-  update(id: number, updateIvaDto: UpdateIvaDto) {
-    return this.ivaRepository.update(id, updateIvaDto);
+  update(id: number, updateTaxTypeDto: UpdateTaxTypeDto) {
+    return this.ivaRepository.update(id, updateTaxTypeDto);
   }
 
   remove(id: number) {

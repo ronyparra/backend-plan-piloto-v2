@@ -20,6 +20,11 @@ export class ConceptService {
       select: {
         id: true,
         name: true,
+        taxTypeId: true,
+        taxType: {
+          id: true,
+          name: true,
+        },
         categoryId: true,
         category: {
           id: true,
@@ -35,7 +40,7 @@ export class ConceptService {
       where: {
         active: true,
       },
-      relations: ['category', 'currency'],
+      relations: ['category', 'currency', 'taxType'],
     });
   }
 
@@ -44,6 +49,11 @@ export class ConceptService {
       select: {
         id: true,
         name: true,
+        taxTypeId: true,
+        taxType: {
+          id: true,
+          name: true,
+        },
         categoryId: true,
         category: {
           id: true,
@@ -57,7 +67,7 @@ export class ConceptService {
         pricing: true,
       },
       where: { id, active: true },
-      relations: ['category', 'currency'],
+      relations: ['category', 'currency', 'taxType'],
     });
   }
 

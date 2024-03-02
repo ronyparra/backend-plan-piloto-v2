@@ -16,7 +16,7 @@ import { ConceptModule } from './modules/concept/concept.module';
 import { PaymentStatusModule } from './modules/payment-status/payment-status.module';
 // import { ActivityModule } from './modules/activity/activity.module';
 import { InvoiceTypeModule } from './modules/invoice-type/invoice-type.module';
-import { IvaModule } from './modules/iva/iva.module';
+import { TaxTypeModule } from './modules/tax-type/tax-type.module';
 import { DocumentTypeModule } from './modules/document-type/document-type.module';
 import { EstablishmentModule } from './modules/establishment/establishment.module';
 import { ExpeditionPointModule } from './modules/expedition-point/expedition-point.module';
@@ -56,7 +56,7 @@ import { PurchaseModule } from './modules/purchase/purchase.module';
     EstablishmentModule,
     ExpeditionPointModule,
     InvoiceTypeModule,
-    IvaModule,
+    TaxTypeModule,
     PaymentStatusModule,
     StrongboxModule,
     StampingModule,

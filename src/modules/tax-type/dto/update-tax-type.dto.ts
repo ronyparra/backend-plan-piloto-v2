@@ -1,8 +1,8 @@
 import { PartialType } from '@nestjs/swagger';
-import { CreateIvaDto } from './create-iva.dto';
+import { CreateTaxTypeDto } from './create-tax-type.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdateIvaDto extends PartialType(CreateIvaDto) {
+export class UpdateTaxTypeDto extends PartialType(CreateTaxTypeDto) {
   @ApiProperty({ example: 'Iva 10' })
   name: string;
 

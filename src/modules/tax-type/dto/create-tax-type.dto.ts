@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateIvaDto {
+export class CreateTaxTypeDto {
   @ApiProperty({ example: 'Iva 5' })
   name: string;
 
