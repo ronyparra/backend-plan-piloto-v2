@@ -72,6 +72,9 @@ export class Purchase {
   @Column({ type: 'boolean', default: true })
   active: boolean;
 
+  @Column({ type: 'jsonb', nullable: false })
+  taxes: JSON;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
 
