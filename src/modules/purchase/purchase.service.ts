@@ -17,14 +17,86 @@ export class PurchaseService {
 
   findAll() {
     return this.purchaseRepository.find({
-      relations: ['invoiceType', 'supplier', 'user', 'purchaseDetail'],
+      select: {
+        id: true,
+        date: true,
+        invoice_number: true,
+        observation: true,
+        stamping: true,
+        invoiceType: {
+          id: true,
+          name: true,
+        },
+        supplier: {
+          id: true,
+          name: true,
+        },
+        user: {
+          id: true,
+          name: true,
+        },
+        purchaseConcept: {
+          purchaseId: true,
+          concept: {
+            id: true,
+            name: true,
+          },
+          quantity: true,
+          price: true,
+        },
+        taxes: true,
+      },
+      relations: {
+        invoiceType: true,
+        supplier: true,
+        user: true,
+        purchaseConcept: {
+          concept: true,
+        },
+      },
     });
   }
 
   findOne(id: number) {
     return this.purchaseRepository.findOne({
-      where: { id },
-      relations: ['invoiceType', 'supplier', 'user', 'purchaseDetail'],
+      where: { id, active: true },
+      select: {
+        id: true,
+        date: true,
+        invoice_number: true,
+        observation: true,
+        stamping: true,
+        invoiceType: {
+          id: true,
+          name: true,
+        },
+        supplier: {
+          id: true,
+          name: true,
+        },
+        user: {
+          id: true,
+          name: true,
+        },
+        purchaseConcept: {
+          purchaseId: true,
+          concept: {
+            id: true,
+            name: true,
+          },
+          quantity: true,
+          price: true,
+        },
+        taxes: true,
+      },
+      relations: {
+        invoiceType: true,
+        supplier: true,
+        user: true,
+        purchaseConcept: {
+          concept: true,
+        },
+      },
     });
   }
 

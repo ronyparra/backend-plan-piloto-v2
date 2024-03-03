@@ -40,6 +40,7 @@ import { PurchaseModule } from './modules/purchase/purchase.module';
       database: configuration().database.name,
       synchronize: true,
       autoLoadEntities: true,
+      logging: true,
     }),
     // Modules
     // ActivityModule,

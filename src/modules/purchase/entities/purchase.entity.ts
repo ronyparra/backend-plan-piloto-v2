@@ -3,14 +3,15 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  OneToMany,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import { Supplier } from 'src/modules/supplier/entities/supplier.entity';
 import { InvoiceType } from 'src/modules/invoice-type/entities/invoice-type.entity';
 import { User } from 'src/modules/user/entities/user.entity';
-import { PurchaseDetail } from './purchase-detail.entity';
+import { Taxes } from '../interfaces/taxes.interface';
+import { PurchaseConcept } from './purchase-concept.entity';
 
 @Entity()
 export class Purchase {
@@ -23,7 +24,7 @@ export class Purchase {
   @Column({ length: 100 })
   invoice_number: string;
 
-  @Column({ length: 100 })
+  @Column({ length: 100, nullable: true })
   observation: string;
 
   @Column({ length: 100 })
@@ -60,20 +61,20 @@ export class Purchase {
   userId: number;
 
   @OneToMany(
-    () => PurchaseDetail,
-    (purchaseDetail) => purchaseDetail.purchaseId,
+    () => PurchaseConcept,
+    (purchaseConcept) => purchaseConcept.purchase,
     {
-      nullable: false,
+      cascade: true,
     },
   )
   @JoinColumn({ name: 'id' })
-  purchaseDetail: PurchaseDetail[];
+  purchaseConcept: PurchaseConcept[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;
 
   @Column({ type: 'jsonb', nullable: false })
-  taxes: JSON;
+  taxes: Taxes[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

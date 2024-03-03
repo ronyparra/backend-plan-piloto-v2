@@ -4,11 +4,13 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import { Category } from 'src/modules/category/entities/category.entity';
 import { Currency } from 'src/modules/currency/entities/currency.entity';
 import { TaxType } from 'src/modules/tax-type/entities/tax-type.entity';
+import { PurchaseConcept } from 'src/modules/purchase/entities/purchase-concept.entity';
 
 @Entity()
 export class Concept {
@@ -30,6 +32,16 @@ export class Concept {
 
   @Column({ name: 'taxTypeId' })
   taxTypeId: number;
+
+  @OneToMany(
+    () => PurchaseConcept,
+    (purchaseConcept) => purchaseConcept.concept,
+    {
+      nullable: false,
+    },
+  )
+  @JoinColumn({ name: 'id' })
+  conceptPurchase: PurchaseConcept[];
 
   @ManyToOne(() => Category, (category) => category.id, {
     onUpdate: 'CASCADE',

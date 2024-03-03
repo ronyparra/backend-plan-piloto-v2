@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { PurchaseService } from './purchase.service';
@@ -21,7 +22,8 @@ export class PurchaseController {
   constructor(private readonly purchaseService: PurchaseService) {}
 
   @Post()
-  create(@Body() createPurchaseDto: CreatePurchaseDto) {
+  create(@Body() createPurchaseDto: CreatePurchaseDto, @Request() req) {
+    createPurchaseDto.userId = req.user.id;
     return this.purchaseService.create(createPurchaseDto);
   }
 

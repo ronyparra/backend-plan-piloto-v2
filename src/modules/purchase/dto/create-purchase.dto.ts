@@ -1,30 +1,6 @@
-// Convertir las entidades a DTOS
-
-// MASTER
-// @Column({ name: 'userId' })
-// userId: number;
-
-// @OneToMany(
-//   () => PurchaseDetail,
-//   (purchaseDetail) => purchaseDetail.purchaseId,
-//   {
-//     nullable: false,
-//   },
-// )
-// @JoinColumn({ name: 'id' })
-// purchaseDetail: PurchaseDetail[];
-
-//DETAIL
-// @PrimaryColumn({ name: 'purchaseId' })
-//   purchaseId: number;
-
-//   @ManyToOne(() => Concept, (concept) => concept.id, {
-//     onUpdate: 'CASCADE',
-//     nullable: false,
-//   })
-
 import { ApiProperty } from '@nestjs/swagger';
-import { CreatePurchaseDetailDto } from './create-purchase-detail.dto';
+import { Taxes } from '../interfaces/taxes.interface';
+import { PurchaseConcept } from '../entities/purchase-concept.entity';
 
 export class CreatePurchaseDto {
   @ApiProperty({ example: '2021-10-10' })
@@ -45,9 +21,11 @@ export class CreatePurchaseDto {
   @ApiProperty({ example: 1 })
   supplierId: number;
 
-  @ApiProperty({ example: 1 })
   userId: number;
 
-  @ApiProperty({ type: [CreatePurchaseDetailDto] })
-  purchaseDetail: CreatePurchaseDetailDto[];
+  @ApiProperty({ example: [{ id: 1, name: 'IVA', value: 12 }] })
+  taxes: Taxes[];
+
+  @ApiProperty({ type: [PurchaseConcept] })
+  purchaseConcept: PurchaseConcept[];
 }
