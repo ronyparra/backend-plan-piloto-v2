@@ -18,7 +18,9 @@ export class PurchaseConcept {
   @Column({})
   price: number;
 
-  @ManyToOne(() => Purchase, (purchase) => purchase.purchaseConcept)
+  @ManyToOne(() => Purchase, (purchase) => purchase.purchaseConcept, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'purchaseId' })
   purchase: Purchase;
 

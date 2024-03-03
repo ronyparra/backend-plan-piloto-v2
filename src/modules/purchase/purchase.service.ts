@@ -27,14 +27,17 @@ export class PurchaseService {
           id: true,
           name: true,
         },
+        invoiceTypeId: true,
         supplier: {
           id: true,
           name: true,
         },
+        supplierId: true,
         user: {
           id: true,
           name: true,
         },
+        userId: true,
         purchaseConcept: {
           purchaseId: true,
           concept: {
