@@ -17,14 +17,14 @@ export class EstablishmentService {
 
   findAll() {
     return this.establishmentRepository.find({
-      select: ['id', 'name'],
+      select: ['id', 'name', 'number'],
       where: { active: true },
     });
   }
 
   findOne(id: number) {
     return this.establishmentRepository.findOne({
-      select: ['id', 'name'],
+      select: ['id', 'name', 'number'],
       where: { id, active: true },
     });
   }

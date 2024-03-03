@@ -57,6 +57,7 @@ export class PurchaseService {
           concept: true,
         },
       },
+      where: { active: true },
     });
   }
 

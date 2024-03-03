@@ -16,11 +16,53 @@ export class CustomerService {
   }
 
   findAll() {
-    return this.customerRepository.find();
+    return this.customerRepository.find({
+      select: {
+        id: true,
+        name: true,
+        social_reason: true,
+        document: true,
+        address: true,
+        phone: true,
+        email: true,
+        active: true,
+        cityId: true,
+        city: {
+          id: true,
+          name: true,
+        },
+        districtId: true,
+        district: {
+          id: true,
+          name: true,
+        },
+      },
+      relations: ['city', 'district'],
+    });
   }
 
   findOne(id: number) {
     return this.customerRepository.findOne({
+      select: {
+        id: true,
+        name: true,
+        social_reason: true,
+        document: true,
+        address: true,
+        phone: true,
+        email: true,
+        active: true,
+        cityId: true,
+        city: {
+          id: true,
+          name: true,
+        },
+        districtId: true,
+        district: {
+          id: true,
+          name: true,
+        },
+      },
       where: { id },
     });
   }

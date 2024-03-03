@@ -20,6 +20,7 @@ export class CustomerBranchService {
       select: {
         id: true,
         name: true,
+        address: true,
         customer: {
           id: true,
           name: true,
@@ -46,6 +47,7 @@ export class CustomerBranchService {
       select: {
         id: true,
         name: true,
+        address: true,
         customer: {
           id: true,
           name: true,

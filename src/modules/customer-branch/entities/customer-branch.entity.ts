@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  PrimaryColumn,
 } from 'typeorm';
 
 import { Customer } from 'src/modules/customer/entities/customer.entity';
@@ -15,7 +16,6 @@ export class CustomerBranch {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @PrimaryGeneratedColumn()
   @ManyToOne(() => Customer, (customer) => customer.id, {
     onUpdate: 'CASCADE',
     nullable: false,
@@ -23,6 +23,7 @@ export class CustomerBranch {
   @JoinColumn({ name: 'customerId' })
   customer: Customer;
 
+  @PrimaryColumn()
   @Column({ name: 'customerId' })
   customerId: number;
 

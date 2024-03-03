@@ -64,6 +64,9 @@ export class Customer {
   @JoinColumn({ name: 'districtId' })
   district: District;
 
+  @Column({ name: 'districtId' })
+  districtId: number;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
 
