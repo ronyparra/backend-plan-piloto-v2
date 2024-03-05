@@ -25,6 +25,7 @@ import { StampingModule } from './modules/stamping/stamping.module';
 import { ServiceTypeModule } from './modules/service-type/service-type.module';
 import { SupplierModule } from './modules/supplier/supplier.module';
 import { PurchaseModule } from './modules/purchase/purchase.module';
+import { SaleModule } from './modules/sale/sale.module';
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { PurchaseModule } from './modules/purchase/purchase.module';
     SupplierModule,
     UserModule,
     PurchaseModule,
+    SaleModule,
   ],
 })
 export class AppModule {}

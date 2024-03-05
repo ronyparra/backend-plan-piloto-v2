@@ -6,10 +6,11 @@ import {
   SwaggerCustomOptions,
 } from '@nestjs/swagger';
 import configuration from './config/configuration';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('Backend')
     .setDescription('API para el plan piloto V2')

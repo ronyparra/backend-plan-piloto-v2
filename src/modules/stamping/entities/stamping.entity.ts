@@ -22,6 +22,12 @@ export class Stamping {
   @Column({ length: 100 })
   number: string;
 
+  @Column({ type: 'date' })
+  start_date: Date;
+
+  @Column({ type: 'date' })
+  end_date: Date;
+
   @ManyToOne(() => ExpeditionPoint, (expeditionPoint) => expeditionPoint.id, {
     onUpdate: 'CASCADE',
     nullable: false,

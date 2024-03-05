@@ -7,28 +7,35 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import { Supplier } from 'src/modules/supplier/entities/supplier.entity';
+import { Customer } from 'src/modules/customer/entities/customer.entity';
 import { InvoiceType } from 'src/modules/invoice-type/entities/invoice-type.entity';
 import { User } from 'src/modules/user/entities/user.entity';
-import { Taxes } from 'src/interfaces/tax.interface';
-import { PurchaseConcept } from './purchase-concept.entity';
+import { SaleConcept } from './sale-concept.entity';
+import { Stamping } from 'src/modules/stamping/entities/stamping.entity';
 
 @Entity()
-export class Purchase {
+export class Sale {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'date' })
   date: Date;
 
-  @Column({ length: 100 })
-  invoice_number: string;
+  @Column()
+  invoice_number: number;
 
   @Column({ length: 100, nullable: true })
   observation: string;
 
-  @Column({ length: 100 })
-  stamping: string;
+  @ManyToOne(() => Stamping, (stamping) => stamping.id, {
+    onUpdate: 'CASCADE',
+    nullable: false,
+  })
+  @JoinColumn({ name: 'stampingId' })
+  stamping: Stamping;
+
+  @Column({ name: 'stampingId' })
+  stampingId: number;
 
   @ManyToOne(() => InvoiceType, (invoiceType) => invoiceType.id, {
     onUpdate: 'CASCADE',
@@ -40,15 +47,15 @@ export class Purchase {
   @Column({ name: 'invoiceTypeId' })
   invoiceTypeId: number;
 
-  @ManyToOne(() => Supplier, (supplier) => supplier.id, {
+  @ManyToOne(() => Customer, (customer) => customer.id, {
     onUpdate: 'CASCADE',
     nullable: false,
   })
-  @JoinColumn({ name: 'supplierId' })
-  supplier: Supplier;
+  @JoinColumn({ name: 'customerId' })
+  customer: Customer;
 
-  @Column({ name: 'supplierId' })
-  supplierId: number;
+  @Column({ name: 'customerId' })
+  customerId: number;
 
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',
@@ -60,21 +67,14 @@ export class Purchase {
   @Column({ name: 'userId' })
   userId: number;
 
-  @OneToMany(
-    () => PurchaseConcept,
-    (purchaseConcept) => purchaseConcept.purchase,
-    {
-      cascade: true,
-    },
-  )
+  @OneToMany(() => SaleConcept, (saleConcept) => saleConcept.sale, {
+    cascade: true,
+  })
   @JoinColumn({ name: 'id' })
-  purchaseConcept: PurchaseConcept[];
+  saleConcept: SaleConcept[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;
-
-  @Column({ type: 'jsonb', nullable: false })
-  taxes: Taxes[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

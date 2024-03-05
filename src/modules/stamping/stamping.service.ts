@@ -26,11 +26,15 @@ export class StampingService {
         expeditionPoint: {
           id: true,
           name: true,
+          number: true,
         },
         establishment: {
           id: true,
           name: true,
+          number: true,
         },
+        start_date: true,
+        end_date: true,
       },
       where: {
         active: true,
@@ -50,11 +54,15 @@ export class StampingService {
         expeditionPoint: {
           id: true,
           name: true,
+          number: true,
         },
         establishment: {
           id: true,
           name: true,
+          number: true,
         },
+        start_date: true,
+        end_date: true,
       },
       where: { id, active: true },
       relations: ['expeditionPoint', 'establishment'],

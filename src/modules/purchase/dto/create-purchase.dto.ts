@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Taxes } from '../interfaces/taxes.interface';
+import { Taxes } from 'src/interfaces/tax.interface';
 import { PurchaseConcept } from '../entities/purchase-concept.entity';
 
 export class CreatePurchaseDto {
