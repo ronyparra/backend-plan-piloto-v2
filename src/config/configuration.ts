@@ -10,4 +10,5 @@ export default () => ({
   jwt: {
     secret: process.env.JWT_SECRET,
   },
+  report: process.env.REPORT_HOST,
 });

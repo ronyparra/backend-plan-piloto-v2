@@ -14,12 +14,16 @@ import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
+import { InvoiceReport } from './invoice.report';
 
 @UseGuards(AuthGuard)
 @ApiTags('sale')
 @Controller('sale')
 export class SaleController {
-  constructor(private readonly saleService: SaleService) {}
+  constructor(
+    private readonly saleService: SaleService,
+    private readonly invoiceReport: InvoiceReport,
+  ) {}
 
   @Post()
   create(@Body() createSaleDto: CreateSaleDto, @Request() req) {
@@ -43,8 +47,9 @@ export class SaleController {
   }
 
   @Get('generate-invoice/:id')
-  generateInvoice(@Param('id') id: number) {
-    return this.saleService.generateInvoice(id);
+  async generateInvoice(@Param('id') id: number) {
+    const sale = await this.saleService.findOne(id);
+    return this.invoiceReport.generateInvoice(sale);
   }
 
   @Patch(':id')

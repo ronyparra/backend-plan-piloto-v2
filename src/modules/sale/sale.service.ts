@@ -4,14 +4,78 @@ import { UpdateSaleDto } from './dto/update-sale.dto';
 import { Sale } from './entities/sale.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { InvoiceReport } from './reports/invoice.report';
 
+const query = {
+  select: {
+    id: true,
+    date: true,
+    invoice_number: true,
+    observation: true,
+    invoiceType: {
+      id: true,
+      name: true,
+    },
+    invoiceTypeId: true,
+    customer: {
+      id: true,
+      name: true,
+      social_reason: true,
+      document: true,
+      phone: true,
+    },
+    stamping: {
+      id: true,
+      name: true,
+      number: true,
+      start_date: true,
+      end_date: true,
+      establishment: {
+        id: true,
+        number: true,
+        name: true,
+      },
+      expeditionPoint: {
+        id: true,
+        number: true,
+        name: true,
+      },
+    },
+    stampingId: true,
+    customerId: true,
+    user: {
+      id: true,
+      name: true,
+    },
+    userId: true,
+    saleConcept: {
+      saleId: true,
+      concept: {
+        id: true,
+        name: true,
+      },
+      quantity: true,
+      price: true,
+      taxes: true,
+    },
+  },
+  relations: {
+    invoiceType: true,
+    customer: true,
+    user: true,
+    stamping: {
+      establishment: true,
+      expeditionPoint: true,
+    },
+    saleConcept: {
+      concept: true,
+    },
+  },
+};
 @Injectable()
 export class SaleService {
   constructor(
     @InjectRepository(Sale)
     private saleRepository: Repository<Sale>,
-    private invoiceReport: InvoiceReport,
   ) {}
   create(createSaleDto: CreateSaleDto) {
     return this.saleRepository.save(createSaleDto);
@@ -19,127 +83,15 @@ export class SaleService {
 
   findAll() {
     return this.saleRepository.find({
-      select: {
-        id: true,
-        date: true,
-        invoice_number: true,
-        observation: true,
-        invoiceType: {
-          id: true,
-          name: true,
-        },
-        invoiceTypeId: true,
-        customer: {
-          id: true,
-          name: true,
-        },
-        stamping: {
-          id: true,
-          name: true,
-          establishment: {
-            id: true,
-            number: true,
-            name: true,
-          },
-          expeditionPoint: {
-            id: true,
-            number: true,
-            name: true,
-          },
-        },
-        stampingId: true,
-        customerId: true,
-        user: {
-          id: true,
-          name: true,
-        },
-        userId: true,
-        saleConcept: {
-          saleId: true,
-          concept: {
-            id: true,
-            name: true,
-          },
-          quantity: true,
-          price: true,
-        },
-      },
-      relations: {
-        invoiceType: true,
-        customer: true,
-        user: true,
-        stamping: {
-          establishment: true,
-          expeditionPoint: true,
-        },
-        saleConcept: {
-          concept: true,
-        },
-      },
+      ...query,
       where: { active: true },
     });
   }
 
   findOne(id: number) {
     return this.saleRepository.findOne({
+      ...query,
       where: { id, active: true },
-      select: {
-        id: true,
-        date: true,
-        invoice_number: true,
-        observation: true,
-        invoiceType: {
-          id: true,
-          name: true,
-        },
-        invoiceTypeId: true,
-        customer: {
-          id: true,
-          name: true,
-        },
-        stamping: {
-          id: true,
-          name: true,
-          establishment: {
-            id: true,
-            number: true,
-            name: true,
-          },
-          expeditionPoint: {
-            id: true,
-            number: true,
-            name: true,
-          },
-        },
-        stampingId: true,
-        customerId: true,
-        user: {
-          id: true,
-          name: true,
-        },
-        userId: true,
-        saleConcept: {
-          saleId: true,
-          concept: {
-            id: true,
-            name: true,
-          },
-          quantity: true,
-          price: true,
-        },
-      },
-      relations: {
-        invoiceType: true,
-        customer: true,
-        user: true,
-        stamping: {
-          establishment: true,
-          expeditionPoint: true,
-        },
-        saleConcept: {
-          concept: true,
-        },
-      },
     });
   }
 
@@ -161,9 +113,5 @@ export class SaleService {
 
   remove(id: number) {
     return this.saleRepository.delete(id);
-  }
-
-  generateInvoice(id: number) {
-    return this.invoiceReport.generateInvoice(id);
   }
 }
