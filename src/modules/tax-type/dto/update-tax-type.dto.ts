@@ -7,5 +7,8 @@ export class UpdateTaxTypeDto extends PartialType(CreateTaxTypeDto) {
   name: string;
 
   @ApiProperty({ example: 10 })
-  value: number;
+  valueDivider: number;
+
+  @ApiProperty({ example: 10 })
+  percentage: number;
 }

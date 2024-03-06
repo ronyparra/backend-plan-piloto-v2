@@ -49,6 +49,7 @@ export class SaleController {
   @Get('generate-invoice/:id')
   async generateInvoice(@Param('id') id: number) {
     const sale = await this.saleService.findOne(id);
+    if (!sale) throw new Error('Sale not found');
     return this.invoiceReport.generateInvoice(sale);
   }
 

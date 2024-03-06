@@ -7,8 +7,11 @@ export class TaxType {
   @Column({ length: 100 })
   name: string;
 
-  @Column({ type: 'float' })
-  value: number;
+  @Column({ type: 'float', default: 0 })
+  valueDivider: number;
+
+  @Column({ type: 'float', default: 0 })
+  percentage: number;
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

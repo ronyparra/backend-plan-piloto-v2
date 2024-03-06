@@ -17,7 +17,7 @@ export class TaxTypeService {
 
   findAll() {
     return this.ivaRepository.find({
-      select: ['id', 'name', 'value'],
+      select: ['id', 'name', 'valueDivider', 'percentage'],
       where: {
         active: true,
       },
@@ -26,7 +26,7 @@ export class TaxTypeService {
 
   findOne(id: number) {
     return this.ivaRepository.findOne({
-      select: ['id', 'name', 'value'],
+      select: ['id', 'name', 'valueDivider', 'percentage'],
       where: { id, active: true },
     });
   }

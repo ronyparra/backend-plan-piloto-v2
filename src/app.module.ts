@@ -41,7 +41,7 @@ import { SaleModule } from './modules/sale/sale.module';
       database: configuration().database.name,
       synchronize: true,
       autoLoadEntities: true,
-      logging: true,
+      // logging: true,
     }),
     // Modules
     // ActivityModule,

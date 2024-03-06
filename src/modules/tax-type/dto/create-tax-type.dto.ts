@@ -5,5 +5,8 @@ export class CreateTaxTypeDto {
   name: string;
 
   @ApiProperty({ example: 5 })
-  value: number;
+  valueDivider: number;
+
+  @ApiProperty({ example: 5 })
+  percentage: number;
 }

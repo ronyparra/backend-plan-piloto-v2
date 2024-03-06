@@ -10,7 +10,6 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('Backend')
     .setDescription('API para el plan piloto V2')
@@ -20,6 +19,7 @@ async function bootstrap() {
   const customOptions: SwaggerCustomOptions = {};
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document, customOptions);
+  app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
   await app.listen(configuration().port);
 }
