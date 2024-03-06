@@ -4,13 +4,14 @@ import { UpdateSaleDto } from './dto/update-sale.dto';
 import { Sale } from './entities/sale.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { chromium } from 'playwright';
+import { InvoiceReport } from './reports/invoice.report';
 
 @Injectable()
 export class SaleService {
   constructor(
     @InjectRepository(Sale)
     private saleRepository: Repository<Sale>,
+    private invoiceReport: InvoiceReport,
   ) {}
   create(createSaleDto: CreateSaleDto) {
     return this.saleRepository.save(createSaleDto);
@@ -32,6 +33,21 @@ export class SaleService {
           id: true,
           name: true,
         },
+        stamping: {
+          id: true,
+          name: true,
+          establishment: {
+            id: true,
+            number: true,
+            name: true,
+          },
+          expeditionPoint: {
+            id: true,
+            number: true,
+            name: true,
+          },
+        },
+        stampingId: true,
         customerId: true,
         user: {
           id: true,
@@ -52,6 +68,10 @@ export class SaleService {
         invoiceType: true,
         customer: true,
         user: true,
+        stamping: {
+          establishment: true,
+          expeditionPoint: true,
+        },
         saleConcept: {
           concept: true,
         },
@@ -77,6 +97,21 @@ export class SaleService {
           id: true,
           name: true,
         },
+        stamping: {
+          id: true,
+          name: true,
+          establishment: {
+            id: true,
+            number: true,
+            name: true,
+          },
+          expeditionPoint: {
+            id: true,
+            number: true,
+            name: true,
+          },
+        },
+        stampingId: true,
         customerId: true,
         user: {
           id: true,
@@ -97,6 +132,10 @@ export class SaleService {
         invoiceType: true,
         customer: true,
         user: true,
+        stamping: {
+          establishment: true,
+          expeditionPoint: true,
+        },
         saleConcept: {
           concept: true,
         },
@@ -111,7 +150,7 @@ export class SaleService {
       order: { id: 'DESC' },
     });
     if (result) {
-      return result;
+      return { invoice_number: result.invoice_number + 1 };
     }
     return { invoice_number: 1 };
   }
@@ -121,32 +160,10 @@ export class SaleService {
   }
 
   remove(id: number) {
-    return this.saleRepository.softDelete(id);
+    return this.saleRepository.delete(id);
   }
 
-  async generateInvoice(id: number) {
-    console.log('id', id);
-    const A = 'invoice';
-    const htmlContent = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    </head>
-    <body>
-    <h2>Approve Page ,${A}</h2>
-    </body>
-    </html>
-    `;
-    const browser = await chromium.launch();
-    const page = await browser.newPage();
-    await page.setContent(htmlContent);
-
-    const buffer = await page.pdf({ format: 'A4' });
-    const base64 = buffer.toString('base64');
-    await browser.close();
-
-    return `data:application/pdf;base64,${base64}`;
+  generateInvoice(id: number) {
+    return this.invoiceReport.generateInvoice(id);
   }
 }
