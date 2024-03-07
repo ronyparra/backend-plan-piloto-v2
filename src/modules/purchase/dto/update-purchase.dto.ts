@@ -1,7 +1,6 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreatePurchaseDto } from './create-purchase.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { Taxes } from 'src/interfaces/tax.interface';
 import { PurchaseConcept } from '../entities/purchase-concept.entity';
 
 export class UpdatePurchaseDto extends PartialType(CreatePurchaseDto) {
@@ -24,9 +23,6 @@ export class UpdatePurchaseDto extends PartialType(CreatePurchaseDto) {
   supplierId: number;
 
   userId: number;
-
-  @ApiProperty({ example: [{ id: 1, name: 'IVA', value: 12 }] })
-  taxes: Taxes[];
 
   @ApiProperty({ type: [PurchaseConcept] })
   purchaseConcept: PurchaseConcept[];

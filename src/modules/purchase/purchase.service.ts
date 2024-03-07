@@ -5,6 +5,49 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Purchase } from './entities/purchase.entity';
 
+const query = {
+  select: {
+    id: true,
+    date: true,
+    invoice_number: true,
+    observation: true,
+    stamping: true,
+    invoiceType: {
+      id: true,
+      name: true,
+    },
+    invoiceTypeId: true,
+    supplier: {
+      id: true,
+      name: true,
+    },
+    supplierId: true,
+    user: {
+      id: true,
+      name: true,
+    },
+    userId: true,
+    purchaseConcept: {
+      purchaseId: true,
+      concept: {
+        id: true,
+        name: true,
+      },
+      quantity: true,
+      price: true,
+      taxes: true,
+    },
+  },
+  relations: {
+    invoiceType: true,
+    supplier: true,
+    user: true,
+    purchaseConcept: {
+      concept: true,
+    },
+  },
+};
+
 @Injectable()
 export class PurchaseService {
   constructor(
@@ -17,90 +60,15 @@ export class PurchaseService {
 
   findAll() {
     return this.purchaseRepository.find({
-      select: {
-        id: true,
-        date: true,
-        invoice_number: true,
-        observation: true,
-        stamping: true,
-        invoiceType: {
-          id: true,
-          name: true,
-        },
-        invoiceTypeId: true,
-        supplier: {
-          id: true,
-          name: true,
-        },
-        supplierId: true,
-        user: {
-          id: true,
-          name: true,
-        },
-        userId: true,
-        purchaseConcept: {
-          purchaseId: true,
-          concept: {
-            id: true,
-            name: true,
-          },
-          quantity: true,
-          price: true,
-        },
-        taxes: true,
-      },
-      relations: {
-        invoiceType: true,
-        supplier: true,
-        user: true,
-        purchaseConcept: {
-          concept: true,
-        },
-      },
+      ...query,
       where: { active: true },
     });
   }
 
   findOne(id: number) {
     return this.purchaseRepository.findOne({
+      ...query,
       where: { id, active: true },
-      select: {
-        id: true,
-        date: true,
-        invoice_number: true,
-        observation: true,
-        stamping: true,
-        invoiceType: {
-          id: true,
-          name: true,
-        },
-        supplier: {
-          id: true,
-          name: true,
-        },
-        user: {
-          id: true,
-          name: true,
-        },
-        purchaseConcept: {
-          purchaseId: true,
-          concept: {
-            id: true,
-            name: true,
-          },
-          quantity: true,
-          price: true,
-        },
-        taxes: true,
-      },
-      relations: {
-        invoiceType: true,
-        supplier: true,
-        user: true,
-        purchaseConcept: {
-          concept: true,
-        },
-      },
     });
   }
 

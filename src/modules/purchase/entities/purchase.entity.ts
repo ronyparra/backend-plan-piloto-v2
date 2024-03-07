@@ -10,7 +10,6 @@ import {
 import { Supplier } from 'src/modules/supplier/entities/supplier.entity';
 import { InvoiceType } from 'src/modules/invoice-type/entities/invoice-type.entity';
 import { User } from 'src/modules/user/entities/user.entity';
-import { Taxes } from 'src/interfaces/tax.interface';
 import { PurchaseConcept } from './purchase-concept.entity';
 
 @Entity()
@@ -72,9 +71,6 @@ export class Purchase {
 
   @Column({ type: 'boolean', default: true })
   active: boolean;
-
-  @Column({ type: 'jsonb', nullable: false })
-  taxes: Taxes[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
