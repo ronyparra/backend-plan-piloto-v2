@@ -8,11 +8,11 @@ import {
 } from 'typeorm';
 
 import { Customer } from 'src/modules/customer/entities/customer.entity';
-import { ServiceRequestDetail } from './service-request-detail.entity';
 import { User } from 'src/modules/user/entities/user.entity';
+import { ServiceOrderDetail } from './service-order-detail.entity';
 
 @Entity()
-export class ServiceRequest {
+export class ServiceOrder {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -43,13 +43,13 @@ export class ServiceRequest {
   userId: number;
 
   @OneToMany(
-    () => ServiceRequestDetail,
-    (serviceRequestConcept) => serviceRequestConcept.serviceRequest,
+    () => ServiceOrderDetail,
+    (serviceOrderDetail) => serviceOrderDetail.serviceOrder,
     {
       cascade: true,
     },
   )
-  serviceRequestDetail: ServiceRequestDetail[];
+  serviceOrderDetail: ServiceOrderDetail[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

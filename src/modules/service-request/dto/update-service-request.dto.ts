@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateServiceRequestDto } from './create-service-request.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { ServiceRequestConcept } from '../entities/service-request-concept.entity';
+import { ServiceRequestDetail } from '../entities/service-request-detail.entity';
 
 export class UpdateServiceRequestDto extends PartialType(
   CreateServiceRequestDto,
@@ -17,6 +17,6 @@ export class UpdateServiceRequestDto extends PartialType(
 
   userId: number;
 
-  @ApiProperty({ type: [ServiceRequestConcept] })
-  serviceRequestConcept: ServiceRequestConcept[];
+  @ApiProperty({ type: [ServiceRequestDetail] })
+  serviceRequestDetail: ServiceRequestDetail[];
 }

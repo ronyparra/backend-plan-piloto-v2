@@ -27,6 +27,7 @@ import { SupplierModule } from './modules/supplier/supplier.module';
 import { PurchaseModule } from './modules/purchase/purchase.module';
 import { SaleModule } from './modules/sale/sale.module';
 import { ServiceRequestModule } from './modules/service-request/service-request.module';
+import { ServiceOrderModule } from './modules/service-order/service-order.module';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { ServiceRequestModule } from './modules/service-request/service-request.
     PurchaseModule,
     SaleModule,
     ServiceRequestModule,
+    ServiceOrderModule,
   ],
 })
 export class AppModule {}
