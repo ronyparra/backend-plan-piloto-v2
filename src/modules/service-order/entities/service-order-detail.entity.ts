@@ -12,6 +12,9 @@ export class ServiceOrderDetail {
   @PrimaryColumn()
   serviceTypeId: number;
 
+  @Column({ length: 10 })
+  hourAndMinute: string;
+
   @ManyToOne(
     () => ServiceOrder,
     (serviceOrder) => serviceOrder.serviceOrderDetail,

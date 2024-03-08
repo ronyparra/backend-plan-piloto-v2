@@ -25,6 +25,7 @@ const query = {
     userId: true,
     serviceOrderConcept: {
       serviceOrderId: true,
+      hourAndMinute: true,
       concept: {
         id: true,
         name: true,
