@@ -23,10 +23,10 @@ const query = {
       name: true,
     },
     userId: true,
-    serviceOrderConcept: {
+    serviceOrderDetail: {
       serviceOrderId: true,
       hourAndMinute: true,
-      concept: {
+      serviceType: {
         id: true,
         name: true,
       },
@@ -35,8 +35,8 @@ const query = {
   relations: {
     customer: true,
     user: true,
-    serviceOrderConcept: {
-      concept: true,
+    serviceOrderDetail: {
+      serviceType: true,
     },
   },
 };
