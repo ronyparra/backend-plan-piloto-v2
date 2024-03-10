@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ServiceOrderService } from './service-order.service';
@@ -21,7 +22,8 @@ export class ServiceOrderController {
   constructor(private readonly serviceOrderService: ServiceOrderService) {}
 
   @Post()
-  create(@Body() createServiceOrderDto: CreateServiceOrderDto) {
+  create(@Body() createServiceOrderDto: CreateServiceOrderDto, @Request() req) {
+    createServiceOrderDto.userId = req.user.id;
     return this.serviceOrderService.create(createServiceOrderDto);
   }
 

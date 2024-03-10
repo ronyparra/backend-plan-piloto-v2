@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ServiceRequestService } from './service-request.service';
@@ -21,7 +22,11 @@ export class ServiceRequestController {
   constructor(private readonly serviceRequestService: ServiceRequestService) {}
 
   @Post()
-  create(@Body() createServiceRequestDto: CreateServiceRequestDto) {
+  create(
+    @Body() createServiceRequestDto: CreateServiceRequestDto,
+    @Request() req,
+  ) {
+    createServiceRequestDto.userId = req.user.id;
     return this.serviceRequestService.create(createServiceRequestDto);
   }
 
