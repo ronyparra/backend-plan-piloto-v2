@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  // Patch,
   Param,
   Delete,
   Request,
@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { PurchaseService } from './purchase.service';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
-import { UpdatePurchaseDto } from './dto/update-purchase.dto';
+// import { UpdatePurchaseDto } from './dto/update-purchase.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 
@@ -37,13 +37,13 @@ export class PurchaseController {
     return this.purchaseService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updatePurchaseDto: UpdatePurchaseDto,
-  ) {
-    return this.purchaseService.update(+id, updatePurchaseDto);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updatePurchaseDto: UpdatePurchaseDto,
+  // ) {
+  //   return this.purchaseService.update(+id, updatePurchaseDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
