@@ -15,7 +15,37 @@ export class AccountToPayService {
   }
 
   findAll() {
-    return this.accountToPayRepository.find();
+    return this.accountToPayRepository.find({
+      select: {
+        id: true,
+        date: true,
+        userId: true,
+        user: {
+          id: true,
+          name: true,
+        },
+        accountToPayDetail: {
+          due_date: true,
+          amount: true,
+        },
+        purchase: {
+          id: true,
+          date: true,
+          invoice_number: true,
+          stamping: true,
+          supplier: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+      relations: {
+        user: true,
+        purchase: {
+          supplier: true,
+        },
+      },
+    });
   }
 
   findOne(id: number) {

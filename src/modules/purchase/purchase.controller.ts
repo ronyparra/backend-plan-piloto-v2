@@ -27,9 +27,10 @@ export class PurchaseController {
   async create(@Body() createPurchaseDto: CreatePurchaseDto, @Request() req) {
     // Asignar el usuario que realiza la compra
     createPurchaseDto.userId = req.user.id;
+
+    // Asignar datos de la cuenta por pagar
     createPurchaseDto.accountToPay.userId = req.user.id;
-    // Asignar el proveedor al que se le realiza la compra
-    createPurchaseDto.accountToPay.supplierId = createPurchaseDto.supplierId;
+    createPurchaseDto.accountToPay.date = createPurchaseDto.date;
 
     const purchaseData = createPurchaseDto;
     const accountToPayData = createPurchaseDto.accountToPay;
@@ -44,9 +45,7 @@ export class PurchaseController {
 
     // Si la compra es a crédito, asignar el id de la compra a cada cuenta por pagar
     const purchaseId = purchase.id;
-    accountToPayData.accountToPayDetail.forEach((element) => {
-      element.purchaseId = purchaseId;
-    });
+    accountToPayData.purchaseId = purchaseId;
     const toPay = await this.accountToPayService.create(accountToPayData);
     return { ...purchase, accountToPay: toPay };
   }

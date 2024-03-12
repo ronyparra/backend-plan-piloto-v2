@@ -11,7 +11,6 @@ import { Supplier } from 'src/modules/supplier/entities/supplier.entity';
 import { InvoiceType } from 'src/modules/invoice-type/entities/invoice-type.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { PurchaseConcept } from './purchase-concept.entity';
-import { AccountToPayDetail } from 'src/modules/account-to-pay/entities/account-to-pay-detail.entity';
 
 @Entity()
 export class Purchase {
@@ -69,16 +68,6 @@ export class Purchase {
   )
   @JoinColumn({ name: 'id' })
   purchaseConcept: PurchaseConcept[];
-
-  @OneToMany(
-    () => AccountToPayDetail,
-    (accountToPayDetail) => accountToPayDetail.purchase,
-    {
-      cascade: true,
-    },
-  )
-  @JoinColumn({ name: 'id' })
-  accountToPayDetail: AccountToPayDetail[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

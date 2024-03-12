@@ -7,7 +7,6 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-import { Purchase } from '../../purchase/entities/purchase.entity';
 import { AccountToPay } from './account-to-pay.entity';
 
 @Entity()
@@ -19,21 +18,11 @@ export class AccountToPayDetail {
   @PrimaryColumn()
   accountToPayId: number;
 
-  @Column()
-  @PrimaryColumn()
-  purchaseId: number;
-
   @Column({ type: 'date' })
   due_date: Date;
 
   @Column({ type: 'float' })
   amount: number;
-
-  @ManyToOne(() => Purchase, (purchase) => purchase.accountToPayDetail, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'purchaseId' })
-  purchase: Purchase;
 
   @ManyToOne(
     () => AccountToPay,

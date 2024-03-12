@@ -5,26 +5,31 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  PrimaryColumn,
 } from 'typeorm';
 
-import { Supplier } from 'src/modules/supplier/entities/supplier.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { AccountToPayDetail } from './account-to-pay-detail.entity';
+import { Purchase } from 'src/modules/purchase/entities/purchase.entity';
 
 @Entity()
 export class AccountToPay {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Supplier, (supplier) => supplier.id, {
+  @Column({ type: 'date' })
+  date: Date;
+
+  @ManyToOne(() => Purchase, (purchase) => purchase.id, {
     onUpdate: 'CASCADE',
     nullable: false,
   })
-  @JoinColumn({ name: 'supplierId' })
-  supplier: Supplier;
+  @JoinColumn({ name: 'purchaseId' })
+  purchase: Purchase;
 
-  @Column({ name: 'supplierId' })
-  supplierId: number;
+  @Column({ name: 'purchaseId' })
+  @PrimaryColumn()
+  purchaseId: number;
 
   @OneToMany(
     () => AccountToPayDetail,
