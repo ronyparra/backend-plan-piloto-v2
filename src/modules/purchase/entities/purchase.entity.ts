@@ -11,7 +11,7 @@ import { Supplier } from 'src/modules/supplier/entities/supplier.entity';
 import { InvoiceType } from 'src/modules/invoice-type/entities/invoice-type.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { PurchaseConcept } from './purchase-concept.entity';
-import { AccountToPayDetail } from './account-to-pay-detail';
+import { AccountToPayDetail } from 'src/modules/account-to-pay/entities/account-to-pay-detail.entity';
 
 @Entity()
 export class Purchase {

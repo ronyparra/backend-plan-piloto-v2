@@ -28,6 +28,7 @@ import { PurchaseModule } from './modules/purchase/purchase.module';
 import { SaleModule } from './modules/sale/sale.module';
 import { ServiceRequestModule } from './modules/service-request/service-request.module';
 import { ServiceOrderModule } from './modules/service-order/service-order.module';
+import { AccountToPayModule } from './modules/account-to-pay/account-to-pay.module';
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import { ServiceOrderModule } from './modules/service-order/service-order.module
     SaleModule,
     ServiceRequestModule,
     ServiceOrderModule,
+    AccountToPayModule,
   ],
 })
 export class AppModule {}

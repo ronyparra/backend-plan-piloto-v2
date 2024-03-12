@@ -9,7 +9,7 @@ import {
 
 import { Supplier } from 'src/modules/supplier/entities/supplier.entity';
 import { User } from 'src/modules/user/entities/user.entity';
-import { AccountToPayDetail } from './account-to-pay-detail';
+import { AccountToPayDetail } from './account-to-pay-detail.entity';
 
 @Entity()
 export class AccountToPay {

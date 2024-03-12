@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-// import { PurchaseConcept } from '../entities/purchase-concept.entity';
-import { CreateAccountToPayDto } from './create-account-to-pay.dto';
+import { CreateAccountToPayDto } from 'src/modules/account-to-pay/dto/create-account-to-pay.dto';
 import { CreatePurchaseConceptDto } from './create-purchase-concept.dto';
 
 export class CreatePurchaseDto {

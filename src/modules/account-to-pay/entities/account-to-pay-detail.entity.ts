@@ -7,8 +7,8 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-import { Purchase } from './purchase.entity';
-import { AccountToPay } from './account-to-pay';
+import { Purchase } from '../../purchase/entities/purchase.entity';
+import { AccountToPay } from './account-to-pay.entity';
 
 @Entity()
 export class AccountToPayDetail {
