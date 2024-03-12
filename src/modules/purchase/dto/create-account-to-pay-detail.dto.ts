@@ -6,4 +6,6 @@ export class CreateAccountToPayDetailDto {
 
   @ApiProperty({ example: 1 })
   amount: number;
+
+  purchaseId: number;
 }

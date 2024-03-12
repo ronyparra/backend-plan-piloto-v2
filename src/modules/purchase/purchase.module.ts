@@ -6,6 +6,7 @@ import { Purchase } from './entities/purchase.entity';
 import { PurchaseConcept } from './entities/purchase-concept.entity';
 import { AccountToPay } from './entities/account-to-pay';
 import { AccountToPayDetail } from './entities/account-to-pay-detail';
+import { AccountToPayService } from './account-to-pay.service';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { AccountToPayDetail } from './entities/account-to-pay-detail';
     ]),
   ],
   controllers: [PurchaseController],
-  providers: [PurchaseService],
+  providers: [PurchaseService, AccountToPayService],
 })
 export class PurchaseModule {}
