@@ -29,6 +29,7 @@ import { SaleModule } from './modules/sale/sale.module';
 import { ServiceRequestModule } from './modules/service-request/service-request.module';
 import { ServiceOrderModule } from './modules/service-order/service-order.module';
 import { AccountToPayModule } from './modules/account-to-pay/account-to-pay.module';
+import { QuotaTypeModule } from './modules/quota-type/quota-type.module';
 
 @Module({
   imports: [
@@ -73,6 +74,7 @@ import { AccountToPayModule } from './modules/account-to-pay/account-to-pay.modu
     ServiceRequestModule,
     ServiceOrderModule,
     AccountToPayModule,
+    QuotaTypeModule,
   ],
 })
 export class AppModule {}
