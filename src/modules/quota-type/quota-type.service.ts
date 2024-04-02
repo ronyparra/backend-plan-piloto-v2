@@ -17,12 +17,24 @@ export class QuotaTypeService {
 
   findAll() {
     return this.quotaTypeRepository.find({
+      select: {
+        id: true,
+        name: true,
+        type: true,
+        value: true,
+      },
       where: { active: true },
     });
   }
 
   findOne(id: number) {
     return this.quotaTypeRepository.findOne({
+      select: {
+        id: true,
+        name: true,
+        type: true,
+        value: true,
+      },
       where: { id, active: true },
     });
   }
