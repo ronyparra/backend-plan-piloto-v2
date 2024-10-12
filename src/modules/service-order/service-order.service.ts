@@ -26,7 +26,7 @@ const query = {
     serviceOrderDetail: {
       serviceOrderId: true,
       hourAndMinute: true,
-      serviceType: {
+      concept: {
         id: true,
         name: true,
       },
@@ -36,7 +36,7 @@ const query = {
     customer: true,
     user: true,
     serviceOrderDetail: {
-      serviceType: true,
+      concept: true,
     },
   },
 };

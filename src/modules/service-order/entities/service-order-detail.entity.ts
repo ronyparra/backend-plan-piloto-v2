@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { ServiceOrder } from './service-order.entity';
-import { ServiceType } from 'src/modules/service-type/entities/service-type.entity';
+import { Concept } from 'src/modules/concept/entities/concept.entity';
 
 @Entity()
 export class ServiceOrderDetail {
@@ -10,10 +10,10 @@ export class ServiceOrderDetail {
 
   @Column()
   @PrimaryColumn()
-  serviceTypeId: number;
+  conceptId: number;
 
-  @Column({ length: 10 })
-  hourAndMinute: string;
+  @Column({ type: 'int' })
+  quantity: number;
 
   @ManyToOne(
     () => ServiceOrder,
@@ -25,10 +25,7 @@ export class ServiceOrderDetail {
   @JoinColumn({ name: 'serviceOrderId' })
   serviceOrder: ServiceOrder;
 
-  @ManyToOne(
-    () => ServiceType,
-    (serviceType) => serviceType.serviceRequestDetail,
-  )
-  @JoinColumn({ name: 'serviceTypeId' })
-  serviceType: ServiceType;
+  @ManyToOne(() => Concept, (concept) => concept.serviceOrderDetail)
+  @JoinColumn({ name: 'conceptId' })
+  concept: Concept;
 }

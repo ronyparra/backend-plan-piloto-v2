@@ -25,7 +25,7 @@ const query = {
     userId: true,
     serviceRequestDetail: {
       serviceRequestId: true,
-      serviceType: {
+      concept: {
         id: true,
         name: true,
       },
@@ -35,7 +35,7 @@ const query = {
     customer: true,
     user: true,
     serviceRequestDetail: {
-      serviceType: true,
+      concept: true,
     },
   },
 };

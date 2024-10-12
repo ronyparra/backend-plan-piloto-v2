@@ -13,6 +13,9 @@ export class UpdateServiceRequestDto extends PartialType(
   observation: string;
 
   @ApiProperty({ example: 1 })
+  serviceTypeId: number;
+
+  @ApiProperty({ example: 1 })
   customerId: number;
 
   userId: number;

@@ -11,6 +11,9 @@ export class CreateServiceRequestDto {
   @ApiProperty({ example: 1 })
   customerId: number;
 
+  @ApiProperty({ example: 1 })
+  serviceTypeId: number;
+
   userId: number;
 
   @ApiProperty({ type: [ServiceRequestDetail] })

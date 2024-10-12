@@ -1,12 +1,12 @@
 import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { ServiceRequest } from './service-request.entity';
 import { Concept } from 'src/modules/concept/entities/concept.entity';
+import { ServiceBudget } from './service-budget.entity';
 
 @Entity()
-export class ServiceRequestDetail {
+export class ServiceBudgetDetail {
   @Column()
   @PrimaryColumn()
-  serviceRequestId: number;
+  serviceBudgetId: number;
 
   @Column()
   @PrimaryColumn()
@@ -16,18 +16,19 @@ export class ServiceRequestDetail {
   quantity: number;
 
   @ManyToOne(
-    () => ServiceRequest,
-    (serviceRequest) => serviceRequest.serviceRequestDetail,
+    () => ServiceBudget,
+    (serviceBudget) => serviceBudget.serviceBudgetDetail,
     {
       onDelete: 'CASCADE',
     },
   )
-  @JoinColumn({ name: 'serviceRequestId' })
-  serviceRequest: ServiceRequest;
+  @JoinColumn({ name: 'serviceBudgetId' })
+  serviceBudget: ServiceBudget;
 
-  @ManyToOne(() => Concept, (concept) => concept.serviceRequestDetail, {
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => Concept, (concept) => concept.serviceBudgetDetail)
   @JoinColumn({ name: 'conceptId' })
   concept: Concept;
+
+  @Column({ type: 'numeric' })
+  price: number;
 }

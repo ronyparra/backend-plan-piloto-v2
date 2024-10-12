@@ -9,11 +9,11 @@ import {
 
 import { Customer } from 'src/modules/customer/entities/customer.entity';
 import { User } from 'src/modules/user/entities/user.entity';
-import { ServiceOrderDetail } from './service-order-detail.entity';
 import { ServiceType } from 'src/modules/service-type/entities/service-type.entity';
+import { ServiceBudgetDetail } from './service-budget-detail.entity';
 
 @Entity()
-export class ServiceOrder {
+export class ServiceBudget {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -53,13 +53,13 @@ export class ServiceOrder {
   userId: number;
 
   @OneToMany(
-    () => ServiceOrderDetail,
-    (serviceOrderDetail) => serviceOrderDetail.serviceOrder,
+    () => ServiceBudgetDetail,
+    (serviceBudgetDetail) => serviceBudgetDetail.serviceBudget,
     {
       cascade: true,
     },
   )
-  serviceOrderDetail: ServiceOrderDetail[];
+  serviceBudgetDetail: ServiceBudgetDetail[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

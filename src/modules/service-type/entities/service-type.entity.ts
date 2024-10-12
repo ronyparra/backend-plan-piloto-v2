@@ -1,11 +1,5 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  JoinColumn,
-} from 'typeorm';
-import { ServiceRequestDetail } from 'src/modules/service-request/entities/service-request-detail.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+
 @Entity()
 export class ServiceType {
   @PrimaryGeneratedColumn()
@@ -16,16 +10,6 @@ export class ServiceType {
 
   @Column({ type: 'boolean', default: true })
   active: boolean;
-
-  @OneToMany(
-    () => ServiceRequestDetail,
-    (serviceRequestDetail) => serviceRequestDetail.serviceType,
-    {
-      cascade: true,
-    },
-  )
-  @JoinColumn({ name: 'id' })
-  serviceRequestDetail: ServiceRequestDetail[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

@@ -13,6 +13,9 @@ export class UpdateServiceOrderDto extends PartialType(CreateServiceOrderDto) {
   @ApiProperty({ example: 1 })
   customerId: number;
 
+  @ApiProperty({ example: 1 })
+  serviceTypeId: number;
+
   userId: number;
 
   @ApiProperty({ type: [ServiceOrderDetail] })
