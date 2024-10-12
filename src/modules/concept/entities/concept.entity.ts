@@ -15,6 +15,7 @@ import { SaleConcept } from 'src/modules/sale/entities/sale-concept.entity';
 import { ServiceRequestDetail } from 'src/modules/service-request/entities/service-request-detail.entity';
 import { ServiceOrderDetail } from 'src/modules/service-order/entities/service-order-detail.entity';
 import { ServiceBudgetDetail } from 'src/modules/service-budget/entities/service-budget-detail.entity';
+import { ServiceProvidedDetail } from 'src/modules/service-provided/entities/service-provided-detail.entity';
 
 @Entity()
 export class Concept {
@@ -46,6 +47,16 @@ export class Concept {
   )
   @JoinColumn({ name: 'id' })
   conceptPurchase: PurchaseConcept[];
+
+  @OneToMany(
+    () => ServiceProvidedDetail,
+    (serviceProvidedDetail) => serviceProvidedDetail.concept,
+    {
+      nullable: false,
+    },
+  )
+  @JoinColumn({ name: 'id' })
+  serviceProvidedDetail: ServiceProvidedDetail[];
 
   @OneToMany(
     () => ServiceBudgetDetail,
