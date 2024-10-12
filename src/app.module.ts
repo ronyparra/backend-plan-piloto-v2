@@ -34,6 +34,8 @@ import { ServiceBudgetModule } from './modules/service-budget/service-budget.mod
 import { ServiceDiagnosticModule } from './modules/service-diagnostic/service-diagnostic.module';
 import { ServiceProvidedModule } from './modules/service-provided/service-provided.module';
 import { ServiceDiscountModule } from './modules/service-discount/service-discount.module';
+import { ServiceContractModule } from './modules/service-contract/service-contract.module';
+import { ServiceClaimModule } from './modules/service-claim/service-claim.module';
 
 @Module({
   imports: [
@@ -83,6 +85,8 @@ import { ServiceDiscountModule } from './modules/service-discount/service-discou
     ServiceDiagnosticModule,
     ServiceProvidedModule,
     ServiceDiscountModule,
+    ServiceContractModule,
+    ServiceClaimModule,
   ],
 })
 export class AppModule {}
