@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateServiceRequestDto } from './dto/create-service-request.dto';
+import {
+  CreateServiceRequestDto,
+  CreateServiceRequestDetailDto,
+} from './dto/create-service-request.dto';
 import { UpdateServiceRequestDto } from './dto/update-service-request.dto';
 import { ServiceRequest } from './entities/service-request.entity';
+import { ServiceRequestDetail } from './entities/service-request-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -11,6 +15,10 @@ const query = {
     date: true,
     observation: true,
     customerId: true,
+    serviceType: {
+      id: true,
+      name: true,
+    },
     customer: {
       id: true,
       name: true,
@@ -29,10 +37,12 @@ const query = {
         id: true,
         name: true,
       },
+      quantity: true,
     },
   },
   relations: {
     customer: true,
+    serviceType: true,
     user: true,
     serviceRequestDetail: {
       concept: true,
@@ -45,6 +55,8 @@ export class ServiceRequestService {
   constructor(
     @InjectRepository(ServiceRequest)
     private serviceRequestRepository: Repository<ServiceRequest>,
+    @InjectRepository(ServiceRequestDetail)
+    private serviceRequestDetailRepository: Repository<ServiceRequestDetail>,
   ) {}
   create(createServiceRequestDto: CreateServiceRequestDto) {
     return this.serviceRequestRepository.save(createServiceRequestDto);
@@ -62,6 +74,18 @@ export class ServiceRequestService {
       ...query,
       where: { id, active: true },
     });
+  }
+
+  async updateDetail(
+    id: number,
+    createServiceRequestDetailDto: CreateServiceRequestDetailDto[],
+  ) {
+    for (const detail of createServiceRequestDetailDto) {
+      await this.serviceRequestDetailRepository.save({
+        ...detail,
+        serviceRequestId: id,
+      });
+    }
   }
 
   update(id: number, updateServiceRequestDto: UpdateServiceRequestDto) {

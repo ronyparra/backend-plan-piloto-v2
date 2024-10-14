@@ -10,7 +10,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ServiceRequestService } from './service-request.service';
-import { CreateServiceRequestDto } from './dto/create-service-request.dto';
+import {
+  CreateServiceRequestDto,
+  CreateServiceRequestDetailDto,
+} from './dto/create-service-request.dto';
 import { UpdateServiceRequestDto } from './dto/update-service-request.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
@@ -41,11 +44,17 @@ export class ServiceRequestController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateServiceRequestDto: UpdateServiceRequestDto,
   ) {
-    return this.serviceRequestService.update(+id, updateServiceRequestDto);
+    const detail: CreateServiceRequestDetailDto[] =
+      updateServiceRequestDto.serviceRequestDetail;
+    delete updateServiceRequestDto.serviceRequestDetail;
+
+    await this.serviceRequestService.update(+id, updateServiceRequestDto);
+    await this.serviceRequestService.updateDetail(+id, detail);
+    return this.serviceRequestService.findOne(+id);
   }
 
   @Delete(':id')
