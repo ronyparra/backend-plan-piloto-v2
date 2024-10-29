@@ -10,7 +10,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ServiceOrderService } from './service-order.service';
-import { CreateServiceOrderDto } from './dto/create-service-order.dto';
+import {
+  CreateServiceOrderDto,
+  ServiceOrderDetailDto,
+} from './dto/create-service-order.dto';
 import { UpdateServiceOrderDto } from './dto/update-service-order.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
@@ -38,11 +41,16 @@ export class ServiceOrderController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateServiceOrderDto: UpdateServiceOrderDto,
   ) {
-    return this.serviceOrderService.update(+id, updateServiceOrderDto);
+    const detail: ServiceOrderDetailDto[] =
+      updateServiceOrderDto.serviceOrderDetail;
+    delete updateServiceOrderDto.serviceOrderDetail;
+    await this.serviceOrderService.update(+id, updateServiceOrderDto);
+    await this.serviceOrderService.updateDetail(+id, detail);
+    return this.serviceOrderService.findOne(+id);
   }
 
   @Delete(':id')

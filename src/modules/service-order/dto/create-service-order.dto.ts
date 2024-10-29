@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ServiceOrderDetail } from '../entities/service-order-detail.entity';
+
+export class ServiceOrderDetailDto {
+  @ApiProperty({ example: 1 })
+  conceptId: number;
+
+  @ApiProperty({ example: 1 })
+  quantity: number;
+}
 
 export class CreateServiceOrderDto {
   @ApiProperty({ example: '2021-10-10' })
@@ -16,6 +23,6 @@ export class CreateServiceOrderDto {
 
   userId: number;
 
-  @ApiProperty({ type: [ServiceOrderDetail] })
-  serviceOrderDetail: ServiceOrderDetail[];
+  @ApiProperty({ type: [ServiceOrderDetailDto] })
+  serviceOrderDetail: ServiceOrderDetailDto[];
 }

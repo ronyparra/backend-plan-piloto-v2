@@ -9,7 +9,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ServiceBudgetService } from './service-budget.service';
-import { CreateServiceBudgetDto } from './dto/create-service-budget.dto';
+import {
+  CreateServiceBudgetDto,
+  ServiceBudgetDetailDto,
+} from './dto/create-service-budget.dto';
 import { UpdateServiceBudgetDto } from './dto/update-service-budget.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
@@ -36,11 +39,18 @@ export class ServiceBudgetController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateServiceBudgetDto: UpdateServiceBudgetDto,
   ) {
-    return this.serviceBudgetService.update(+id, updateServiceBudgetDto);
+    const detail: ServiceBudgetDetailDto[] =
+      updateServiceBudgetDto.serviceBudgetDetail;
+
+    delete updateServiceBudgetDto.serviceBudgetDetail;
+
+    await this.serviceBudgetService.update(+id, updateServiceBudgetDto);
+    await this.serviceBudgetService.updateDetail(+id, detail);
+    return this.serviceBudgetService.findOne(+id);
   }
 
   @Delete(':id')
