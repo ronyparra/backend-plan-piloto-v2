@@ -80,6 +80,22 @@ export class ServiceRequestService {
     id: number,
     createServiceRequestDetailDto: CreateServiceRequestDetailDto[],
   ) {
+    const currentDetail = await this.serviceRequestDetailRepository.find({
+      where: { serviceRequestId: id },
+    });
+
+    for (const detail of currentDetail) {
+      if (
+        !createServiceRequestDetailDto.find(
+          (d) => d.conceptId === detail.conceptId,
+        )
+      ) {
+        await this.serviceRequestDetailRepository.delete({
+          conceptId: detail.conceptId,
+        });
+      }
+    }
+
     for (const detail of createServiceRequestDetailDto) {
       await this.serviceRequestDetailRepository.save({
         ...detail,

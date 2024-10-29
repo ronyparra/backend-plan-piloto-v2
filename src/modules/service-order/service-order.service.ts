@@ -56,7 +56,7 @@ export class ServiceOrderService {
     @InjectRepository(ServiceOrder)
     private serviceOrderRepository: Repository<ServiceOrder>,
     @InjectRepository(ServiceOrderDetail)
-    private serviceRequestDetailRepository: Repository<ServiceOrderDetail>,
+    private serviceOrderDetailRepository: Repository<ServiceOrderDetail>,
   ) {}
   create(createServiceOrderDto: CreateServiceOrderDto) {
     return this.serviceOrderRepository.save(createServiceOrderDto);
@@ -77,8 +77,18 @@ export class ServiceOrderService {
   }
 
   async updateDetail(id: number, serviceOrderDetail: ServiceOrderDetailDto[]) {
+    const currentDetails = await this.serviceOrderDetailRepository.find({
+      where: { serviceOrderId: id },
+    });
+    for (const detail of currentDetails) {
+      if (!serviceOrderDetail.find((d) => d.conceptId === detail.conceptId)) {
+        await this.serviceOrderDetailRepository.delete({
+          conceptId: detail.conceptId,
+        });
+      }
+    }
     for (const detail of serviceOrderDetail) {
-      await this.serviceRequestDetailRepository.save({
+      await this.serviceOrderDetailRepository.save({
         ...detail,
         serviceRequestId: id,
       });

@@ -74,6 +74,16 @@ export class ServiceBudgetService {
     id: number,
     serviceBudgetDetail: ServiceBudgetDetailDto[],
   ) {
+    const currentDetail = await this.serviceBudgetDetailRepository.find({
+      where: { serviceBudgetId: id },
+    });
+    for (const detail of currentDetail) {
+      if (!serviceBudgetDetail.find((d) => d.conceptId === detail.conceptId)) {
+        await this.serviceBudgetDetailRepository.delete({
+          conceptId: detail.conceptId,
+        });
+      }
+    }
     for (const detail of serviceBudgetDetail) {
       await this.serviceBudgetDetailRepository.save({
         ...detail,
