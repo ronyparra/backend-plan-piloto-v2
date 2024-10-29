@@ -21,7 +21,44 @@ export class ServiceBudgetService {
 
   findAll() {
     return this.serviceBudgetRepository.find({
-      relations: ['serviceBudgetDetail'],
+      select: {
+        id: true,
+        date: true,
+        observation: true,
+        customerId: true,
+        serviceType: {
+          id: true,
+          name: true,
+        },
+        customer: {
+          id: true,
+          name: true,
+          social_reason: true,
+          document: true,
+          phone: true,
+        },
+        user: {
+          id: true,
+          name: true,
+        },
+        userId: true,
+        serviceBudgetDetail: {
+          serviceBudgetId: true,
+          concept: {
+            id: true,
+            name: true,
+          },
+          quantity: true,
+        },
+      },
+      relations: {
+        customer: true,
+        serviceType: true,
+        user: true,
+        serviceBudgetDetail: {
+          concept: true,
+        },
+      },
       where: { active: true },
     });
   }
@@ -40,7 +77,7 @@ export class ServiceBudgetService {
     for (const detail of serviceBudgetDetail) {
       await this.serviceBudgetDetailRepository.save({
         ...detail,
-        serviceRequestId: id,
+        serviceBudgetId: id,
       });
     }
   }

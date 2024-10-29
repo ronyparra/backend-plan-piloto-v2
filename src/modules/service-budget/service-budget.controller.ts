@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ServiceBudgetService } from './service-budget.service';
@@ -24,7 +25,11 @@ export class ServiceBudgetController {
   constructor(private readonly serviceBudgetService: ServiceBudgetService) {}
 
   @Post()
-  create(@Body() createServiceBudgetDto: CreateServiceBudgetDto) {
+  create(
+    @Body() createServiceBudgetDto: CreateServiceBudgetDto,
+    @Request() req,
+  ) {
+    createServiceBudgetDto.userId = req.user.id;
     return this.serviceBudgetService.create(createServiceBudgetDto);
   }
 
