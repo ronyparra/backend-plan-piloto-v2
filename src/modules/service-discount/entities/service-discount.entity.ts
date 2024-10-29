@@ -5,8 +5,8 @@ export class ServiceDiscount {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'date' })
-  date: Date;
+  @Column({ type: 'varchar', length: 255 })
+  description: string;
 
   @Column({ type: 'numeric' })
   discountPercentage: number;

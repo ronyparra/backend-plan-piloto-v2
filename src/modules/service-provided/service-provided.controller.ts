@@ -6,10 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ServiceProvidedService } from './service-provided.service';
-import { CreateServiceProvidedDto } from './dto/create-service-provided.dto';
+import {
+  CreateServiceProvidedDto,
+  ServiceProvidedDetailDto,
+} from './dto/create-service-provided.dto';
 import { UpdateServiceProvidedDto } from './dto/update-service-provided.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
@@ -23,7 +27,11 @@ export class ServiceProvidedController {
   ) {}
 
   @Post()
-  create(@Body() createServiceProvidedDto: CreateServiceProvidedDto) {
+  create(
+    @Body() createServiceProvidedDto: CreateServiceProvidedDto,
+    @Request() req,
+  ) {
+    createServiceProvidedDto.userId = req.user.id;
     return this.serviceProvidedService.create(createServiceProvidedDto);
   }
 
@@ -38,11 +46,18 @@ export class ServiceProvidedController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateServiceProvidedDto: UpdateServiceProvidedDto,
   ) {
-    return this.serviceProvidedService.update(+id, updateServiceProvidedDto);
+    const detail: ServiceProvidedDetailDto[] =
+      updateServiceProvidedDto.serviceProvidedDetail;
+
+    delete updateServiceProvidedDto.serviceProvidedDetail;
+
+    await this.serviceProvidedService.update(+id, updateServiceProvidedDto);
+    await this.serviceProvidedService.updateDetail(+id, detail);
+    return this.serviceProvidedService.findOne(+id);
   }
 
   @Delete(':id')

@@ -17,6 +17,11 @@ export class ServiceDiscountService {
 
   findAll() {
     return this.serviceDiscountRepository.find({
+      select: {
+        id: true,
+        description: true,
+        discountPercentage: true,
+      },
       where: { active: true },
     });
   }
