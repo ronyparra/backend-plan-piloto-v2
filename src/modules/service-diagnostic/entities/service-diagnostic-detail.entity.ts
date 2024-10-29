@@ -1,16 +1,10 @@
-import {
-  Entity,
-  Column,
-  PrimaryColumn,
-  ManyToOne,
-  JoinColumn,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { ServiceDiagnostic } from './service-diagnostic.entity';
 
 @Entity()
 export class ServiceDiagnosticDetail {
-  @PrimaryGeneratedColumn()
+  @Column()
+  @PrimaryColumn()
   id: number;
 
   @Column()

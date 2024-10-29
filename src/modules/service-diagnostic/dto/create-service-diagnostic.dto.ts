@@ -1,5 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ServiceDiagnosticDetail } from '../entities/service-diagnostic-detail.entity';
+
+export class CreateServiceBudgetDetailDto {
+  @ApiProperty({ example: 1 })
+  id: number;
+
+  @ApiProperty({ example: 'Description' })
+  description: string;
+
+  @ApiProperty({ example: 'Observation' })
+  observation: string;
+}
 
 export class CreateServiceDiagnosticDto {
   @ApiProperty({ example: '2021-10-10' })
@@ -13,6 +23,6 @@ export class CreateServiceDiagnosticDto {
 
   userId: number;
 
-  @ApiProperty({ type: [ServiceDiagnosticDetail] })
-  serviceDiagnosticDetail: ServiceDiagnosticDetail[];
+  @ApiProperty({ type: [CreateServiceBudgetDetailDto] })
+  serviceDiagnosticDetail: CreateServiceBudgetDetailDto[];
 }

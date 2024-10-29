@@ -6,10 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ServiceDiagnosticService } from './service-diagnostic.service';
-import { CreateServiceDiagnosticDto } from './dto/create-service-diagnostic.dto';
+import {
+  CreateServiceDiagnosticDto,
+  CreateServiceBudgetDetailDto,
+} from './dto/create-service-diagnostic.dto';
 import { UpdateServiceDiagnosticDto } from './dto/update-service-diagnostic.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
@@ -23,8 +27,22 @@ export class ServiceDiagnosticController {
   ) {}
 
   @Post()
-  create(@Body() createServiceDiagnosticDto: CreateServiceDiagnosticDto) {
-    return this.serviceDiagnosticService.create(createServiceDiagnosticDto);
+  async create(
+    @Body() createServiceDiagnosticDto: CreateServiceDiagnosticDto,
+    @Request() req,
+  ) {
+    createServiceDiagnosticDto.userId = req.user.id;
+    const created = await this.serviceDiagnosticService.create(
+      createServiceDiagnosticDto,
+    );
+    const detail = createServiceDiagnosticDto.serviceDiagnosticDetail.map(
+      (item) => ({
+        ...item,
+        serviceDiagnosticId: created.id,
+      }),
+    );
+    await this.serviceDiagnosticService.createDetail(detail);
+    return this.serviceDiagnosticService.findOne(created.id);
   }
 
   @Get()
@@ -38,14 +56,18 @@ export class ServiceDiagnosticController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateServiceDiagnosticDto: UpdateServiceDiagnosticDto,
   ) {
-    return this.serviceDiagnosticService.update(
-      +id,
-      updateServiceDiagnosticDto,
-    );
+    const detail: CreateServiceBudgetDetailDto[] =
+      updateServiceDiagnosticDto.serviceDiagnosticDetail;
+
+    delete updateServiceDiagnosticDto.serviceDiagnosticDetail;
+
+    await this.serviceDiagnosticService.update(+id, updateServiceDiagnosticDto);
+    await this.serviceDiagnosticService.updateDetail(+id, detail);
+    return this.serviceDiagnosticService.findOne(+id);
   }
 
   @Delete(':id')
