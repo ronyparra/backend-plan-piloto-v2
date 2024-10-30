@@ -78,6 +78,9 @@ export class ServiceProvided {
   @OneToMany(
     () => ServiceProvidedDetail,
     (serviceProvidedDetail) => serviceProvidedDetail.serviceProvided,
+    {
+      cascade: true,
+    },
   )
   serviceProvidedDetail: ServiceProvidedDetail[];
 

@@ -6,10 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ServiceContractService } from './service-contract.service';
-import { CreateServiceContractDto } from './dto/create-service-contract.dto';
+import {
+  CreateServiceContractDto,
+  ServiceContractDetailDto,
+} from './dto/create-service-contract.dto';
 import { UpdateServiceContractDto } from './dto/update-service-contract.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
@@ -23,7 +27,11 @@ export class ServiceContractController {
   ) {}
 
   @Post()
-  create(@Body() createServiceContractDto: CreateServiceContractDto) {
+  create(
+    @Body() createServiceContractDto: CreateServiceContractDto,
+    @Request() req,
+  ) {
+    createServiceContractDto.userId = req.user.id;
     return this.serviceContractService.create(createServiceContractDto);
   }
 
@@ -38,11 +46,18 @@ export class ServiceContractController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateServiceContractDto: UpdateServiceContractDto,
   ) {
-    return this.serviceContractService.update(+id, updateServiceContractDto);
+    const detail: ServiceContractDetailDto[] =
+      updateServiceContractDto.serviceContractClausule;
+
+    delete updateServiceContractDto.serviceContractClausule;
+
+    await this.serviceContractService.updateDetail(+id, detail);
+    await this.serviceContractService.update(+id, updateServiceContractDto);
+    return this.serviceContractService.findOne(+id);
   }
 
   @Delete(':id')

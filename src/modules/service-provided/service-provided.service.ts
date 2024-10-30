@@ -28,6 +28,16 @@ export class ServiceProvidedService {
         date: true,
         observation: true,
         customerId: true,
+        serviceOrderId: true,
+        serviceDiscountId: true,
+        serviceDiscount: {
+          id: true,
+          description: true,
+          discountPercentage: true,
+        },
+        serviceOrder: {
+          id: true,
+        },
         serviceType: {
           id: true,
           name: true,
@@ -51,11 +61,14 @@ export class ServiceProvidedService {
             name: true,
           },
           quantity: true,
+          price: true,
         },
       },
       relations: {
         customer: true,
         serviceType: true,
+        serviceOrder: true,
+        serviceDiscount: true,
         user: true,
         serviceProvidedDetail: {
           concept: true,

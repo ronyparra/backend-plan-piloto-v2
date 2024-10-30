@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ServiceProvidedDetail } from '../entities/service-provided-detail.entity';
 
 export class ServiceProvidedDetailDto {
   @ApiProperty({ example: 1 })
@@ -26,10 +25,13 @@ export class CreateServiceProvidedDto {
   serviceTypeId: number;
 
   @ApiProperty({ example: 1 })
+  serviceOrderId: number;
+
+  @ApiProperty({ example: 1 })
   serviceDiscountId: number;
 
   userId: number;
 
-  @ApiProperty({ type: [ServiceProvidedDetail] })
-  serviceProvidedDetail: ServiceProvidedDetail[];
+  @ApiProperty({ type: [ServiceProvidedDetailDto] })
+  serviceProvidedDetail: ServiceProvidedDetailDto[];
 }

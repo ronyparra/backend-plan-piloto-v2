@@ -1,5 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ServiceContractClausule } from '../entities/service-contract-clausule.entity';
+
+export class ServiceContractDetailDto {
+  @ApiProperty({ example: 1 })
+  id: number;
+
+  @ApiProperty({ example: 'Description' })
+  description: string;
+
+  @ApiProperty({ example: 'Observation' })
+  observation: string;
+}
 
 export class CreateServiceContractDto {
   @ApiProperty({ example: '2021-10-10' })
@@ -12,10 +22,10 @@ export class CreateServiceContractDto {
   customerId: number;
 
   @ApiProperty({ example: 1 })
-  serviceTypeId: number;
+  serviceBudgetId: number;
 
   userId: number;
 
-  @ApiProperty({ type: [ServiceContractClausule] })
-  serviceContractClausule: ServiceContractClausule[];
+  @ApiProperty({ type: [ServiceContractDetailDto] })
+  serviceContractClausule: ServiceContractDetailDto[];
 }

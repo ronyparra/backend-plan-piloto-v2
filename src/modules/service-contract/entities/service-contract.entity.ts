@@ -56,6 +56,9 @@ export class ServiceContract {
   @OneToMany(
     () => ServiceContractClausule,
     (serviceContractClausule) => serviceContractClausule.serviceContract,
+    {
+      cascade: true,
+    },
   )
   serviceContractClausule: ServiceContractClausule[];
 

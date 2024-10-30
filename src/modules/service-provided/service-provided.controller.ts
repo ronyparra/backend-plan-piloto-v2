@@ -32,6 +32,7 @@ export class ServiceProvidedController {
     @Request() req,
   ) {
     createServiceProvidedDto.userId = req.user.id;
+    console.log('createServiceProvidedDto', createServiceProvidedDto);
     return this.serviceProvidedService.create(createServiceProvidedDto);
   }
 
