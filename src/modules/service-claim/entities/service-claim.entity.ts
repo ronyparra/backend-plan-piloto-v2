@@ -1,7 +1,6 @@
 import {
   Entity,
   Column,
-  PrimaryColumn,
   ManyToOne,
   JoinColumn,
   PrimaryGeneratedColumn,
@@ -15,7 +14,6 @@ export class ServiceClaim {
   id: number;
 
   @Column()
-  @PrimaryColumn()
   serviceContractId: number;
 
   @ManyToOne(() => ServiceContract, (serviceContract) => serviceContract.id, {
@@ -23,6 +21,9 @@ export class ServiceClaim {
   })
   @JoinColumn({ name: 'serviceContractId' })
   serviceContract: ServiceContract;
+
+  @Column({ length: 100 })
+  description: string;
 
   @Column({ type: 'text' })
   observation: string;

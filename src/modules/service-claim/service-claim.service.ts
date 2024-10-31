@@ -17,7 +17,31 @@ export class ServiceClaimService {
 
   findAll() {
     return this.serviceClaimRepository.find({
-      relations: ['serviceBudget', 'serviceContract'],
+      select: {
+        id: true,
+        date: true,
+        description: true,
+        observation: true,
+        serviceContractId: true,
+        serviceContract: {
+          id: true,
+          serviceBudgetId: true,
+          serviceBudget: {
+            id: true,
+            customer: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      },
+      relations: {
+        serviceContract: {
+          serviceBudget: {
+            customer: true,
+          },
+        },
+      },
       where: { active: true },
     });
   }

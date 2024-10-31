@@ -14,7 +14,7 @@ export class ServicePromotion {
   endDate: Date;
 
   @Column({ length: 100, nullable: true })
-  observation: string;
+  name: string;
 
   @ManyToOne(() => ServiceType, (serviceType) => serviceType.id, {
     onUpdate: 'CASCADE',

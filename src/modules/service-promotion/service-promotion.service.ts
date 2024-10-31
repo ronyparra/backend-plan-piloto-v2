@@ -17,6 +17,19 @@ export class ServicePromotionService {
 
   findAll() {
     return this.servicePromotionRepository.find({
+      select: {
+        id: true,
+        name: true,
+        startDate: true,
+        endDate: true,
+        discountPercentage: true,
+        serviceTypeId: true,
+        serviceType: {
+          id: true,
+          name: true,
+        },
+      },
+      relations: ['serviceType'],
       where: { active: true },
     });
   }
