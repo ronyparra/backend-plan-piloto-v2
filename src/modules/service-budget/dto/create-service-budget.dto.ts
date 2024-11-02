@@ -1,5 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+export class ServiceBudgetRequestDetailDto {
+  @ApiProperty({ example: 1 })
+  serviceRequestId: number;
+}
+
+export class ServiceBudgetDiagnosticDetailDto {
+  @ApiProperty({ example: 1 })
+  serviceDiagnosticId: number;
+}
+
 export class ServiceBudgetDetailDto {
   @ApiProperty({ example: 1 })
   conceptId: number;
@@ -28,4 +38,10 @@ export class CreateServiceBudgetDto {
 
   @ApiProperty({ type: [ServiceBudgetDetailDto] })
   serviceBudgetDetail: ServiceBudgetDetailDto[];
+
+  @ApiProperty({ type: [ServiceBudgetRequestDetailDto] })
+  serviceBudgetRequestDetail: ServiceBudgetRequestDetailDto[];
+
+  @ApiProperty({ type: [ServiceBudgetDiagnosticDetailDto] })
+  serviceBudgetDiagnosticDetail: ServiceBudgetDiagnosticDetailDto[];
 }

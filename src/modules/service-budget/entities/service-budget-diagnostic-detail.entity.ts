@@ -4,7 +4,7 @@ import { ServiceBudget } from './service-budget.entity';
 import { ServiceDiagnostic } from 'src/modules/service-diagnostic/entities/service-diagnostic.entity';
 
 @Entity()
-export class ServicebudgetDiagnosticDetail {
+export class ServiceBudgetDiagnosticDetail {
   @Column()
   @PrimaryColumn()
   serviceBudgetId: number;

@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 import { ServiceOrder } from 'src/modules/service-order/entities/service-order.entity';
-import { ServiceBudget } from './service-budget.entity';
+import { ServiceBudget } from '../../service-budget/entities/service-budget.entity';
 
 @Entity()
 export class ServiceBudgetOrderDetail {
