@@ -49,6 +49,15 @@ export class ServiceBudgetService {
             name: true,
           },
           quantity: true,
+          price: true,
+        },
+        serviceBudgetDiagnosticDetail: {
+          serviceBudgetId: true,
+          serviceDiagnosticId: true,
+        },
+        serviceBudgetRequestDetail: {
+          serviceBudgetId: true,
+          serviceRequestId: true,
         },
       },
       relations: {
@@ -58,6 +67,8 @@ export class ServiceBudgetService {
         serviceBudgetDetail: {
           concept: true,
         },
+        serviceBudgetDiagnosticDetail: true,
+        serviceBudgetRequestDetail: true,
       },
       where: { active: true },
     });
