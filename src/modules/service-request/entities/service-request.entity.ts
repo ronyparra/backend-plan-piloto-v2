@@ -11,6 +11,7 @@ import { Customer } from 'src/modules/customer/entities/customer.entity';
 import { ServiceRequestDetail } from './service-request-detail.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { ServiceType } from 'src/modules/service-type/entities/service-type.entity';
+import { ServiceBudgetRequestDetail } from 'src/modules/service-budget/entities/service-budget-request-detail.entity';
 
 @Entity()
 export class ServiceRequest {
@@ -60,6 +61,15 @@ export class ServiceRequest {
     },
   )
   serviceRequestDetail: ServiceRequestDetail[];
+
+  @OneToMany(
+    () => ServiceBudgetRequestDetail,
+    (serviceBudgetRequestDetail) => serviceBudgetRequestDetail.serviceRequest,
+    {
+      cascade: true,
+    },
+  )
+  serviceBudgetRequestDetail: ServiceBudgetRequestDetail[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

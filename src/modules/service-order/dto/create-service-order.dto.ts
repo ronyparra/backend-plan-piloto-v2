@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+export class ServiceBudgetOrderDetailDto {
+  @ApiProperty({ example: 1 })
+  serviceBudgetId: number;
+
+  @ApiProperty({ example: 1 })
+  serviceOrderId: number;
+}
+
 export class ServiceOrderDetailDto {
   @ApiProperty({ example: 1 })
   conceptId: number;
@@ -25,4 +33,7 @@ export class CreateServiceOrderDto {
 
   @ApiProperty({ type: [ServiceOrderDetailDto] })
   serviceOrderDetail: ServiceOrderDetailDto[];
+
+  @ApiProperty({ type: [ServiceBudgetOrderDetailDto] })
+  serviceBudgetOrderDetail: ServiceBudgetOrderDetailDto[];
 }

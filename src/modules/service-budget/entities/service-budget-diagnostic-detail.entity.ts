@@ -15,7 +15,7 @@ export class ServiceBudgetDiagnosticDetail {
 
   @ManyToOne(
     () => ServiceBudget,
-    (serviceBudget) => serviceBudget.serviceBudgetDetail,
+    (serviceBudget) => serviceBudget.serviceBudgetDiagnosticDetail,
     {
       onDelete: 'CASCADE',
     },
@@ -25,7 +25,7 @@ export class ServiceBudgetDiagnosticDetail {
 
   @ManyToOne(
     () => ServiceDiagnostic,
-    (serviceDiagnostic) => serviceDiagnostic.serviceDiagnosticDetail,
+    (serviceDiagnostic) => serviceDiagnostic.serviceBudgetDiagnosticDetail,
     {
       onDelete: 'CASCADE',
     },

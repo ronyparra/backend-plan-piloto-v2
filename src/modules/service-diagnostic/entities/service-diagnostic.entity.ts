@@ -10,6 +10,7 @@ import {
 import { Customer } from 'src/modules/customer/entities/customer.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { ServiceDiagnosticDetail } from './service-diagnostic-detail.entity';
+import { ServiceBudgetDiagnosticDetail } from 'src/modules/service-budget/entities/service-budget-diagnostic-detail.entity';
 
 @Entity()
 export class ServiceDiagnostic {
@@ -47,6 +48,13 @@ export class ServiceDiagnostic {
     (serviceDiagnosticDetail) => serviceDiagnosticDetail.serviceDiagnostic,
   )
   serviceDiagnosticDetail: ServiceDiagnosticDetail[];
+
+  @OneToMany(
+    () => ServiceBudgetDiagnosticDetail,
+    (serviceBudgetDiagnosticDetail) =>
+      serviceBudgetDiagnosticDetail.serviceDiagnostic,
+  )
+  serviceBudgetDiagnosticDetail: ServiceBudgetDiagnosticDetail[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

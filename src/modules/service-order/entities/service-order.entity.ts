@@ -10,6 +10,7 @@ import {
 import { Customer } from 'src/modules/customer/entities/customer.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { ServiceOrderDetail } from './service-order-detail.entity';
+import { ServiceBudgetOrderDetail } from './service-budget-order-detail.entity';
 import { ServiceType } from 'src/modules/service-type/entities/service-type.entity';
 
 @Entity()
@@ -60,6 +61,15 @@ export class ServiceOrder {
     },
   )
   serviceOrderDetail: ServiceOrderDetail[];
+
+  @OneToMany(
+    () => ServiceBudgetOrderDetail,
+    (serviceBudgetOrderDetail) => serviceBudgetOrderDetail.serviceOrder,
+    {
+      cascade: true,
+    },
+  )
+  serviceBudgetOrderDetail: ServiceBudgetOrderDetail[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

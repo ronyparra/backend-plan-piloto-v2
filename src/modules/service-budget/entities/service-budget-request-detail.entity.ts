@@ -15,7 +15,7 @@ export class ServiceBudgetRequestDetail {
 
   @ManyToOne(
     () => ServiceBudget,
-    (serviceBudget) => serviceBudget.serviceBudgetDetail,
+    (serviceBudget) => serviceBudget.serviceBudgetRequestDetail,
     {
       onDelete: 'CASCADE',
     },
@@ -25,7 +25,7 @@ export class ServiceBudgetRequestDetail {
 
   @ManyToOne(
     () => ServiceRequest,
-    (serviceRequest) => serviceRequest.serviceRequestDetail,
+    (serviceRequest) => serviceRequest.serviceBudgetRequestDetail,
     {
       onDelete: 'CASCADE',
     },

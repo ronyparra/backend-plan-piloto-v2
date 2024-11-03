@@ -39,6 +39,10 @@ const query = {
       },
       quantity: true,
     },
+    serviceBudgetOrderDetail: {
+      serviceOrderId: true,
+      serviceBudgetId: true,
+    },
   },
   relations: {
     customer: true,
@@ -47,6 +51,7 @@ const query = {
     serviceOrderDetail: {
       concept: true,
     },
+    serviceBudgetOrderDetail: true,
   },
 };
 
