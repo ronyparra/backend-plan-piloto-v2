@@ -40,6 +40,9 @@ import { ServicePromotionModule } from './modules/service-promotion/service-prom
 import { PurchaseOrderModule } from './modules/purchase-order/purchase-order.module';
 import { PurchaseBudgetModule } from './modules/purchase-budget/purchase-budget.module';
 import { PurchasePedidoModule } from './modules/purchase-pedido/purchase-pedido.module';
+import { CreditNotePurchaseModule } from './modules/credit-note-purchase/credit-note-purchase.module';
+import { DebitNotePurchaseModule } from './modules/debit-note-purchase/debit-note-purchase.module';
+import { RemissionNotePurchaseModule } from './modules/remission-note-purchase/remission-note-purchase.module';
 
 @Module({
   imports: [
@@ -95,6 +98,9 @@ import { PurchasePedidoModule } from './modules/purchase-pedido/purchase-pedido.
     PurchaseOrderModule,
     PurchaseBudgetModule,
     PurchasePedidoModule,
+    CreditNotePurchaseModule,
+    DebitNotePurchaseModule,
+    RemissionNotePurchaseModule,
   ],
 })
 export class AppModule {}
