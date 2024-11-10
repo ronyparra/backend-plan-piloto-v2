@@ -37,6 +37,9 @@ import { ServiceDiscountModule } from './modules/service-discount/service-discou
 import { ServiceContractModule } from './modules/service-contract/service-contract.module';
 import { ServiceClaimModule } from './modules/service-claim/service-claim.module';
 import { ServicePromotionModule } from './modules/service-promotion/service-promotion.module';
+import { PurchaseOrderModule } from './modules/purchase-order/purchase-order.module';
+import { PurchaseBudgetModule } from './modules/purchase-budget/purchase-budget.module';
+import { PurchasePedidoModule } from './modules/purchase-pedido/purchase-pedido.module';
 
 @Module({
   imports: [
@@ -89,6 +92,9 @@ import { ServicePromotionModule } from './modules/service-promotion/service-prom
     ServiceContractModule,
     ServiceClaimModule,
     ServicePromotionModule,
+    PurchaseOrderModule,
+    PurchaseBudgetModule,
+    PurchasePedidoModule,
   ],
 })
 export class AppModule {}

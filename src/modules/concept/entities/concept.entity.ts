@@ -16,6 +16,9 @@ import { ServiceRequestDetail } from 'src/modules/service-request/entities/servi
 import { ServiceOrderDetail } from 'src/modules/service-order/entities/service-order-detail.entity';
 import { ServiceBudgetDetail } from 'src/modules/service-budget/entities/service-budget-detail.entity';
 import { ServiceProvidedDetail } from 'src/modules/service-provided/entities/service-provided-detail.entity';
+import { PurchasePedidoDetail } from 'src/modules/purchase-pedido/entities/purchase-pedido-detail.entity';
+import { PurchaseBudgetDetail } from 'src/modules/purchase-budget/entities/purchase-budget-detail.entity';
+import { PurchaseOrderDetail } from 'src/modules/purchase-order/entities/purchase-order-detail.entity';
 
 @Entity()
 export class Concept {
@@ -88,11 +91,41 @@ export class Concept {
   @JoinColumn({ name: 'id' })
   serviceOrderDetail: ServiceOrderDetail[];
 
+  @OneToMany(
+    () => PurchasePedidoDetail,
+    (purchasePedidoDetail) => purchasePedidoDetail.concept,
+    {
+      nullable: false,
+    },
+  )
+  @JoinColumn({ name: 'id' })
+  purchasePedidoDetail: PurchasePedidoDetail[];
+
   @OneToMany(() => SaleConcept, (saleConcept) => saleConcept.concept, {
     nullable: false,
   })
   @JoinColumn({ name: 'id' })
   saleConcept: SaleConcept[];
+
+  @OneToMany(
+    () => PurchaseBudgetDetail,
+    (purchaseBudgetDetail) => purchaseBudgetDetail.concept,
+    {
+      nullable: false,
+    },
+  )
+  @JoinColumn({ name: 'id' })
+  purchaseBudgetDetail: PurchaseBudgetDetail[];
+
+  @OneToMany(
+    () => PurchaseOrderDetail,
+    (purchaseOrderDetail) => purchaseOrderDetail.concept,
+    {
+      nullable: false,
+    },
+  )
+  @JoinColumn({ name: 'id' })
+  purchaseOrderDetail: PurchaseOrderDetail[];
 
   @ManyToOne(() => Category, (category) => category.id, {
     onUpdate: 'CASCADE',
