@@ -37,6 +37,10 @@ export class PurchaseOrderService {
           id: true,
           name: true,
         },
+        purchaseBudgetId: true,
+        purchaseBudget: {
+          id: true,
+        },
         purchaseOrderDetail: {
           conceptId: true,
           quantity: true,
@@ -50,6 +54,7 @@ export class PurchaseOrderService {
       relations: {
         user: true,
         supplier: true,
+        purchaseBudget: true,
         purchaseOrderDetail: {
           concept: true,
         },

@@ -45,6 +45,7 @@ export class PurchaseBudgetService {
         purchaseBudgetDetail: {
           conceptId: true,
           quantity: true,
+          price: true,
           concept: {
             id: true,
             name: true,

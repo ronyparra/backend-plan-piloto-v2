@@ -1,6 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Taxes } from 'src/interfaces/tax.interface';
 import { CreateAccountToPayDto } from 'src/modules/account-to-pay/dto/create-account-to-pay.dto';
-import { CreatePurchaseConceptDto } from './create-purchase-concept.dto';
+
+export class CreatePurchaseConceptDto {
+  @ApiProperty({ example: 1 })
+  amount: number;
+
+  @ApiProperty({ example: 1 })
+  quantity: number;
+
+  @ApiProperty({ example: 1 })
+  conceptId: number;
+
+  @ApiProperty({ example: [] })
+  taxes: Taxes[];
+}
 
 export class CreatePurchaseDto {
   @ApiProperty({ example: '2021-10-10' })
