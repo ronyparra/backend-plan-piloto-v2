@@ -19,8 +19,8 @@ import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 
 @UseGuards(AuthGuard)
-@ApiTags('remission-note-purchase')
-@Controller('remission-note-purchase')
+@ApiTags('purchase-remission-note')
+@Controller('purchase-remission-note')
 export class RemissionNotePurchaseController {
   constructor(
     private readonly remissionNotePurchaseService: RemissionNotePurchaseService,

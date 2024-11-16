@@ -19,9 +19,9 @@ import { ServiceProvidedDetail } from 'src/modules/service-provided/entities/ser
 import { PurchasePedidoDetail } from 'src/modules/purchase-pedido/entities/purchase-pedido-detail.entity';
 import { PurchaseBudgetDetail } from 'src/modules/purchase-budget/entities/purchase-budget-detail.entity';
 import { PurchaseOrderDetail } from 'src/modules/purchase-order/entities/purchase-order-detail.entity';
-import { CreditNotePurchaseDetail } from 'src/modules/credit-note-purchase/entities/credit-note-purchase-detail.entity';
-import { DebitNotePurchaseDetail } from 'src/modules/debit-note-purchase/entities/debit-note-purchase-detail.entity';
-import { RemissionNotePurchaseDetail } from 'src/modules/remission-note-purchase/entities/remission-note-purchase-detail.entity';
+import { CreditNotePurchaseDetail } from 'src/modules/purchase-credit-note/entities/credit-note-purchase-detail.entity';
+import { DebitNotePurchaseDetail } from 'src/modules/purchase-debit-note/entities/debit-note-purchase-detail.entity';
+import { RemissionNotePurchaseDetail } from 'src/modules/purchase-remission-note/entities/remission-note-purchase-detail.entity';
 
 @Entity()
 export class Concept {

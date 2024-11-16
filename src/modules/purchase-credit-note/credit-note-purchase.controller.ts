@@ -19,8 +19,8 @@ import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 
 @UseGuards(AuthGuard)
-@ApiTags('credit-note-purchase')
-@Controller('credit-note-purchase')
+@ApiTags('purchase-credit-note')
+@Controller('purchase-credit-note')
 export class CreditNotePurchaseController {
   constructor(
     private readonly creditNotePurchaseService: CreditNotePurchaseService,
