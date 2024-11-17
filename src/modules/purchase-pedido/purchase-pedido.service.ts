@@ -8,6 +8,7 @@ import { PurchasePedido } from './entities/purchase-pedido.entity';
 import { PurchasePedidoDetail } from './entities/purchase-pedido-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @Injectable()
 export class PurchasePedidoService {
@@ -21,7 +22,7 @@ export class PurchasePedidoService {
     return this.purchasePedidoRepository.save(createPurchasePedidoDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.purchasePedidoRepository.find({
       select: {
         id: true,
@@ -40,16 +41,19 @@ export class PurchasePedidoService {
             name: true,
           },
         },
+        purchaseBudget: {
+          id: true,
+          budget_number: true,
+        },
       },
       relations: {
         user: true,
         purchasePedidoDetail: {
           concept: true,
         },
+        purchaseBudget: true,
       },
-      where: {
-        active: true,
-      },
+      where: queryStatus,
     });
   }
 

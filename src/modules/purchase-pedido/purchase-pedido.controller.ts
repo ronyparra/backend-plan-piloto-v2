@@ -3,6 +3,7 @@ import {
   Get,
   Post,
   Body,
+  Query,
   Patch,
   Param,
   Delete,
@@ -15,6 +16,7 @@ import { UpdatePurchasePedidoDto } from './dto/update-purchase-pedido.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { PurchasePedidoDetailDto } from './dto/create-purchase-pedido.dto';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('purchase-pedido')
@@ -32,8 +34,8 @@ export class PurchasePedidoController {
   }
 
   @Get()
-  findAll() {
-    return this.purchasePedidoService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.purchasePedidoService.findAll(queryParams);
   }
 
   @Get(':id')

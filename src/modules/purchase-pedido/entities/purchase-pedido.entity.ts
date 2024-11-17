@@ -9,6 +9,7 @@ import {
 
 import { User } from 'src/modules/user/entities/user.entity';
 import { PurchasePedidoDetail } from './purchase-pedido-detail.entity';
+import { PurchaseBudget } from 'src/modules/purchase-budget/entities/purchase-budget.entity';
 
 @Entity()
 export class PurchasePedido {
@@ -39,6 +40,12 @@ export class PurchasePedido {
     },
   )
   purchasePedidoDetail: PurchasePedidoDetail[];
+
+  @OneToMany(
+    () => PurchaseBudget,
+    (purchaseBudget) => purchaseBudget.purchasePedido,
+  )
+  purchaseBudget: PurchaseBudget[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

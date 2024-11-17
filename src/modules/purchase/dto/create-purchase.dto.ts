@@ -2,6 +2,14 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Taxes } from 'src/interfaces/tax.interface';
 import { CreateAccountToPayDto } from 'src/modules/account-to-pay/dto/create-account-to-pay.dto';
 
+export class PurchaseMoneyBoxDetailDto {
+  @ApiProperty({ example: 1 })
+  strongboxId: number;
+
+  @ApiProperty({ example: 1 })
+  amount: number;
+}
+
 export class CreatePurchaseConceptDto {
   @ApiProperty({ example: 1 })
   amount: number;
@@ -23,6 +31,9 @@ export class CreatePurchaseDto {
   @ApiProperty({ example: '123456789' })
   invoice_number: string;
 
+  @ApiProperty({ example: 1 })
+  purchaseOrderId: number;
+
   @ApiProperty({ example: '123456789' })
   observation: string;
 
@@ -42,4 +53,7 @@ export class CreatePurchaseDto {
 
   @ApiProperty({ type: [CreateAccountToPayDto] })
   accountToPay: CreateAccountToPayDto;
+
+  @ApiProperty({ type: [PurchaseMoneyBoxDetailDto] })
+  purchaseMoneyBoxDetail: PurchaseMoneyBoxDetailDto[];
 }

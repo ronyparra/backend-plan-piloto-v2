@@ -11,6 +11,8 @@ import { Supplier } from 'src/modules/supplier/entities/supplier.entity';
 import { InvoiceType } from 'src/modules/invoice-type/entities/invoice-type.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { PurchaseConcept } from './purchase-concept.entity';
+import { PurchaseMoneyBoxDetail } from 'src/modules/purchase/entities/purchase-money-box-detail.entity';
+import { PurchaseOrder } from 'src/modules/purchase-order/entities/purchase-order.entity';
 
 @Entity()
 export class Purchase {
@@ -49,6 +51,16 @@ export class Purchase {
   @Column({ name: 'supplierId' })
   supplierId: number;
 
+  @ManyToOne(() => PurchaseOrder, (purchaseOrder) => purchaseOrder.id, {
+    onUpdate: 'CASCADE',
+    nullable: false,
+  })
+  @JoinColumn({ name: 'purchaseOrderId' })
+  purchaseOrder: PurchaseOrder;
+
+  @Column({ name: 'purchaseOrderId' })
+  purchaseOrderId: number;
+
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',
     nullable: false,
@@ -68,6 +80,16 @@ export class Purchase {
   )
   @JoinColumn({ name: 'id' })
   purchaseConcept: PurchaseConcept[];
+
+  @OneToMany(
+    () => PurchaseMoneyBoxDetail,
+    (purchaseMoneyBoxDetail) => purchaseMoneyBoxDetail.purchase,
+    {
+      cascade: true,
+    },
+  )
+  @JoinColumn({ name: 'id' })
+  purchaseMoneyBoxDetail: PurchaseMoneyBoxDetail[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

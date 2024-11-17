@@ -4,6 +4,7 @@ import {
   Post,
   Body,
   Param,
+  Query,
   Delete,
   Request,
   UseGuards,
@@ -13,6 +14,7 @@ import { AccountToPayService } from '../account-to-pay/account-to-pay.service';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @Controller('purchase')
@@ -51,8 +53,8 @@ export class PurchaseController {
   }
 
   @Get()
-  findAll() {
-    return this.purchaseService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.purchaseService.findAll(queryParams);
   }
 
   @Get(':id')

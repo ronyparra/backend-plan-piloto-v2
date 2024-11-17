@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Currency } from 'src/modules/currency/entities/currency.entity';
+import { PurchaseMoneyBoxDetail } from 'src/modules/purchase/entities/purchase-money-box-detail.entity';
 
 @Entity()
 export class Strongbox {
@@ -24,6 +26,13 @@ export class Strongbox {
   })
   @JoinColumn({ name: 'currencyId' })
   currency: Currency;
+
+  @OneToMany(
+    () => PurchaseMoneyBoxDetail,
+    (purchaseMoneyBoxDetail) => purchaseMoneyBoxDetail.strongbox,
+  )
+  @JoinColumn({ name: 'id' })
+  strongboxPurchase: PurchaseMoneyBoxDetail[];
 
   @Column({ name: 'currencyId' })
   currencyId: number;

@@ -3,6 +3,7 @@ import { CreatePurchaseDto } from './dto/create-purchase.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Purchase } from './entities/purchase.entity';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 const query = {
   select: {
@@ -36,6 +37,11 @@ const query = {
       price: true,
       taxes: true,
     },
+    purchaseOrderId: true,
+    purchaseOrder: {
+      id: true,
+    },
+    active: true,
   },
   relations: {
     invoiceType: true,
@@ -44,6 +50,7 @@ const query = {
     purchaseConcept: {
       concept: true,
     },
+    purchaseOrder: true,
   },
 };
 
@@ -57,10 +64,61 @@ export class PurchaseService {
     return this.purchaseRepository.save(createPurchaseDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.purchaseRepository.find({
-      ...query,
-      where: { active: true },
+      select: {
+        id: true,
+        date: true,
+        invoice_number: true,
+        observation: true,
+        stamping: true,
+        invoiceType: {
+          id: true,
+          name: true,
+        },
+        invoiceTypeId: true,
+        supplier: {
+          id: true,
+          name: true,
+        },
+        supplierId: true,
+        user: {
+          id: true,
+          name: true,
+        },
+        userId: true,
+        purchaseConcept: {
+          purchaseId: true,
+          concept: {
+            id: true,
+            name: true,
+          },
+          quantity: true,
+          price: true,
+          taxes: true,
+        },
+        purchaseMoneyBoxDetail: {
+          purchaseId: true,
+          strongboxId: true,
+          amount: true,
+        },
+        purchaseOrderId: true,
+        purchaseOrder: {
+          id: true,
+        },
+        active: true,
+      },
+      relations: {
+        invoiceType: true,
+        supplier: true,
+        user: true,
+        purchaseConcept: {
+          concept: true,
+        },
+        purchaseOrder: true,
+        purchaseMoneyBoxDetail: true,
+      },
+      where: queryStatus,
     });
   }
 
@@ -72,6 +130,6 @@ export class PurchaseService {
   }
 
   remove(id: number) {
-    return this.purchaseRepository.delete(id);
+    return this.purchaseRepository.update(id, { active: false });
   }
 }

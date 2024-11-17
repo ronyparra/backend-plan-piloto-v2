@@ -23,6 +23,9 @@ export class PurchaseBudget {
   @Column({ length: 100, nullable: true })
   observation: string;
 
+  @Column({ length: 100, nullable: true })
+  budget_number: string;
+
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',
     nullable: false,
