@@ -23,6 +23,9 @@ export class PurchaseOrder {
   @Column({ length: 100, nullable: true })
   observation: string;
 
+  @Column({ length: 100 })
+  order_number: string;
+
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',
     nullable: false,

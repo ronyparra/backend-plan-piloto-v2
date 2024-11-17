@@ -5,6 +5,7 @@ import {
   Body,
   Patch,
   Param,
+  Query,
   Delete,
   Request,
   UseGuards,
@@ -17,6 +18,7 @@ import {
 import { UpdatePurchaseBudgetDto } from './dto/update-purchase-budget.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('purchase-budget')
@@ -34,8 +36,8 @@ export class PurchaseBudgetController {
   }
 
   @Get()
-  findAll() {
-    return this.purchaseBudgetService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.purchaseBudgetService.findAll(queryParams);
   }
 
   @Get(':id')

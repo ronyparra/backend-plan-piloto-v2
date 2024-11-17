@@ -45,6 +45,7 @@ export class PurchasePedidoService {
           id: true,
           budget_number: true,
         },
+        active: true,
       },
       relations: {
         user: true,
