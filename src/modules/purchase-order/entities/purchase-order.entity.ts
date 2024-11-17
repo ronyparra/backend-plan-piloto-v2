@@ -11,6 +11,7 @@ import { Supplier } from 'src/modules/supplier/entities/supplier.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { PurchaseBudget } from 'src/modules/purchase-budget/entities/purchase-budget.entity';
 import { PurchaseOrderDetail } from './purchase-order-detail.entity';
+import { Purchase } from 'src/modules/purchase/entities/purchase.entity';
 
 @Entity()
 export class PurchaseOrder {
@@ -64,6 +65,9 @@ export class PurchaseOrder {
     },
   )
   purchaseOrderDetail: PurchaseOrderDetail[];
+
+  @OneToMany(() => Purchase, (purchase) => purchase.purchaseOrder)
+  purchase: Purchase[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

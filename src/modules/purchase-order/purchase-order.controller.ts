@@ -5,6 +5,7 @@ import {
   Body,
   Patch,
   Param,
+  Query,
   Delete,
   Request,
   UseGuards,
@@ -17,6 +18,7 @@ import {
 import { UpdatePurchaseOrderDto } from './dto/update-purchase-order.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('purchase-order')
@@ -34,8 +36,8 @@ export class PurchaseOrderController {
   }
 
   @Get()
-  findAll() {
-    return this.purchaseOrderService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.purchaseOrderService.findAll(queryParams);
   }
 
   @Get(':id')
