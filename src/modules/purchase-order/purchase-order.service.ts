@@ -28,6 +28,7 @@ export class PurchaseOrderService {
         id: true,
         date: true,
         observation: true,
+        order_number: true,
         userId: true,
         user: {
           id: true,
