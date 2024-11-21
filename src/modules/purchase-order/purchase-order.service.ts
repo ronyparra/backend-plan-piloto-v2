@@ -50,6 +50,11 @@ export class PurchaseOrderService {
           concept: {
             id: true,
             name: true,
+            taxTypeId: true,
+            taxType: {
+              id: true,
+              name: true,
+            },
           },
         },
         purchase: {
@@ -64,7 +69,9 @@ export class PurchaseOrderService {
         purchase: true,
         purchaseBudget: true,
         purchaseOrderDetail: {
-          concept: true,
+          concept: {
+            taxType: true,
+          },
         },
       },
       where: queryStatus,

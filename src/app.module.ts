@@ -58,7 +58,7 @@ import { RemissionNotePurchaseModule } from './modules/purchase-remission-note/r
       database: configuration().database.name,
       synchronize: true,
       autoLoadEntities: true,
-      // logging: true,
+      //logging: true,
     }),
     // Modules
     // ActivityModule,

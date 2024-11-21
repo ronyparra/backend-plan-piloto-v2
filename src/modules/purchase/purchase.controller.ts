@@ -48,6 +48,9 @@ export class PurchaseController {
     // Si la compra es a crédito, asignar el id de la compra a cada cuenta por pagar
     const purchaseId = purchase.id;
     accountToPayData.purchaseId = purchaseId;
+    accountToPayData.accountToPayDetail.forEach((detail) => {
+      detail.purchaseId = purchaseId;
+    });
     const toPay = await this.accountToPayService.create(accountToPayData);
     return { ...purchase, accountToPay: toPay };
   }

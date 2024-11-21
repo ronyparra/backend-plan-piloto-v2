@@ -27,6 +27,8 @@ export class AccountToPayService {
         accountToPayDetail: {
           due_date: true,
           amount: true,
+          paid: true,
+          id: true,
         },
         purchase: {
           id: true,
@@ -44,6 +46,7 @@ export class AccountToPayService {
         purchase: {
           supplier: true,
         },
+        accountToPayDetail: true,
       },
     });
   }

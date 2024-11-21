@@ -18,11 +18,18 @@ export class AccountToPayDetail {
   @PrimaryColumn()
   accountToPayId: number;
 
+  @Column()
+  @PrimaryColumn()
+  purchaseId: number;
+
   @Column({ type: 'date' })
   due_date: Date;
 
   @Column({ type: 'float' })
   amount: number;
+
+  @Column({ type: Boolean, default: false })
+  paid: boolean;
 
   @ManyToOne(
     () => AccountToPay,
@@ -31,6 +38,9 @@ export class AccountToPayDetail {
       onDelete: 'CASCADE',
     },
   )
-  @JoinColumn({ name: 'accountToPayId' })
+  @JoinColumn([
+    { name: 'accountToPayId', referencedColumnName: 'id' },
+    { name: 'purchaseId', referencedColumnName: 'purchaseId' },
+  ])
   accountToPay: AccountToPay;
 }

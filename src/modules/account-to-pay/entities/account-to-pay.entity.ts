@@ -38,7 +38,10 @@ export class AccountToPay {
       cascade: true,
     },
   )
-  @JoinColumn({ name: 'id' })
+  @JoinColumn([
+    { name: 'accountToPayId', referencedColumnName: 'id' },
+    { name: 'purchaseId', referencedColumnName: 'purchaseId' },
+  ])
   accountToPayDetail: AccountToPayDetail[];
 
   @ManyToOne(() => User, (user) => user.id, {
