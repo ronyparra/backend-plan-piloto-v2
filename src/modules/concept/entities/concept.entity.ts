@@ -22,6 +22,7 @@ import { PurchaseOrderDetail } from 'src/modules/purchase-order/entities/purchas
 import { CreditNotePurchaseDetail } from 'src/modules/purchase-credit-note/entities/credit-note-purchase-detail.entity';
 import { DebitNotePurchaseDetail } from 'src/modules/purchase-debit-note/entities/debit-note-purchase-detail.entity';
 import { RemissionNotePurchaseDetail } from 'src/modules/purchase-remission-note/entities/remission-note-purchase-detail.entity';
+import { SalePedidoDetail } from 'src/modules/sale-pedido/entities/sale-pedido-detail.entity';
 
 @Entity()
 export class Concept {
@@ -53,6 +54,16 @@ export class Concept {
   )
   @JoinColumn({ name: 'id' })
   conceptPurchase: PurchaseConcept[];
+
+  @OneToMany(
+    () => SalePedidoDetail,
+    (salePedidoDetail) => salePedidoDetail.concept,
+    {
+      nullable: false,
+    },
+  )
+  @JoinColumn({ name: 'id' })
+  salePedidoDetail: SalePedidoDetail[];
 
   @OneToMany(
     () => ServiceProvidedDetail,
