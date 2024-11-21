@@ -44,6 +44,7 @@ import { CreditNotePurchaseModule } from './modules/purchase-credit-note/credit-
 import { DebitNotePurchaseModule } from './modules/purchase-debit-note/debit-note-purchase.module';
 import { RemissionNotePurchaseModule } from './modules/purchase-remission-note/remission-note-purchase.module';
 import { SalePedidoModule } from './modules/sale-pedido/sale-pedido.module';
+import { SaleRemissionNoteModule } from './modules/sale-remission-note/sale-remission-note.module';
 
 @Module({
   imports: [
@@ -103,6 +104,7 @@ import { SalePedidoModule } from './modules/sale-pedido/sale-pedido.module';
     DebitNotePurchaseModule,
     RemissionNotePurchaseModule,
     SalePedidoModule,
+    SaleRemissionNoteModule,
   ],
 })
 export class AppModule {}

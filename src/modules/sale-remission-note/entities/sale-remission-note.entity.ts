@@ -8,11 +8,13 @@ import {
 } from 'typeorm';
 
 import { User } from 'src/modules/user/entities/user.entity';
+import { Sale } from 'src/modules/sale/entities/sale.entity';
 import { Customer } from 'src/modules/customer/entities/customer.entity';
-import { SalePedidoDetail } from './sale-pedido-detail.entity';
+import { SaleRemissionNoteDetail } from './sale-remission-note-detail.entity';
+import { Stamping } from 'src/modules/stamping/entities/stamping.entity';
 
 @Entity()
-export class SalePedido {
+export class SaleRemissionNote {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,8 +24,8 @@ export class SalePedido {
   @Column({ length: 100, nullable: true })
   observation: string;
 
-  @Column({ length: 100 })
-  sale_pedido_number: string;
+  @Column({ type: 'int' })
+  remission_note_number: number;
 
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',
@@ -34,6 +36,16 @@ export class SalePedido {
 
   @Column({ name: 'userId' })
   userId: number;
+
+  @ManyToOne(() => Stamping, (stamping) => stamping.id, {
+    onUpdate: 'CASCADE',
+    nullable: false,
+  })
+  @JoinColumn({ name: 'stampingId' })
+  stamping: Stamping;
+
+  @Column({ name: 'stampingId' })
+  stampingId: number;
 
   @ManyToOne(() => Customer, (customer) => customer.id, {
     onUpdate: 'CASCADE',
@@ -46,13 +58,29 @@ export class SalePedido {
   customerId: number;
 
   @OneToMany(
-    () => SalePedidoDetail,
-    (salePedidoDetail) => salePedidoDetail.salePedido,
+    () => SaleRemissionNoteDetail,
+    (saleRemissionNoteDetail) => saleRemissionNoteDetail.saleRemissionNote,
     {
       cascade: true,
     },
   )
-  salePedidoDetail: SalePedidoDetail[];
+  saleRemissionNoteDetail: SaleRemissionNoteDetail[];
+
+  @ManyToOne(() => Sale, (sale) => sale.id, {
+    onUpdate: 'CASCADE',
+    nullable: false,
+  })
+  @JoinColumn({ name: 'saleId' })
+  sale: Sale;
+
+  @Column({ name: 'saleId' })
+  saleId: number;
+
+  @Column({ length: 13 })
+  timbrado: string;
+
+  @Column({ length: 13 })
+  remissionNoteNumber: string;
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

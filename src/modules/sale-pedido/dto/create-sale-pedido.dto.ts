@@ -18,6 +18,9 @@ export class CreateSalePedidoDto {
   @ApiProperty({ example: 'Observation' })
   observation: string;
 
+  @ApiProperty({ example: '001-001-1234567' })
+  sale_pedido_number: string;
+
   @ApiProperty({ example: 1 })
   customerId: number;
 

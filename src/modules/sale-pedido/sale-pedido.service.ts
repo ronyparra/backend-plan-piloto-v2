@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { CreateSalePedidoDto } from './dto/create-sale-pedido.dto';
 import { UpdateSalePedidoDto } from './dto/update-sale-pedido.dto';
 import { SalePedido } from './entities/sale-pedido.entity';
-import { SalePedidoDetail } from './entities/sale-pedido-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { QueryStatusDto } from 'src/commons/query-status.dto';
@@ -12,8 +11,6 @@ export class SalePedidoService {
   constructor(
     @InjectRepository(SalePedido)
     private salePedidoRepository: Repository<SalePedido>,
-    @InjectRepository(SalePedidoDetail)
-    private salePedidoDetailRepository: Repository<SalePedidoDetail>,
   ) {}
   create(createSalePedidoDto: CreateSalePedidoDto) {
     return this.salePedidoRepository.save(createSalePedidoDto);
@@ -26,6 +23,7 @@ export class SalePedidoService {
         date: true,
         observation: true,
         userId: true,
+        sale_pedido_number: true,
         user: {
           id: true,
           name: true,
