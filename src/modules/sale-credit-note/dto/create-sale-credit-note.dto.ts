@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateSaleRemissionNoteDetailDto {
+export class CreateSaleCreditNoteDetailDto {
   @ApiProperty({ example: 1 })
-  saleRemissionNoteId: number;
+  saleCreditNoteId: number;
 
   @ApiProperty({ example: 1 })
   conceptId: number;
@@ -14,7 +14,7 @@ export class CreateSaleRemissionNoteDetailDto {
   price: number;
 }
 
-export class CreateSaleRemissionNoteDto {
+export class CreateSaleCreditNoteDto {
   @ApiProperty({ example: '2021-10-10' })
   date: Date;
 
@@ -25,16 +25,16 @@ export class CreateSaleRemissionNoteDto {
   customerId: number;
 
   @ApiProperty({ example: 1 })
+  credit_note_number: number;
+
+  @ApiProperty({ example: 1 })
   stampingId: number;
 
   @ApiProperty({ example: 1 })
   saleId: number;
 
-  @ApiProperty({ example: 1 })
-  remission_note_number: number;
-
   userId: number;
 
-  @ApiProperty({ type: [CreateSaleRemissionNoteDetailDto] })
-  saleRemissionNoteDetail: CreateSaleRemissionNoteDetailDto[];
+  @ApiProperty({ type: [CreateSaleCreditNoteDetailDto] })
+  saleCreditNoteDetail: CreateSaleCreditNoteDetailDto[];
 }

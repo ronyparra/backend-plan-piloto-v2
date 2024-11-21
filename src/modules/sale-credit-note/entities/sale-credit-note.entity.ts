@@ -10,11 +10,11 @@ import {
 import { User } from 'src/modules/user/entities/user.entity';
 import { Sale } from 'src/modules/sale/entities/sale.entity';
 import { Customer } from 'src/modules/customer/entities/customer.entity';
-import { SaleRemissionNoteDetail } from './sale-remission-note-detail.entity';
+import { SaleCreditNoteDetail } from './sale-credit-note-detail.entity';
 import { Stamping } from 'src/modules/stamping/entities/stamping.entity';
 
 @Entity()
-export class SaleRemissionNote {
+export class SaleCreditNote {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,7 +25,7 @@ export class SaleRemissionNote {
   observation: string;
 
   @Column({ type: 'int' })
-  remission_note_number: number;
+  credit_note_number: number;
 
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',
@@ -58,13 +58,13 @@ export class SaleRemissionNote {
   customerId: number;
 
   @OneToMany(
-    () => SaleRemissionNoteDetail,
-    (saleRemissionNoteDetail) => saleRemissionNoteDetail.saleRemissionNote,
+    () => SaleCreditNoteDetail,
+    (saleCreditNoteDetail) => saleCreditNoteDetail.saleCreditNote,
     {
       cascade: true,
     },
   )
-  saleRemissionNoteDetail: SaleRemissionNoteDetail[];
+  saleCreditNoteDetail: SaleCreditNoteDetail[];
 
   @ManyToOne(() => Sale, (sale) => sale.id, {
     onUpdate: 'CASCADE',
