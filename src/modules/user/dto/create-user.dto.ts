@@ -13,6 +13,9 @@ export class CreateUserDto {
   @ApiProperty({ example: 'Rony' })
   name: string;
 
+  @ApiProperty({ example: 1 })
+  roleId: number;
+
   @ApiProperty({ example: 'Parra' })
   lastname: string;
 }

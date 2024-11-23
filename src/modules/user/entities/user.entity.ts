@@ -4,8 +4,12 @@ import {
   PrimaryGeneratedColumn,
   BeforeInsert,
   BeforeUpdate,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+
+import { Role } from 'src/modules/role/entities/role.entity';
 
 @Entity()
 export class User {
@@ -26,6 +30,16 @@ export class User {
 
   @Column({ length: 100 })
   lastname: string;
+
+  @ManyToOne(() => Role, (role) => role.id, {
+    onUpdate: 'CASCADE',
+    nullable: false,
+  })
+  @JoinColumn({ name: 'roleId' })
+  role: Role;
+
+  @Column({ name: 'roleId' })
+  roleId: number;
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

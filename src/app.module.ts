@@ -47,6 +47,8 @@ import { SalePedidoModule } from './modules/sale-pedido/sale-pedido.module';
 import { SaleRemissionNoteModule } from './modules/sale-remission-note/sale-remission-note.module';
 import { SaleCreditNoteModule } from './modules/sale-credit-note/sale-credit-note.module';
 import { SaleDebitNoteModule } from './modules/sale-debit-note/sale-debit-note.module';
+import { RoleModule } from './modules/role/role.module';
+import { PermissionModule } from './modules/permission/permission.module';
 
 @Module({
   imports: [
@@ -109,6 +111,8 @@ import { SaleDebitNoteModule } from './modules/sale-debit-note/sale-debit-note.m
     SaleRemissionNoteModule,
     SaleCreditNoteModule,
     SaleDebitNoteModule,
+    RoleModule,
+    PermissionModule,
   ],
 })
 export class AppModule {}

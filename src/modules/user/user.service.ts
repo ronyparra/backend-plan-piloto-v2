@@ -19,8 +19,11 @@ export class UserService {
 
   findAll() {
     return this.userRepository.find({
-      select: ['id', 'username', 'email', 'name', 'lastname'],
+      select: ['id', 'username', 'email', 'name', 'lastname', 'role', 'roleId'],
       where: { active: true },
+      relations: {
+        role: true,
+      },
     });
   }
 
@@ -33,7 +36,15 @@ export class UserService {
 
   findByEmail(email: string) {
     return this.userRepository.findOne({
-      select: ['id', 'username', 'email', 'name', 'lastname', 'password'],
+      select: [
+        'id',
+        'username',
+        'email',
+        'name',
+        'lastname',
+        'password',
+        'roleId',
+      ],
       where: { email, active: true },
     });
   }

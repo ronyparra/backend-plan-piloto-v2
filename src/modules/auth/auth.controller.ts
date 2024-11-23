@@ -7,6 +7,7 @@ import {
   Request,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { RoleService } from '../role/role.service';
 import { AuthDto } from './dto/auth.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from './auth.guard';
@@ -14,7 +15,10 @@ import { AuthGuard } from './auth.guard';
 @Controller('auth')
 @ApiTags('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly roleService: RoleService,
+  ) {}
 
   @Post()
   signIn(@Body() authDto: AuthDto) {
@@ -23,7 +27,11 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
+  async getProfile(@Request() req) {
+    const role = await this.roleService.findOne(req.user.roleId);
+    return {
+      ...req.user,
+      role,
+    };
   }
 }
