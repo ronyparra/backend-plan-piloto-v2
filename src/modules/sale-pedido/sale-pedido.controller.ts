@@ -11,7 +11,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { SalePedidoService } from './sale-pedido.service';
-import { CreateSalePedidoDto } from './dto/create-sale-pedido.dto';
+import {
+  CreateSalePedidoDto,
+  CreateSalePedidoDetailDto,
+} from './dto/create-sale-pedido.dto';
 import { UpdateSalePedidoDto } from './dto/update-sale-pedido.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
@@ -40,11 +43,17 @@ export class SalePedidoController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateSalePedidoDto: UpdateSalePedidoDto,
   ) {
-    return this.salePedidoService.update(+id, updateSalePedidoDto);
+    const detail: CreateSalePedidoDetailDto[] =
+      updateSalePedidoDto.salePedidoDetail;
+    delete updateSalePedidoDto.salePedidoDetail;
+
+    await this.salePedidoService.update(+id, updateSalePedidoDto);
+    await this.salePedidoService.updateDetail(+id, detail);
+    return this.salePedidoService.findOne(+id);
   }
 
   @Delete(':id')

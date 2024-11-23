@@ -12,6 +12,7 @@ import { InvoiceType } from 'src/modules/invoice-type/entities/invoice-type.enti
 import { User } from 'src/modules/user/entities/user.entity';
 import { SaleConcept } from './sale-concept.entity';
 import { Stamping } from 'src/modules/stamping/entities/stamping.entity';
+import { SalePedidoSale } from './sale-pedido-sale.entity';
 
 @Entity()
 export class Sale {
@@ -56,6 +57,11 @@ export class Sale {
 
   @Column({ name: 'customerId' })
   customerId: number;
+
+  @OneToMany(() => SalePedidoSale, (salePedidoSale) => salePedidoSale.sale, {
+    cascade: true,
+  })
+  salePedidoSale: SalePedidoSale[];
 
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',

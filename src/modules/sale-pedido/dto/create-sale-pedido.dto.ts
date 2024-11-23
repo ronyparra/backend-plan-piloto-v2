@@ -19,7 +19,7 @@ export class CreateSalePedidoDto {
   observation: string;
 
   @ApiProperty({ example: '001-001-1234567' })
-  sale_pedido_number: string;
+  salePedidoNumber: string;
 
   @ApiProperty({ example: 1 })
   customerId: number;

@@ -10,6 +10,7 @@ import {
 import { User } from 'src/modules/user/entities/user.entity';
 import { Customer } from 'src/modules/customer/entities/customer.entity';
 import { SalePedidoDetail } from './sale-pedido-detail.entity';
+import { SalePedidoSale } from 'src/modules/sale/entities/sale-pedido-sale.entity';
 
 @Entity()
 export class SalePedido {
@@ -23,7 +24,7 @@ export class SalePedido {
   observation: string;
 
   @Column({ length: 100 })
-  sale_pedido_number: string;
+  salePedidoNumber: string;
 
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',
@@ -44,6 +45,15 @@ export class SalePedido {
 
   @Column({ name: 'customerId' })
   customerId: number;
+
+  @OneToMany(
+    () => SalePedidoSale,
+    (salePedidoSale) => salePedidoSale.salePedido,
+    {
+      cascade: true,
+    },
+  )
+  salePedidoSale: SalePedidoSale[];
 
   @OneToMany(
     () => SalePedidoDetail,

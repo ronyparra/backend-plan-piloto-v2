@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSalePedidoDto } from './dto/create-sale-pedido.dto';
+import {
+  CreateSalePedidoDto,
+  CreateSalePedidoDetailDto,
+} from './dto/create-sale-pedido.dto';
 import { UpdateSalePedidoDto } from './dto/update-sale-pedido.dto';
 import { SalePedido } from './entities/sale-pedido.entity';
+import { SalePedidoDetail } from './entities/sale-pedido-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { QueryStatusDto } from 'src/commons/query-status.dto';
@@ -11,6 +15,8 @@ export class SalePedidoService {
   constructor(
     @InjectRepository(SalePedido)
     private salePedidoRepository: Repository<SalePedido>,
+    @InjectRepository(SalePedidoDetail)
+    private salePedidoDetailRepository: Repository<SalePedidoDetail>,
   ) {}
   create(createSalePedidoDto: CreateSalePedidoDto) {
     return this.salePedidoRepository.save(createSalePedidoDto);
@@ -23,7 +29,7 @@ export class SalePedidoService {
         date: true,
         observation: true,
         userId: true,
-        sale_pedido_number: true,
+        salePedidoNumber: true,
         user: {
           id: true,
           name: true,
@@ -36,6 +42,7 @@ export class SalePedidoService {
             name: true,
           },
         },
+        salePedidoSale: true,
         customer: {
           id: true,
           name: true,
@@ -44,6 +51,7 @@ export class SalePedidoService {
       },
       relations: {
         user: true,
+        salePedidoSale: true,
         salePedidoDetail: {
           concept: true,
         },
@@ -63,7 +71,31 @@ export class SalePedidoService {
     return this.salePedidoRepository.update(id, updateSalePedidoDto);
   }
 
+  async updateDetail(
+    id: number,
+    createSalePedidoDetailDto: CreateSalePedidoDetailDto[],
+  ) {
+    const currentDetails = await this.salePedidoDetailRepository.find({
+      where: { salePedidoId: id },
+    });
+
+    for (const detail of currentDetails) {
+      if (
+        !createSalePedidoDetailDto.find((d) => d.conceptId === detail.conceptId)
+      ) {
+        await this.salePedidoDetailRepository.delete(detail.conceptId);
+      }
+    }
+
+    for (const detail of createSalePedidoDetailDto) {
+      await this.salePedidoDetailRepository.save({
+        ...detail,
+        salePedidoId: id,
+      });
+    }
+  }
+
   remove(id: number) {
-    return this.salePedidoRepository.update(id, { active: false });
+    return this.salePedidoRepository.delete(id);
   }
 }
