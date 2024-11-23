@@ -22,6 +22,12 @@ export class SalePedidoService {
     return this.salePedidoRepository.save(createSalePedidoDto);
   }
 
+  findLastId() {
+    return this.salePedidoRepository.query(
+      'SELECT MAX(id) FROM sale_pedido WHERE active = true',
+    );
+  }
+
   findAll(queryStatus: QueryStatusDto) {
     return this.salePedidoRepository.find({
       select: {

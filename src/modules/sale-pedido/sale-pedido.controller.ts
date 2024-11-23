@@ -37,6 +37,11 @@ export class SalePedidoController {
     return this.salePedidoService.findAll(queryParams);
   }
 
+  @Get('last-id')
+  findLastId() {
+    return this.salePedidoService.findLastId();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.salePedidoService.findOne(+id);
