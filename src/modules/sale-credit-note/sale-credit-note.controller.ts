@@ -37,6 +37,11 @@ export class SaleCreditNoteController {
     return this.saleCreditNoteService.findAll(queryParams);
   }
 
+  @Get('last-credit-number/:id')
+  findByStamping(@Param('id') id: number) {
+    return this.saleCreditNoteService.findLastCreditNumber(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.saleCreditNoteService.findOne(+id);

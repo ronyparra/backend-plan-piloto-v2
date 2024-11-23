@@ -22,7 +22,7 @@ export class SaleRemissionNoteService {
         id: true,
         date: true,
         observation: true,
-        remission_note_number: true,
+        remissionNoteNumber: true,
         userId: true,
         user: {
           id: true,
@@ -58,6 +58,18 @@ export class SaleRemissionNoteService {
       },
       where: queryStatus,
     });
+  }
+
+  async findLastRemissionNumber(id: number) {
+    const result = await this.saleRemissionNoteRepository.findOne({
+      select: { remissionNoteNumber: true },
+      where: { active: true, stampingId: id },
+      order: { id: 'DESC' },
+    });
+    if (result) {
+      return { remissionNoteNumber: result.remissionNoteNumber + 1 };
+    }
+    return { remissionNoteNumber: 1 };
   }
 
   findOne(id: number) {

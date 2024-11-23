@@ -22,7 +22,7 @@ export class SaleCreditNoteService {
         id: true,
         date: true,
         observation: true,
-        credit_note_number: true,
+        creditNoteNumber: true,
         userId: true,
         user: {
           id: true,
@@ -52,6 +52,18 @@ export class SaleCreditNoteService {
       },
       where: queryStatus,
     });
+  }
+
+  async findLastCreditNumber(id: number) {
+    const result = await this.saleCreditNoteRepository.findOne({
+      select: { creditNoteNumber: true },
+      where: { active: true, stampingId: id },
+      order: { id: 'DESC' },
+    });
+    if (result) {
+      return { creditNoteNumber: result.creditNoteNumber + 1 };
+    }
+    return { creditNoteNumber: 1 };
   }
 
   findOne(id: number) {

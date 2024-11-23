@@ -24,7 +24,7 @@ export class SalePedidoService {
 
   findLastId() {
     return this.salePedidoRepository.query(
-      'SELECT MAX(id) FROM sale_pedido WHERE active = true',
+      'SELECT COALESCE(MAX(id), 0) as max FROM sale_pedido WHERE active = true',
     );
   }
 

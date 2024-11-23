@@ -39,6 +39,11 @@ export class SaleRemissionNoteController {
     return this.saleRemissionNoteService.findAll(queryParams);
   }
 
+  @Get('last-remission-number/:id')
+  findByStamping(@Param('id') id: number) {
+    return this.saleRemissionNoteService.findLastRemissionNumber(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.saleRemissionNoteService.findOne(+id);

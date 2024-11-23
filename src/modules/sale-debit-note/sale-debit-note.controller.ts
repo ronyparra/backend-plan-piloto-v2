@@ -37,6 +37,11 @@ export class SaleDebitNoteController {
     return this.saleDebitNoteService.findAll(queryParams);
   }
 
+  @Get('last-debit-number/:id')
+  findByStamping(@Param('id') id: number) {
+    return this.saleDebitNoteService.findLastDebitNumber(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.saleDebitNoteService.findOne(+id);

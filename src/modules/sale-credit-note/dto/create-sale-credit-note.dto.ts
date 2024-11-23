@@ -25,7 +25,7 @@ export class CreateSaleCreditNoteDto {
   customerId: number;
 
   @ApiProperty({ example: 1 })
-  credit_note_number: number;
+  creditNoteNumber: number;
 
   @ApiProperty({ example: 1 })
   stampingId: number;

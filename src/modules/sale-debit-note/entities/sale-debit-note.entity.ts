@@ -25,7 +25,7 @@ export class SaleDebitNote {
   observation: string;
 
   @Column({ type: 'int' })
-  debit_note_number: number;
+  debitNoteNumber: number;
 
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',

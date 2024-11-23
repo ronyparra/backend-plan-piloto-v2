@@ -22,7 +22,7 @@ export class SaleDebitNoteService {
         id: true,
         date: true,
         observation: true,
-        debit_note_number: true,
+        debitNoteNumber: true,
         userId: true,
         user: {
           id: true,
@@ -52,6 +52,18 @@ export class SaleDebitNoteService {
       },
       where: queryStatus,
     });
+  }
+
+  async findLastDebitNumber(id: number) {
+    const result = await this.saleDebitNoteRepository.findOne({
+      select: { debitNoteNumber: true },
+      where: { active: true, stampingId: id },
+      order: { id: 'DESC' },
+    });
+    if (result) {
+      return { debitNoteNumber: result.debitNoteNumber + 1 };
+    }
+    return { debitNoteNumber: 1 };
   }
 
   findOne(id: number) {
