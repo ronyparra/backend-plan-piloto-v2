@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { ExpeditionPoint } from 'src/modules/expedition-point/entities/expedition-point.entity';
 import { Establishment } from 'src/modules/establishment/entities/establishment.entity';
+import { DocumentType } from 'src/modules/document-type/entities/document-type.entity';
 
 @Entity()
 export class Stamping {
@@ -27,6 +28,16 @@ export class Stamping {
 
   @Column({ type: 'date' })
   end_date: Date;
+
+  @ManyToOne(() => DocumentType, (documentType) => documentType.id, {
+    onUpdate: 'CASCADE',
+    nullable: false,
+  })
+  @JoinColumn({ name: 'documentTypeId' })
+  documentType: DocumentType;
+
+  @Column({ name: 'documentTypeId' })
+  documentTypeId: number;
 
   @ManyToOne(() => ExpeditionPoint, (expeditionPoint) => expeditionPoint.id, {
     onUpdate: 'CASCADE',

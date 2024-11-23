@@ -33,13 +33,18 @@ export class StampingService {
           name: true,
           number: true,
         },
+        documentType: {
+          id: true,
+          name: true,
+        },
+        documentTypeId: true,
         start_date: true,
         end_date: true,
       },
       where: {
         active: true,
       },
-      relations: ['expeditionPoint', 'establishment'],
+      relations: ['expeditionPoint', 'establishment', 'documentType'],
     });
   }
 
