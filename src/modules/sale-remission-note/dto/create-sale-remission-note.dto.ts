@@ -31,7 +31,7 @@ export class CreateSaleRemissionNoteDto {
   saleId: number;
 
   @ApiProperty({ example: 1 })
-  remission_note_number: number;
+  remissionNoteNumber: number;
 
   userId: number;
 
