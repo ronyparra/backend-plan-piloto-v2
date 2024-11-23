@@ -33,9 +33,25 @@ export class SaleDebitNoteService {
           id: true,
           name: true,
         },
+        stampingId: true,
+        stamping: {
+          id: true,
+          name: true,
+          expeditionPoint: {
+            number: true,
+          },
+          establishment: {
+            number: true,
+          },
+        },
+        saleId: true,
+        sale: {
+          id: true,
+        },
         saleDebitNoteDetail: {
           conceptId: true,
           quantity: true,
+          price: true,
           concept: {
             id: true,
             name: true,
@@ -46,6 +62,11 @@ export class SaleDebitNoteService {
       relations: {
         user: true,
         customer: true,
+        sale: true,
+        stamping: {
+          establishment: true,
+          expeditionPoint: true,
+        },
         saleDebitNoteDetail: {
           concept: true,
         },

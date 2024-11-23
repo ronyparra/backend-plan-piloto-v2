@@ -25,7 +25,7 @@ export class CreateSaleDebitNoteDto {
   customerId: number;
 
   @ApiProperty({ example: 1 })
-  debit_note_number: number;
+  debitNoteNumber: number;
 
   @ApiProperty({ example: 1 })
   stampingId: number;
