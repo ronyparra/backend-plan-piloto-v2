@@ -8,6 +8,7 @@ import {
   Delete,
   Request,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ServiceOrderService } from './service-order.service';
 import {
@@ -17,6 +18,7 @@ import {
 import { UpdateServiceOrderDto } from './dto/update-service-order.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('service-order')
@@ -31,8 +33,15 @@ export class ServiceOrderController {
   }
 
   @Get()
-  findAll() {
-    return this.serviceOrderService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.serviceOrderService.findAll(queryParams).then((res) => {
+      return res.map((item) => ({
+        ...item,
+        service_number: item.serviceProvided.length
+          ? item.serviceProvided[0].id
+          : null,
+      }));
+    });
   }
 
   @Get(':id')

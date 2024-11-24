@@ -8,6 +8,7 @@ import { ServiceOrder } from './entities/service-order.entity';
 import { ServiceOrderDetail } from './entities/service-order-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 const query = {
   select: {
@@ -43,6 +44,8 @@ const query = {
       serviceOrderId: true,
       serviceBudgetId: true,
     },
+    serviceProvided: true,
+    active: true,
   },
   relations: {
     customer: true,
@@ -51,6 +54,7 @@ const query = {
     serviceOrderDetail: {
       concept: true,
     },
+    serviceProvided: true,
     serviceBudgetOrderDetail: true,
   },
 };
@@ -67,10 +71,10 @@ export class ServiceOrderService {
     return this.serviceOrderRepository.save(createServiceOrderDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.serviceOrderRepository.find({
       ...query,
-      where: { active: true },
+      where: queryStatus,
     });
   }
 
@@ -105,6 +109,6 @@ export class ServiceOrderService {
   }
 
   remove(id: number) {
-    return this.serviceOrderRepository.delete(id);
+    return this.serviceOrderRepository.update(id, { active: false });
   }
 }

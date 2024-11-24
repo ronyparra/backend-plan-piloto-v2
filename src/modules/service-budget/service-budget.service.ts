@@ -6,6 +6,7 @@ import { ServiceBudget } from './entities/service-budget.entity';
 import { ServiceBudgetDetail } from './entities/service-budget-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @Injectable()
 export class ServiceBudgetService {
@@ -19,7 +20,7 @@ export class ServiceBudgetService {
     return this.serviceBudgetRepository.save(createServiceBudgetDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.serviceBudgetRepository.find({
       select: {
         id: true,
@@ -59,6 +60,11 @@ export class ServiceBudgetService {
           serviceBudgetId: true,
           serviceRequestId: true,
         },
+        serviceBudgetOrderDetail: {
+          serviceBudgetId: true,
+          serviceOrderId: true,
+        },
+        active: true,
       },
       relations: {
         customer: true,
@@ -69,8 +75,9 @@ export class ServiceBudgetService {
         },
         serviceBudgetDiagnosticDetail: true,
         serviceBudgetRequestDetail: true,
+        serviceBudgetOrderDetail: true,
       },
-      where: { active: true },
+      where: queryStatus,
     });
   }
 
@@ -108,6 +115,6 @@ export class ServiceBudgetService {
   }
 
   remove(id: number) {
-    return this.serviceBudgetRepository.delete(id);
+    return this.serviceBudgetRepository.update(id, { active: false });
   }
 }

@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ServiceContract } from './entities/service-contract.entity';
 import { ServiceContractClausule } from './entities/service-contract-clausule.entity';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @Injectable()
 export class ServiceContractService {
@@ -21,7 +22,7 @@ export class ServiceContractService {
     return this.serviceContractRepository.save(createServiceContractDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.serviceContractRepository.find({
       select: {
         id: true,
@@ -42,6 +43,7 @@ export class ServiceContractService {
           },
         },
         serviceContractClausule: true,
+        active: true,
       },
       relations: {
         user: true,
@@ -51,7 +53,7 @@ export class ServiceContractService {
         customer: true,
         serviceContractClausule: true,
       },
-      where: { active: true },
+      where: queryStatus,
     });
   }
 

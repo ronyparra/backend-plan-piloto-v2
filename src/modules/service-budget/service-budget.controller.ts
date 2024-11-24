@@ -8,6 +8,7 @@ import {
   Delete,
   Request,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ServiceBudgetService } from './service-budget.service';
 import {
@@ -17,6 +18,7 @@ import {
 import { UpdateServiceBudgetDto } from './dto/update-service-budget.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @Controller('service-budget')
@@ -34,8 +36,15 @@ export class ServiceBudgetController {
   }
 
   @Get()
-  findAll() {
-    return this.serviceBudgetService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.serviceBudgetService.findAll(queryParams).then((data) => {
+      return data.map((item) => ({
+        ...item,
+        order_number: item.serviceBudgetOrderDetail.length
+          ? item.serviceBudgetOrderDetail[0].serviceOrderId
+          : null,
+      }));
+    });
   }
 
   @Get(':id')

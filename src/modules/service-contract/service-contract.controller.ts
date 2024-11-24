@@ -8,6 +8,7 @@ import {
   Delete,
   Request,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ServiceContractService } from './service-contract.service';
 import {
@@ -17,6 +18,7 @@ import {
 import { UpdateServiceContractDto } from './dto/update-service-contract.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('service-contract')
@@ -36,8 +38,8 @@ export class ServiceContractController {
   }
 
   @Get()
-  findAll() {
-    return this.serviceContractService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.serviceContractService.findAll(queryParams);
   }
 
   @Get(':id')

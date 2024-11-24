@@ -12,6 +12,7 @@ import { User } from 'src/modules/user/entities/user.entity';
 import { ServiceOrderDetail } from './service-order-detail.entity';
 import { ServiceBudgetOrderDetail } from './service-budget-order-detail.entity';
 import { ServiceType } from 'src/modules/service-type/entities/service-type.entity';
+import { ServiceProvided } from 'src/modules/service-provided/entities/service-provided.entity';
 
 @Entity()
 export class ServiceOrder {
@@ -52,6 +53,15 @@ export class ServiceOrder {
 
   @Column({ name: 'userId' })
   userId: number;
+
+  @OneToMany(
+    () => ServiceProvided,
+    (serviceProvided) => serviceProvided.serviceOrder,
+    {
+      nullable: false,
+    },
+  )
+  serviceProvided: ServiceProvided[];
 
   @OneToMany(
     () => ServiceOrderDetail,
