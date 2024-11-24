@@ -24,7 +24,7 @@ export class RoleService {
   findOne(id: number) {
     return this.roleRepository.findOne({
       where: { id },
-      relations: ['roleDetail'],
+      relations: ['roleDetail', 'roleDetail.permission'],
     });
   }
 
