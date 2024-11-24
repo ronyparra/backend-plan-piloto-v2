@@ -8,6 +8,7 @@ import {
   Delete,
   Request,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ServiceProvidedService } from './service-provided.service';
 import {
@@ -17,6 +18,8 @@ import {
 import { UpdateServiceProvidedDto } from './dto/update-service-provided.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
+import { getDocumentNumber } from 'src/commons/document';
 
 @UseGuards(AuthGuard)
 @ApiTags('service-provided')
@@ -37,8 +40,19 @@ export class ServiceProvidedController {
   }
 
   @Get()
-  findAll() {
-    return this.serviceProvidedService.findAll();
+  async findAll(@Query() queryParams: QueryStatusDto) {
+    const result = await this.serviceProvidedService.findAll(queryParams);
+    return result.map((item) => {
+      let document_number = null;
+      if (item.saleServiceProvided.length) {
+        const sale = item.saleServiceProvided[0].sale;
+        document_number = getDocumentNumber(sale.stamping, sale.invoice_number);
+      }
+      return {
+        ...item,
+        invoice_number: document_number,
+      };
+    });
   }
 
   @Get(':id')

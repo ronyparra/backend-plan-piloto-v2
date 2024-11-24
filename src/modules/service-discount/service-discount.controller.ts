@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ServiceDiscountService } from './service-discount.service';
 import { CreateServiceDiscountDto } from './dto/create-service-discount.dto';
 import { UpdateServiceDiscountDto } from './dto/update-service-discount.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('service-discount')
@@ -28,8 +30,8 @@ export class ServiceDiscountController {
   }
 
   @Get()
-  findAll() {
-    return this.serviceDiscountService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.serviceDiscountService.findAll(queryParams);
   }
 
   @Get(':id')

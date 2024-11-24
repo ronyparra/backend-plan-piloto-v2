@@ -47,7 +47,14 @@ export class ServiceDiagnosticController {
 
   @Get()
   findAll() {
-    return this.serviceDiagnosticService.findAll();
+    return this.serviceDiagnosticService.findAll().then((data) => {
+      return data.map((item) => ({
+        ...item,
+        budget_number: item.serviceBudgetDiagnosticDetail.length
+          ? item.serviceBudgetDiagnosticDetail[0].serviceBudgetId
+          : null,
+      }));
+    });
   }
 
   @Get(':id')

@@ -4,6 +4,7 @@ import { UpdateServiceDiscountDto } from './dto/update-service-discount.dto';
 import { ServiceDiscount } from './entities/service-discount.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @Injectable()
 export class ServiceDiscountService {
@@ -15,14 +16,15 @@ export class ServiceDiscountService {
     return this.serviceDiscountRepository.save(createServiceDiscountDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.serviceDiscountRepository.find({
       select: {
         id: true,
         description: true,
         discountPercentage: true,
+        active: true,
       },
-      where: { active: true },
+      where: queryStatus,
     });
   }
 

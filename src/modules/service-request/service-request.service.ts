@@ -8,6 +8,7 @@ import { ServiceRequest } from './entities/service-request.entity';
 import { ServiceRequestDetail } from './entities/service-request-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 const query = {
   select: {
@@ -39,6 +40,8 @@ const query = {
       },
       quantity: true,
     },
+    serviceBudgetRequestDetail: true,
+    active: true,
   },
   relations: {
     customer: true,
@@ -47,6 +50,7 @@ const query = {
     serviceRequestDetail: {
       concept: true,
     },
+    serviceBudgetRequestDetail: true,
   },
 };
 
@@ -62,10 +66,10 @@ export class ServiceRequestService {
     return this.serviceRequestRepository.save(createServiceRequestDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.serviceRequestRepository.find({
       ...query,
-      where: { active: true },
+      where: queryStatus,
     });
   }
 

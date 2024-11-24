@@ -45,11 +45,13 @@ export class ServiceDiagnosticService {
         },
         userId: true,
         serviceDiagnosticDetail: true,
+        serviceBudgetDiagnosticDetail: true,
       },
       relations: {
         customer: true,
         user: true,
         serviceDiagnosticDetail: true,
+        serviceBudgetDiagnosticDetail: true,
       },
       where: { active: true },
     });

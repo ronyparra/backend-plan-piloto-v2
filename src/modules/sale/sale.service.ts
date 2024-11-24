@@ -5,6 +5,8 @@ import { Sale } from './entities/sale.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { QueryStatusDto } from 'src/commons/query-status.dto';
+import { SalePedidoSale } from './entities/sale-pedido-sale.entity';
+import { SaleServiceProvided } from './entities/sale-service-provided';
 
 const query = {
   select: {
@@ -78,6 +80,10 @@ export class SaleService {
   constructor(
     @InjectRepository(Sale)
     private saleRepository: Repository<Sale>,
+    @InjectRepository(SalePedidoSale)
+    private salePedidoSaleRepository: Repository<SalePedidoSale>,
+    @InjectRepository(SaleServiceProvided)
+    private saleServiceProvidedRepository: Repository<SaleServiceProvided>,
   ) {}
   create(createSaleDto: CreateSaleDto) {
     return this.saleRepository.save(createSaleDto);
@@ -113,7 +119,9 @@ export class SaleService {
     return this.saleRepository.update(id, updateSaleDto);
   }
 
-  remove(id: number) {
-    return this.saleRepository.update(id, { active: false });
+  async remove(id: number) {
+    this.salePedidoSaleRepository.delete({ saleId: id });
+    this.saleServiceProvidedRepository.delete({ saleId: id });
+    return await this.saleRepository.update(id, { active: false });
   }
 }

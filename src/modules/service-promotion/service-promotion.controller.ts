@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ServicePromotionService } from './service-promotion.service';
 import { CreateServicePromotionDto } from './dto/create-service-promotion.dto';
 import { UpdateServicePromotionDto } from './dto/update-service-promotion.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @ApiTags('service-promotion')
 @UseGuards(AuthGuard)
@@ -28,8 +30,8 @@ export class ServicePromotionController {
   }
 
   @Get()
-  findAll() {
-    return this.servicePromotionService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.servicePromotionService.findAll(queryParams);
   }
 
   @Get(':id')

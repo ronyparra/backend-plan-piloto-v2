@@ -4,6 +4,7 @@ import { UpdateServicePromotionDto } from './dto/update-service-promotion.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ServicePromotion } from './entities/service-promotion.entity';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @Injectable()
 export class ServicePromotionService {
@@ -15,7 +16,7 @@ export class ServicePromotionService {
     return this.servicePromotionRepository.save(createServicePromotionDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.servicePromotionRepository.find({
       select: {
         id: true,
@@ -28,9 +29,10 @@ export class ServicePromotionService {
           id: true,
           name: true,
         },
+        active: true,
       },
       relations: ['serviceType'],
-      where: { active: true },
+      where: queryStatus,
     });
   }
 

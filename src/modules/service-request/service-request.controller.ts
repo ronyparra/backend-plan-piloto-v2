@@ -8,6 +8,7 @@ import {
   Delete,
   Request,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ServiceRequestService } from './service-request.service';
 import {
@@ -17,6 +18,7 @@ import {
 import { UpdateServiceRequestDto } from './dto/update-service-request.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('service-request')
@@ -34,8 +36,15 @@ export class ServiceRequestController {
   }
 
   @Get()
-  findAll() {
-    return this.serviceRequestService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.serviceRequestService.findAll(queryParams).then((data) => {
+      return data.map((item) => ({
+        ...item,
+        budget_number: item.serviceBudgetRequestDetail.length
+          ? item.serviceBudgetRequestDetail[0].serviceBudgetId
+          : null,
+      }));
+    });
   }
 
   @Get(':id')

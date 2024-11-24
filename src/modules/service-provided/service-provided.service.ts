@@ -8,6 +8,7 @@ import { ServiceProvided } from './entities/service-provided.entity';
 import { ServiceProvidedDetail } from './entities/service-provided-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @Injectable()
 export class ServiceProvidedService {
@@ -21,7 +22,7 @@ export class ServiceProvidedService {
     return this.serviceProvidedRepository.save(createServiceProvidedDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.serviceProvidedRepository.find({
       select: {
         id: true,
@@ -42,6 +43,7 @@ export class ServiceProvidedService {
           id: true,
           name: true,
         },
+        saleServiceProvided: true,
         customer: {
           id: true,
           name: true,
@@ -64,6 +66,7 @@ export class ServiceProvidedService {
           quantity: true,
           price: true,
         },
+        active: true,
       },
       relations: {
         customer: true,
@@ -74,8 +77,16 @@ export class ServiceProvidedService {
         serviceProvidedDetail: {
           concept: true,
         },
+        saleServiceProvided: {
+          sale: {
+            stamping: {
+              expeditionPoint: true,
+              establishment: true,
+            },
+          },
+        },
       },
-      where: { active: true },
+      where: queryStatus,
     });
   }
 
