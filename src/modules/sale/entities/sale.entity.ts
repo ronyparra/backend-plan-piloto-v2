@@ -13,6 +13,7 @@ import { User } from 'src/modules/user/entities/user.entity';
 import { SaleConcept } from './sale-concept.entity';
 import { Stamping } from 'src/modules/stamping/entities/stamping.entity';
 import { SalePedidoSale } from './sale-pedido-sale.entity';
+import { SaleServiceProvided } from './sale-service-provided';
 
 @Entity()
 export class Sale {
@@ -62,6 +63,15 @@ export class Sale {
     cascade: true,
   })
   salePedidoSale: SalePedidoSale[];
+
+  @OneToMany(
+    () => SaleServiceProvided,
+    (saleServiceProvided) => saleServiceProvided.sale,
+    {
+      cascade: true,
+    },
+  )
+  saleServiceProvided: SaleServiceProvided[];
 
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',

@@ -1,6 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { SaleConcept } from '../entities/sale-concept.entity';
 
+export class SaleServiceProvided {
+  @ApiProperty()
+  saleId: number;
+
+  @ApiProperty()
+  serviceProvidedId: number;
+}
+
 export class SalePedidoSale {
   @ApiProperty()
   saleId: number;
@@ -35,4 +43,7 @@ export class CreateSaleDto {
 
   @ApiProperty({ type: [SalePedidoSale] })
   salePedidoSale: SalePedidoSale[];
+
+  @ApiProperty({ type: [SaleServiceProvided] })
+  saleServiceProvided: SaleServiceProvided[];
 }

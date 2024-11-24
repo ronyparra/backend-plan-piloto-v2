@@ -19,6 +19,7 @@ import { UpdateSalePedidoDto } from './dto/update-sale-pedido.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { QueryStatusDto } from 'src/commons/query-status.dto';
+import { getDocumentNumber } from 'src/commons/document';
 
 @UseGuards(AuthGuard)
 @ApiTags('sale-pedido')
@@ -33,8 +34,19 @@ export class SalePedidoController {
   }
 
   @Get()
-  findAll(@Query() queryParams: QueryStatusDto) {
-    return this.salePedidoService.findAll(queryParams);
+  async findAll(@Query() queryParams: QueryStatusDto) {
+    const result = await this.salePedidoService.findAll(queryParams);
+    return result.map((item) => {
+      let document_number = null;
+      if (item.salePedidoSale.length) {
+        const sale = item.salePedidoSale[0].sale;
+        document_number = getDocumentNumber(sale.stamping, sale.invoice_number);
+      }
+      return {
+        ...item,
+        invoice_number: document_number,
+      };
+    });
   }
 
   @Get('last-id')

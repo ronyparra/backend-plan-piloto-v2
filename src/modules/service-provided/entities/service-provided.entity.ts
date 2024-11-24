@@ -13,6 +13,7 @@ import { ServiceType } from 'src/modules/service-type/entities/service-type.enti
 import { ServiceOrder } from 'src/modules/service-order/entities/service-order.entity';
 import { ServiceProvidedDetail } from './service-provided-detail.entity';
 import { ServiceDiscount } from 'src/modules/service-discount/entities/service-discount.entity';
+import { SaleServiceProvided } from 'src/modules/sale/entities/sale-service-provided';
 
 @Entity()
 export class ServiceProvided {
@@ -83,6 +84,15 @@ export class ServiceProvided {
     },
   )
   serviceProvidedDetail: ServiceProvidedDetail[];
+
+  @OneToMany(
+    () => SaleServiceProvided,
+    (saleServiceProvided) => saleServiceProvided.serviceProvided,
+    {
+      nullable: false,
+    },
+  )
+  saleServiceProvided: SaleServiceProvided[];
 
   @Column({ type: 'boolean', default: true })
   active: boolean;

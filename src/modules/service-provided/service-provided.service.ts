@@ -59,6 +59,7 @@ export class ServiceProvidedService {
           concept: {
             id: true,
             name: true,
+            taxTypeId: true,
           },
           quantity: true,
           price: true,

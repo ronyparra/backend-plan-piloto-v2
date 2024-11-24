@@ -58,7 +58,14 @@ export class SalePedidoService {
       },
       relations: {
         user: true,
-        salePedidoSale: true,
+        salePedidoSale: {
+          sale: {
+            stamping: {
+              expeditionPoint: true,
+              establishment: true,
+            },
+          },
+        },
         salePedidoDetail: {
           concept: true,
         },
