@@ -46,6 +46,7 @@ export class SalePedidoService {
           concept: {
             id: true,
             name: true,
+            taxTypeId: true,
           },
         },
         salePedidoSale: true,

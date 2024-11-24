@@ -4,6 +4,7 @@ import { UpdateSaleDto } from './dto/update-sale.dto';
 import { Sale } from './entities/sale.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 const query = {
   select: {
@@ -57,6 +58,7 @@ const query = {
       price: true,
       taxes: true,
     },
+    active: true,
   },
   relations: {
     invoiceType: true,
@@ -81,10 +83,10 @@ export class SaleService {
     return this.saleRepository.save(createSaleDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.saleRepository.find({
       ...query,
-      where: { active: true },
+      where: queryStatus,
     });
   }
 
@@ -112,6 +114,6 @@ export class SaleService {
   }
 
   remove(id: number) {
-    return this.saleRepository.delete(id);
+    return this.saleRepository.update(id, { active: false });
   }
 }

@@ -5,6 +5,7 @@ import {
   Body,
   Patch,
   Param,
+  Query,
   Delete,
   Request,
   UseGuards,
@@ -15,6 +16,7 @@ import { UpdateSaleDto } from './dto/update-sale.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 import { InvoiceReport } from './invoice.report';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('sale')
@@ -32,8 +34,8 @@ export class SaleController {
   }
 
   @Get()
-  findAll() {
-    return this.saleService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.saleService.findAll(queryParams);
   }
 
   @Get(':id')
