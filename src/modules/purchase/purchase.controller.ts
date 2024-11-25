@@ -60,6 +60,29 @@ export class PurchaseController {
     return this.purchaseService.findAll(queryParams);
   }
 
+  @Get('book')
+  findBook(@Query() queryParams: QueryStatusDto) {
+    return this.purchaseService.findAll(queryParams).then((data) => {
+      return data.map((purchase) => {
+        return {
+          ...purchase,
+          tax0: purchase.purchaseConcept.reduce((acc, curr: any) => {
+            return curr.taxes.percentage == 0 ? acc + curr.taxes.amount : acc;
+          }, 0),
+          tax5: purchase.purchaseConcept.reduce((acc, curr: any) => {
+            return curr.taxes.percentage == 5 ? acc + curr.taxes.amount : acc;
+          }, 0),
+          tax10: purchase.purchaseConcept.reduce((acc, curr: any) => {
+            return curr.taxes.percentage == 10 ? acc + curr.taxes.amount : acc;
+          }, 0),
+          total: purchase.purchaseConcept.reduce((acc, curr: any) => {
+            return acc + curr.price * curr.quantity;
+          }, 0),
+        };
+      });
+    });
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.purchaseService.findOne(+id);

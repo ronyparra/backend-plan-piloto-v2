@@ -17,6 +17,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
 import { DocumentLegal } from '../../commons/document-legal';
 import { QueryStatusDto } from 'src/commons/query-status.dto';
+import { getDocumentNumber } from 'src/commons/document';
 
 @UseGuards(AuthGuard)
 @ApiTags('sale')
@@ -36,6 +37,28 @@ export class SaleController {
   @Get()
   findAll(@Query() queryParams: QueryStatusDto) {
     return this.saleService.findAll(queryParams);
+  }
+
+  @Get('book')
+  findBook() {
+    return this.saleService.findAll({ active: true }).then((result) => {
+      return result.map((item) => ({
+        ...item,
+        invoice_number: getDocumentNumber(item.stamping, item.invoice_number),
+        tax0: item.saleConcept.reduce((acc, curr: any) => {
+          return curr.taxes.percentage == 0 ? acc + curr.taxes.amount : acc;
+        }, 0),
+        tax5: item.saleConcept.reduce((acc, curr: any) => {
+          return curr.taxes.percentage == 5 ? acc + curr.taxes.amount : acc;
+        }, 0),
+        tax10: item.saleConcept.reduce((acc, curr: any) => {
+          return curr.taxes.percentage == 10 ? acc + curr.taxes.amount : acc;
+        }, 0),
+        total: item.saleConcept.reduce((acc, curr: any) => {
+          return acc + curr.price * curr.quantity;
+        }, 0),
+      }));
+    });
   }
 
   @Get(':id')
