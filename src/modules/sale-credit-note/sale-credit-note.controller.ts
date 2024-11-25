@@ -16,12 +16,16 @@ import { UpdateSaleCreditNoteDto } from './dto/update-sale-credit-note.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { QueryStatusDto } from 'src/commons/query-status.dto';
+import { DocumentLegal } from '../../commons/document-legal';
 
 @UseGuards(AuthGuard)
 @ApiTags('sale-credit-note')
 @Controller('sale-credit-note')
 export class SaleCreditNoteController {
-  constructor(private readonly saleCreditNoteService: SaleCreditNoteService) {}
+  constructor(
+    private readonly saleCreditNoteService: SaleCreditNoteService,
+    private readonly documentLegal: DocumentLegal,
+  ) {}
 
   @Post()
   create(
@@ -40,6 +44,17 @@ export class SaleCreditNoteController {
   @Get('last-credit-number/:id')
   findByStamping(@Param('id') id: number) {
     return this.saleCreditNoteService.findLastCreditNumber(id);
+  }
+
+  @Get('generate-document/:id')
+  async generateDocument(@Param('id') id: number) {
+    const result = await this.saleCreditNoteService.findOne(id);
+    if (!result) throw new Error('Not found');
+    return this.documentLegal.generateDocument(
+      result,
+      'saleCreditNoteDetail',
+      'creditNoteNumber',
+    );
   }
 
   @Get(':id')

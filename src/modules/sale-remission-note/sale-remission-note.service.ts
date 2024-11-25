@@ -6,6 +6,63 @@ import { Repository } from 'typeorm';
 import { QueryStatusDto } from 'src/commons/query-status.dto';
 import { SaleRemissionNote } from './entities/sale-remission-note.entity';
 
+const query = {
+  select: {
+    id: true,
+    date: true,
+    observation: true,
+    remissionNoteNumber: true,
+    userId: true,
+    user: {
+      id: true,
+      name: true,
+    },
+    customerId: true,
+    customer: {
+      id: true,
+      name: true,
+    },
+    stampingId: true,
+    stamping: {
+      id: true,
+      name: true,
+      expeditionPoint: {
+        number: true,
+      },
+      establishment: {
+        number: true,
+      },
+    },
+    saleId: true,
+    sale: {
+      id: true,
+    },
+    saleRemissionNoteDetail: {
+      conceptId: true,
+      quantity: true,
+      price: true,
+      concept: {
+        id: true,
+        name: true,
+      },
+      taxes: true,
+    },
+    active: true,
+  },
+  relations: {
+    user: true,
+    customer: true,
+    sale: true,
+    stamping: {
+      establishment: true,
+      expeditionPoint: true,
+    },
+    saleRemissionNoteDetail: {
+      concept: true,
+    },
+  },
+};
+
 @Injectable()
 export class SaleRemissionNoteService {
   constructor(
@@ -18,59 +75,7 @@ export class SaleRemissionNoteService {
 
   findAll(queryStatus: QueryStatusDto) {
     return this.saleRemissionNoteRepository.find({
-      select: {
-        id: true,
-        date: true,
-        observation: true,
-        remissionNoteNumber: true,
-        userId: true,
-        user: {
-          id: true,
-          name: true,
-        },
-        customerId: true,
-        customer: {
-          id: true,
-          name: true,
-        },
-        stampingId: true,
-        stamping: {
-          id: true,
-          name: true,
-          expeditionPoint: {
-            number: true,
-          },
-          establishment: {
-            number: true,
-          },
-        },
-        saleId: true,
-        sale: {
-          id: true,
-        },
-        saleRemissionNoteDetail: {
-          conceptId: true,
-          quantity: true,
-          price: true,
-          concept: {
-            id: true,
-            name: true,
-          },
-        },
-        active: true,
-      },
-      relations: {
-        user: true,
-        customer: true,
-        sale: true,
-        stamping: {
-          establishment: true,
-          expeditionPoint: true,
-        },
-        saleRemissionNoteDetail: {
-          concept: true,
-        },
-      },
+      ...query,
       where: queryStatus,
       order: { id: 'DESC' },
     });
@@ -90,6 +95,7 @@ export class SaleRemissionNoteService {
 
   findOne(id: number) {
     return this.saleRemissionNoteRepository.findOne({
+      ...query,
       where: { id, active: true },
     });
   }

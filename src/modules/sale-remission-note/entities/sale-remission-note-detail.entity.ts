@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
-
+import { Taxes } from 'src/interfaces/tax.interface';
 import { SaleRemissionNote } from './sale-remission-note.entity';
 import { Concept } from 'src/modules/concept/entities/concept.entity';
 
@@ -18,6 +18,9 @@ export class SaleRemissionNoteDetail {
 
   @Column({ type: 'numeric' })
   price: number;
+
+  @Column({ type: 'jsonb', nullable: false })
+  taxes: Taxes[];
 
   @ManyToOne(
     () => SaleRemissionNote,

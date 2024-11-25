@@ -4,10 +4,11 @@ import { SaleDebitNoteController } from './sale-debit-note.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SaleDebitNote } from './entities/sale-debit-note.entity';
 import { SaleDebitNoteDetail } from './entities/sale-debit-note-detail.entity';
+import { DocumentLegal } from '../../commons/document-legal';
 
 @Module({
   imports: [TypeOrmModule.forFeature([SaleDebitNote, SaleDebitNoteDetail])],
   controllers: [SaleDebitNoteController],
-  providers: [SaleDebitNoteService],
+  providers: [SaleDebitNoteService, DocumentLegal],
 })
 export class SaleDebitNoteModule {}

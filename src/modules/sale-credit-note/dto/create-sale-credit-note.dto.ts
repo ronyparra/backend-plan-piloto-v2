@@ -12,6 +12,8 @@ export class CreateSaleCreditNoteDetailDto {
 
   @ApiProperty({ example: 1 })
   price: number;
+
+  taxes: any[];
 }
 
 export class CreateSaleCreditNoteDto {

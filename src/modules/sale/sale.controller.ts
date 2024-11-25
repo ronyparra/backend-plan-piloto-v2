@@ -15,7 +15,7 @@ import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
-import { InvoiceReport } from './invoice.report';
+import { DocumentLegal } from '../../commons/document-legal';
 import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
@@ -24,7 +24,7 @@ import { QueryStatusDto } from 'src/commons/query-status.dto';
 export class SaleController {
   constructor(
     private readonly saleService: SaleService,
-    private readonly invoiceReport: InvoiceReport,
+    private readonly invoiceReport: DocumentLegal,
   ) {}
 
   @Post()
@@ -52,7 +52,11 @@ export class SaleController {
   async generateInvoice(@Param('id') id: number) {
     const sale = await this.saleService.findOne(id);
     if (!sale) throw new Error('Sale not found');
-    return this.invoiceReport.generateInvoice(sale);
+    return this.invoiceReport.generateDocument(
+      sale,
+      'saleConcept',
+      'invoice_number',
+    );
   }
 
   @Patch(':id')

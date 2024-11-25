@@ -4,7 +4,7 @@ import { SaleController } from './sale.controller';
 import { Sale } from './entities/sale.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SaleConcept } from './entities/sale-concept.entity';
-import { InvoiceReport } from './invoice.report';
+import { DocumentLegal } from '../../commons/document-legal';
 import { SalePedidoSale } from './entities/sale-pedido-sale.entity';
 import { SaleServiceProvided } from './entities/sale-service-provided';
 
@@ -18,6 +18,6 @@ import { SaleServiceProvided } from './entities/sale-service-provided';
     ]),
   ],
   controllers: [SaleController],
-  providers: [SaleService, InvoiceReport],
+  providers: [SaleService, DocumentLegal],
 })
 export class SaleModule {}

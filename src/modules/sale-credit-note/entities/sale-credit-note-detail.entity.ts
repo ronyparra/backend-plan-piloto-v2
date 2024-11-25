@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
-
+import { Taxes } from 'src/interfaces/tax.interface';
 import { SaleCreditNote } from './sale-credit-note.entity';
 import { Concept } from 'src/modules/concept/entities/concept.entity';
 
@@ -18,6 +18,9 @@ export class SaleCreditNoteDetail {
 
   @Column({ type: 'numeric' })
   price: number;
+
+  @Column({ type: 'jsonb', nullable: false })
+  taxes: Taxes[];
 
   @ManyToOne(
     () => SaleCreditNote,

@@ -15,6 +15,7 @@ import { CreateSaleRemissionNoteDto } from './dto/create-sale-remission-note.dto
 import { UpdateSaleRemissionNoteDto } from './dto/update-sale-remission-note.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { DocumentLegal } from '../../commons/document-legal';
 import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
@@ -23,6 +24,7 @@ import { QueryStatusDto } from 'src/commons/query-status.dto';
 export class SaleRemissionNoteController {
   constructor(
     private readonly saleRemissionNoteService: SaleRemissionNoteService,
+    private readonly documentLegal: DocumentLegal,
   ) {}
 
   @Post()
@@ -42,6 +44,17 @@ export class SaleRemissionNoteController {
   @Get('last-remission-number/:id')
   findByStamping(@Param('id') id: number) {
     return this.saleRemissionNoteService.findLastRemissionNumber(id);
+  }
+
+  @Get('generate-document/:id')
+  async generateDocument(@Param('id') id: number) {
+    const result = await this.saleRemissionNoteService.findOne(id);
+    if (!result) throw new Error('Not found');
+    return this.documentLegal.generateDocument(
+      result,
+      'saleRemissionNoteDetail',
+      'remissionNoteNumber',
+    );
   }
 
   @Get(':id')
