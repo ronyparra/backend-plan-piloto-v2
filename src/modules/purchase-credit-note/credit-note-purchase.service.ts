@@ -56,6 +56,7 @@ export class CreditNotePurchaseService {
       where: {
         active: true,
       },
+      order: { id: 'DESC' },
     });
   }
 

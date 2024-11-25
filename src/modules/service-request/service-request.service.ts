@@ -70,6 +70,7 @@ export class ServiceRequestService {
     return this.serviceRequestRepository.find({
       ...query,
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 
@@ -113,6 +114,6 @@ export class ServiceRequestService {
   }
 
   remove(id: number) {
-    return this.serviceRequestRepository.delete(id);
+    return this.serviceRequestRepository.update(id, { active: false });
   }
 }

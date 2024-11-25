@@ -54,6 +54,7 @@ export class ServiceDiagnosticService {
         serviceBudgetDiagnosticDetail: true,
       },
       where: { active: true },
+      order: { id: 'DESC' },
     });
   }
 

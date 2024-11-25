@@ -72,6 +72,7 @@ export class SaleDebitNoteService {
         },
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

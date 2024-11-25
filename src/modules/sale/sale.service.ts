@@ -93,6 +93,7 @@ export class SaleService {
     return this.saleRepository.find({
       ...query,
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

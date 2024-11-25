@@ -48,6 +48,7 @@ export class AccountToPayService {
         },
         accountToPayDetail: true,
       },
+      order: { id: 'DESC' },
     });
   }
 

@@ -14,6 +14,7 @@ import { ServiceBudgetDetail } from './service-budget-detail.entity';
 import { ServiceBudgetDiagnosticDetail } from './service-budget-diagnostic-detail.entity';
 import { ServiceBudgetRequestDetail } from './service-budget-request-detail.entity';
 import { ServiceBudgetOrderDetail } from 'src/modules/service-order/entities/service-budget-order-detail.entity';
+import { ServiceContract } from 'src/modules/service-contract/entities/service-contract.entity';
 
 @Entity()
 export class ServiceBudget {
@@ -44,6 +45,15 @@ export class ServiceBudget {
 
   @Column({ name: 'serviceTypeId' })
   serviceTypeId: number;
+
+  @OneToMany(
+    () => ServiceContract,
+    (serviceContract) => serviceContract.serviceBudget,
+    {
+      nullable: true,
+    },
+  )
+  serviceContract: ServiceContract[];
 
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: 'CASCADE',

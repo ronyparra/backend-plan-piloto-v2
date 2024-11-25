@@ -87,6 +87,7 @@ export class ServiceProvidedService {
         },
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

@@ -75,6 +75,7 @@ export class ServiceOrderService {
     return this.serviceOrderRepository.find({
       ...query,
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

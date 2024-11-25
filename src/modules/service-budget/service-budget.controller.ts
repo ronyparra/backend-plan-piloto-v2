@@ -43,6 +43,9 @@ export class ServiceBudgetController {
         order_number: item.serviceBudgetOrderDetail.length
           ? item.serviceBudgetOrderDetail[0].serviceOrderId
           : null,
+        contract_number: item.serviceContract.length
+          ? item.serviceContract[0].id
+          : null,
       }));
     });
   }

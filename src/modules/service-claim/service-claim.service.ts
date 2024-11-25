@@ -43,6 +43,7 @@ export class ServiceClaimService {
         },
       },
       where: { active: true },
+      order: { id: 'DESC' },
     });
   }
 

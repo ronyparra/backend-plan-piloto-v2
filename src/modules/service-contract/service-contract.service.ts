@@ -49,11 +49,13 @@ export class ServiceContractService {
         user: true,
         serviceBudget: {
           customer: true,
+          serviceBudgetOrderDetail: true,
         },
         customer: true,
         serviceContractClausule: true,
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

@@ -33,6 +33,7 @@ export class ServicePromotionService {
       },
       relations: ['serviceType'],
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

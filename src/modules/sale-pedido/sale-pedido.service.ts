@@ -72,6 +72,7 @@ export class SalePedidoService {
         customer: true,
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

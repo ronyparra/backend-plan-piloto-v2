@@ -119,6 +119,7 @@ export class PurchaseService {
         purchaseMoneyBoxDetail: true,
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

@@ -46,6 +46,7 @@ export class RemissionNotePurchaseService {
       where: {
         active: true,
       },
+      order: { id: 'DESC' },
     });
   }
 

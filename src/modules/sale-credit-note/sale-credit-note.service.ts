@@ -72,6 +72,7 @@ export class SaleCreditNoteService {
         },
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

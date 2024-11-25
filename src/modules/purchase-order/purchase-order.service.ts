@@ -75,6 +75,7 @@ export class PurchaseOrderService {
         },
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

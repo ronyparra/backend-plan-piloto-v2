@@ -25,6 +25,7 @@ export class ServiceDiscountService {
         active: true,
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

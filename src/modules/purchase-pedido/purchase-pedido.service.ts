@@ -55,6 +55,7 @@ export class PurchasePedidoService {
         purchaseBudget: true,
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

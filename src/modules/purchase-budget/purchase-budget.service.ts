@@ -69,6 +69,7 @@ export class PurchaseBudgetService {
         },
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

@@ -56,6 +56,7 @@ export class DebitNotePurchaseService {
       where: {
         active: true,
       },
+      order: { id: 'DESC' },
     });
   }
 

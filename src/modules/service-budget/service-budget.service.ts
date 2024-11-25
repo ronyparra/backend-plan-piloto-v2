@@ -64,6 +64,7 @@ export class ServiceBudgetService {
           serviceBudgetId: true,
           serviceOrderId: true,
         },
+        serviceContract: true,
         active: true,
       },
       relations: {
@@ -76,8 +77,10 @@ export class ServiceBudgetService {
         serviceBudgetDiagnosticDetail: true,
         serviceBudgetRequestDetail: true,
         serviceBudgetOrderDetail: true,
+        serviceContract: true,
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 

@@ -72,6 +72,7 @@ export class SaleRemissionNoteService {
         },
       },
       where: queryStatus,
+      order: { id: 'DESC' },
     });
   }
 
