@@ -54,6 +54,7 @@ export class SaleCreditNoteController {
       result,
       'saleCreditNoteDetail',
       'creditNoteNumber',
+      'credit',
     );
   }
 

@@ -54,6 +54,7 @@ export class SaleRemissionNoteController {
       result,
       'saleRemissionNoteDetail',
       'remissionNoteNumber',
+      'remission',
     );
   }
 

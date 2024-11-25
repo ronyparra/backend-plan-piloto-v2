@@ -54,6 +54,7 @@ export class SaleDebitNoteController {
       result,
       'saleDebitNoteDetail',
       'debitNoteNumber',
+      'debit',
     );
   }
 

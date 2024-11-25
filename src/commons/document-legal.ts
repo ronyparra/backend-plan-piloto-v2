@@ -5,7 +5,7 @@ import { DD_MM_YYYY } from 'src/commons/constants';
 import { currencyFormat } from 'src/commons/currency-format';
 
 export class DocumentLegal {
-  async generateDocument(data, detailKey, documentNumberKey) {
+  async generateDocument(data, detailKey, documentNumberKey, path) {
     const calcExenta = (concept) =>
       concept.taxes.percentage === 0 ? concept.quantity * concept.price : 0;
     const calcIva5 = (concept) =>
@@ -76,6 +76,6 @@ export class DocumentLegal {
       },
     };
     const urlParams = encodeURIComponent(JSON.stringify(invoiceData));
-    return generatePdfBase64FromHtml(`/invoice?data=${urlParams}`);
+    return generatePdfBase64FromHtml(`/${path}?data=${urlParams}`);
   }
 }

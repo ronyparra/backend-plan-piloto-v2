@@ -56,6 +56,7 @@ export class SaleController {
       sale,
       'saleConcept',
       'invoice_number',
+      'invoice',
     );
   }
 
