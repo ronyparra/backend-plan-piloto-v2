@@ -39,6 +39,7 @@ const query = {
         name: true,
       },
       quantity: true,
+      price: true,
     },
     serviceBudgetOrderDetail: {
       serviceOrderId: true,

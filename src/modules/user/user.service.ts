@@ -19,7 +19,16 @@ export class UserService {
 
   findAll() {
     return this.userRepository.find({
-      select: ['id', 'username', 'email', 'name', 'lastname', 'role', 'roleId'],
+      select: [
+        'id',
+        'username',
+        'email',
+        'name',
+        'lastname',
+        'role',
+        'roleId',
+        'active',
+      ],
       where: { active: true },
       relations: {
         role: true,

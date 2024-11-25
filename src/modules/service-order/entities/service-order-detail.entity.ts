@@ -28,4 +28,7 @@ export class ServiceOrderDetail {
   @ManyToOne(() => Concept, (concept) => concept.serviceOrderDetail)
   @JoinColumn({ name: 'conceptId' })
   concept: Concept;
+
+  @Column({ type: 'numeric' })
+  price: number;
 }

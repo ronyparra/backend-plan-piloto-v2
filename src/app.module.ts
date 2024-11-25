@@ -51,6 +51,7 @@ import { RoleModule } from './modules/role/role.module';
 import { PermissionModule } from './modules/permission/permission.module';
 import { BoxOpeningModule } from './modules/box-opening/box-opening.module';
 import { BoxClosingModule } from './modules/box-closing/box-closing.module';
+import { BackupModule } from './modules/backup/backup.module';
 
 @Module({
   imports: [
@@ -117,6 +118,7 @@ import { BoxClosingModule } from './modules/box-closing/box-closing.module';
     PermissionModule,
     BoxOpeningModule,
     BoxClosingModule,
+    BackupModule,
   ],
 })
 export class AppModule {}

@@ -41,6 +41,7 @@ export class ServiceContractService {
             id: true,
             name: true,
           },
+          serviceBudgetDetail: true,
         },
         serviceContractClausule: true,
         active: true,
@@ -50,6 +51,9 @@ export class ServiceContractService {
         serviceBudget: {
           customer: true,
           serviceBudgetOrderDetail: true,
+          serviceBudgetDetail: {
+            concept: true,
+          },
         },
         customer: true,
         serviceContractClausule: true,

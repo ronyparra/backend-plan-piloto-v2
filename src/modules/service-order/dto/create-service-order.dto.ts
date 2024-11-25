@@ -14,6 +14,9 @@ export class ServiceOrderDetailDto {
 
   @ApiProperty({ example: 1 })
   quantity: number;
+
+  @ApiProperty({ example: 1 })
+  price: number;
 }
 
 export class CreateServiceOrderDto {
