@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreditNotePurchase } from './entities/credit-note-purchase.entity';
 import { CreditNotePurchaseDetail } from './entities/credit-note-purchase-detail.entity';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @Injectable()
 export class CreditNotePurchaseService {
@@ -21,7 +22,7 @@ export class CreditNotePurchaseService {
     return this.creditNotePurchaseRepository.save(createCreditNotePurchaseDto);
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.creditNotePurchaseRepository.find({
       select: {
         id: true,
@@ -44,6 +45,7 @@ export class CreditNotePurchaseService {
           name: true,
         },
         supplierId: true,
+        active: true,
       },
       relations: {
         user: true,
@@ -53,9 +55,7 @@ export class CreditNotePurchaseService {
           concept: true,
         },
       },
-      where: {
-        active: true,
-      },
+      where: queryStatus,
       order: { id: 'DESC' },
     });
   }

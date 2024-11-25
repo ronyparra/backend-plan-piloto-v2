@@ -49,6 +49,8 @@ import { SaleCreditNoteModule } from './modules/sale-credit-note/sale-credit-not
 import { SaleDebitNoteModule } from './modules/sale-debit-note/sale-debit-note.module';
 import { RoleModule } from './modules/role/role.module';
 import { PermissionModule } from './modules/permission/permission.module';
+import { BoxOpeningModule } from './modules/box-opening/box-opening.module';
+import { BoxClosingModule } from './modules/box-closing/box-closing.module';
 
 @Module({
   imports: [
@@ -113,6 +115,8 @@ import { PermissionModule } from './modules/permission/permission.module';
     SaleDebitNoteModule,
     RoleModule,
     PermissionModule,
+    BoxOpeningModule,
+    BoxClosingModule,
   ],
 })
 export class AppModule {}

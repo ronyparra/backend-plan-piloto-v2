@@ -8,6 +8,7 @@ import {
   Delete,
   Request,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CreditNotePurchaseService } from './credit-note-purchase.service';
 import {
@@ -17,6 +18,7 @@ import {
 import { UpdateCreditNotePurchaseDto } from './dto/update-credit-note-purchase.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('purchase-credit-note')
@@ -36,8 +38,8 @@ export class CreditNotePurchaseController {
   }
 
   @Get()
-  findAll() {
-    return this.creditNotePurchaseService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.creditNotePurchaseService.findAll(queryParams);
   }
 
   @Get(':id')

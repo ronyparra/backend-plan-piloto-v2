@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RemissionNotePurchase } from './entities/remission-note-purchase.entity';
 import { RemissionNotePurchaseDetail } from './entities/remission-note-purchase-detail.entity';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @Injectable()
 export class RemissionNotePurchaseService {
@@ -23,7 +24,7 @@ export class RemissionNotePurchaseService {
     );
   }
 
-  findAll() {
+  findAll(queryStatus: QueryStatusDto) {
     return this.remissionNotePurchaseRepository.find({
       select: {
         id: true,
@@ -34,6 +35,7 @@ export class RemissionNotePurchaseService {
         userId: true,
         purchaseId: true,
         supplierId: true,
+        active: true,
       },
       relations: {
         user: true,
@@ -43,9 +45,7 @@ export class RemissionNotePurchaseService {
           concept: true,
         },
       },
-      where: {
-        active: true,
-      },
+      where: queryStatus,
       order: { id: 'DESC' },
     });
   }

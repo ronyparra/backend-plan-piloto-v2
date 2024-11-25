@@ -8,6 +8,7 @@ import {
   Delete,
   Request,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { RemissionNotePurchaseService } from './remission-note-purchase.service';
 import {
@@ -17,6 +18,7 @@ import {
 import { UpdateRemissionNotePurchaseDto } from './dto/update-remission-note-purchase.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('purchase-remission-note')
@@ -38,8 +40,8 @@ export class RemissionNotePurchaseController {
   }
 
   @Get()
-  findAll() {
-    return this.remissionNotePurchaseService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.remissionNotePurchaseService.findAll(queryParams);
   }
 
   @Get(':id')

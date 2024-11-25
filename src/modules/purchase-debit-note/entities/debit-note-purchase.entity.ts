@@ -26,7 +26,7 @@ export class DebitNotePurchase {
   @Column({ length: 13 })
   timbrado: string;
 
-  @Column({ length: 13 })
+  @Column({ length: 20 })
   debitNoteNumber: string;
 
   @ManyToOne(() => User, (user) => user.id, {
@@ -62,6 +62,9 @@ export class DebitNotePurchase {
   @OneToMany(
     () => DebitNotePurchaseDetail,
     (debitNotePurchaseDetail) => debitNotePurchaseDetail.debitNotePurchase,
+    {
+      cascade: true,
+    },
   )
   debitNotePurchaseDetail: DebitNotePurchaseDetail[];
 

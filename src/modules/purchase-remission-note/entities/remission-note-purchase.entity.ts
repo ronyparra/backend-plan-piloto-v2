@@ -36,7 +36,7 @@ export class RemissionNotePurchase {
   @Column({ length: 13 })
   timbrado: string;
 
-  @Column({ length: 13 })
+  @Column({ length: 20 })
   remissionNoteNumber: string;
 
   @ManyToOne(() => Supplier, (supplier) => supplier.id, {

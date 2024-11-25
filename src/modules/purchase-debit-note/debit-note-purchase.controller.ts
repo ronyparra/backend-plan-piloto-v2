@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Request,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { DebitNotePurchaseService } from './debit-note-purchase.service';
@@ -17,6 +18,7 @@ import {
 import { UpdateDebitNotePurchaseDto } from './dto/update-debit-note-purchase.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { QueryStatusDto } from 'src/commons/query-status.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('purchase-debit-note')
@@ -36,8 +38,8 @@ export class DebitNotePurchaseController {
   }
 
   @Get()
-  findAll() {
-    return this.debitNotePurchaseService.findAll();
+  findAll(@Query() queryParams: QueryStatusDto) {
+    return this.debitNotePurchaseService.findAll(queryParams);
   }
 
   @Get(':id')
