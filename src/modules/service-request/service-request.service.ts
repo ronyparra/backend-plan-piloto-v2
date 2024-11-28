@@ -37,6 +37,7 @@ const query = {
       concept: {
         id: true,
         name: true,
+        pricing: true,
       },
       quantity: true,
     },
